@@ -1,11 +1,14 @@
 ---
 layout: post
-title: '一篇散文'
-subtitle: '紧握忽视的盈盈暖意'
-date: 2018-6-8
-categories: 散文
-cover: '/assets/img/wu-wen-tao.jpg'
-tags: 散文
+title: "一篇散文"
+subtitle: "紧握忽视的盈盈暖意"
+date: 2018-6-8 18:00:00
+author: "ShanLin"
+categories: 散文???
+header-img: "/assets/img/wu-wen-tao.jpg"
+catlog: true
+tags: 
+    - 散文
 ---
 
 樱花烂漫时节，一身利落的轻装，踏着新发的嫩草，悠悠的散步。
