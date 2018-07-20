@@ -2,11 +2,9 @@
 layout: post
 title: "一篇散文"
 subtitle: "紧握忽视的盈盈暖意"
-date: 2018-6-8 18:00:00
+date: 2018-06-08 18:00:00
 author: "ShanLin"
-categories: 散文???
 header-img: "img/in-post/home-bg-art.jpg"
-catlog: true
 tags: 
     - 散文
 ---
