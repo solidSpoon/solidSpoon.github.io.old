@@ -2,6 +2,8 @@
 
 ### [View Live Hux Blog &rarr;](https://huangxuan.me)
 
+### [My Blog](https://shanlin257.github.io)
+
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
