@@ -444,8 +444,9 @@ public class q1133{
         if(x.length != y.length)
             System.exit(1);
         double res = 0.0;
-        for(int i = 0; i < x.length; i++)
+        for(int i = 0; i < x.length; i++){
             res += x[i] * y[i];
+        }
         return res;
     }
 
@@ -460,10 +461,13 @@ public class q1133{
         if(a[0].length != b.length)
             System.exit(1);
         double[][] matrix = new double[a.length][b[0].length];
-        for (int i = 0; i < a.length; i++)
-            for (int j = 0; j < b[0].length; j++)
-                for (int k = 0; k < b.length; ++k)
+        for (int i = 0; i < a.length; i++){
+            for (int j = 0; j < b[0].length; j++){
+                for (int k = 0; k < b.length; ++k){
                     matrix[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
         return matrix;
     }
 
@@ -477,9 +481,11 @@ public class q1133{
         if(a[0].length != x.length)
             System.exit(1);
         double[] matrix = new double[x.length];
-        for(int i = 0; i < a.length; i++)
-            for(int j = 0; j < x.length; j++)
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j < x.length; j++){
                 matrix[i] += a[i][j] * x[j];
+            }
+        }
         return matrix;
     }
 
@@ -491,9 +497,11 @@ public class q1133{
      */
     public static double[] multiple(double[] y, double[][] a) {
         double[] matrix = new double[y.length];
-        for(int i = 0; i < y.length; i++)
-            for(int j = 0; j < a[i].length; j++)
+        for(int i = 0; i < y.length; i++){
+            for(int j = 0; j < a[i].length; j++){
                 matrix[i] += y[j] * a[j][i];
+            }
+        }
         return matrix;
     }
 
@@ -503,12 +511,13 @@ public class q1133{
      * @return
      */
     public static double[][] transpose(double[][] a) {
-        for(int i = 0; i < a.length; i++)
+        for(int i = 0; i < a.length; i++){
             for(int j = 0; j < i; j++) {
                 double temp = a[i][j];
                 a[i][j] = a[j][i];
                 a[j][i] = temp;
             }
+        }
         return a;
     }
 
@@ -531,8 +540,9 @@ public class q1133{
         };
         double[][] res1 = multiple(a1, b1);
         for(int i = 0; i < res1.length; i++) {
-            for (int j = 0; j < res1[i].length; j++)
+            for (int j = 0; j < res1[i].length; j++){
                 StdOut.printf("%-10.3f", res1[i][j]);
+            }
             StdOut.println();
         }
 
@@ -544,8 +554,9 @@ public class q1133{
         };
         double[][] c2 = transpose(a2);
         for(int i = 0; i < a2.length; i++) {
-            for (int j = 0; j < a2[i].length; j++)
+            for (int j = 0; j < a2[i].length; j++){
                 StdOut.printf("%-10.3f", a2[i][j]);
+            }
             StdOut.println();
         }
 
@@ -557,8 +568,9 @@ public class q1133{
         };
         double[] b3 = {1, 2, 3};
         double[] c3 = multiple(a3, b3);
-        for(int i = 0; i < c3.length; i++)
+        for(int i = 0; i < c3.length; i++){
             StdOut.printf("%-10.3f\n", c3[i]);
+        }
 
         StdOut.println("----- 向量和矩阵之积 ------");
         double[] a4 = {1, 2, 3};
@@ -568,8 +580,9 @@ public class q1133{
                 {7, 8, 9}
         };
         double[] c4 = multiple(a4, b4);
-        for(int i = 0; i < c4.length; i++)
+        for(int i = 0; i < c4.length; i++){
             StdOut.printf("%-10.3f", c4[i]);
+        }
     }
 }
 ````
