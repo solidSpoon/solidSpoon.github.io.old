@@ -431,7 +431,147 @@ public class q1132{
 ==================================================================================
 ````
 ````java
+import edu.princeton.cs.algs4.*;
+public class q1133{
+    /**
+     * 向量点乘
+     * @param x x向量
+     * @param y y向量
+     * @return  向量点乘
+     */
+    public static double dot(double[] x, double[] y) {
+        // 点乘必须是向量a的长度等于向量b的长度才能运算
+        if(x.length != y.length)
+            System.exit(1);
+        double res = 0.0;
+        for(int i = 0; i < x.length; i++)
+            res += x[i] * y[i];
+        return res;
+    }
 
+    /**
+     * 矩阵和矩阵之积
+     * @param a
+     * @param b
+     * @return
+     */
+    public static double[][] multiple(double[][] a, double[][] b) {
+        // 只有矩阵a的列数等于矩阵b的行数时，相乘才有意义
+        if(a[0].length != b.length)
+            System.exit(1);
+        double[][] matrix = new double[a.length][b[0].length];
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < b[0].length; j++)
+                for (int k = 0; k < b.length; ++k)
+                    matrix[i][j] += a[i][k] * b[k][j];
+        return matrix;
+    }
+
+    /**
+     * 矩阵和向量之积
+     * @param a
+     * @param x
+     * @return
+     */
+    public static double[] multiple(double[][] a, double[] x) {
+        if(a[0].length != x.length)
+            System.exit(1);
+        double[] matrix = new double[x.length];
+        for(int i = 0; i < a.length; i++)
+            for(int j = 0; j < x.length; j++)
+                matrix[i] += a[i][j] * x[j];
+        return matrix;
+    }
+
+    /**
+     * 向量和矩阵之积
+     * @param y
+     * @param a
+     * @return
+     */
+    public static double[] multiple(double[] y, double[][] a) {
+        double[] matrix = new double[y.length];
+        for(int i = 0; i < y.length; i++)
+            for(int j = 0; j < a[i].length; j++)
+                matrix[i] += y[j] * a[j][i];
+        return matrix;
+    }
+
+    /**
+     * 转置矩阵
+     * @param a
+     * @return
+     */
+    public static double[][] transpose(double[][] a) {
+        for(int i = 0; i < a.length; i++)
+            for(int j = 0; j < i; j++) {
+                double temp = a[i][j];
+                a[i][j] = a[j][i];
+                a[j][i] = temp;
+            }
+        return a;
+    }
+
+    public static void main(String[] args) {
+        StdOut.println("-------- 向量点乘 ---------");
+        double[] a0 = {1, 2, 3};
+        double[] b0 = {4, 5, 6};
+        double res0 = dot(a0, b0);
+        StdOut.println(res0);
+
+        StdOut.println("-------- 矩阵乘法 ---------");
+        double[][] a1 = {
+                {1, 2},
+                {3, 4},
+                {5, 6}
+        };
+        double[][] b1 = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        double[][] res1 = multiple(a1, b1);
+        for(int i = 0; i < res1.length; i++) {
+            for (int j = 0; j < res1[i].length; j++)
+                StdOut.printf("%-10.3f", res1[i][j]);
+            StdOut.println();
+        }
+
+        StdOut.println("-------- 矩阵转置 ---------");
+        double[][] a2 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        double[][] c2 = transpose(a2);
+        for(int i = 0; i < a2.length; i++) {
+            for (int j = 0; j < a2[i].length; j++)
+                StdOut.printf("%-10.3f", a2[i][j]);
+            StdOut.println();
+        }
+
+        StdOut.println("----- 矩阵和向量之积 ------");
+        double[][] a3 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        double[] b3 = {1, 2, 3};
+        double[] c3 = multiple(a3, b3);
+        for(int i = 0; i < c3.length; i++)
+            StdOut.printf("%-10.3f\n", c3[i]);
+
+        StdOut.println("----- 向量和矩阵之积 ------");
+        double[] a4 = {1, 2, 3};
+        double[][] b4 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        double[] c4 = multiple(a4, b4);
+        for(int i = 0; i < c4.length; i++)
+            StdOut.printf("%-10.3f", c4[i]);
+    }
+}
 ````
 
 ##### 1.1.34 过滤。以下哪些任务需要以下哪些任务需要（在数组中，比如）保存标准输入中的所有值？哪些可以被实现为一个过滤器且仅使用固定数量的变量和固定大小的数组（和N无关）？在每个问题中，输入都来自于标准输入且含有N个0到1的实数。
@@ -448,3 +588,5 @@ B.被实现为一个过滤器且仅使用固定数量的变量和固定大小的
         (A)       将 N 个数按照升序打印 
         (A)       将 N 个数按照随机顺序打印 
 ````
+
+###### ·[实验题篇](\2018\07\30\algorithms4-1.1-ShiYanTi) ----- [在新标签页打开](\2018\07\30\algorithms4-1.1-ShiYanTi){:target="_blank"}

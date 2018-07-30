@@ -690,4 +690,6 @@ public class q1124 {
 
 ##### 1.1.25 用数学归纳法证明欧几里得算法能够计算任意一对非负整数 p 和 q 的最大公约数。
 
-###### ·[提高题](\2018\07\28\algorithms4-1.1-TiGaoTi) ----- [在新标签页打开](\2018\07\28\algorithms4-1.1-TiGaoTi){:target="_blank"}
+###### ·[提高题篇](\2018\07\28\algorithms4-1.1-TiGaoTi) ----- [在新标签页打开](\2018\07\28\algorithms4-1.1-TiGaoTi){:target="_blank"}
+
+###### ·[实验题篇](\2018\07\30\algorithms4-1.1-ShiYanTi) ----- [在新标签页打开](\2018\07\30\algorithms4-1.1-ShiYanTi){:target="_blank"}
