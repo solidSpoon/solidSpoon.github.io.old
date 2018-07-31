@@ -209,7 +209,7 @@ N=10000000
 8999488 13960   35951   71120   133266  199985  166855  142866  124703  111806
 ````
 
-##### 1.1.38 二分查找与暴力查找。根据 1.1.10.4 节给出的暴力查找法编写一个程序 `BruteForceSearch` ，在你的计算机上比较它和 `BinartSearch` 处理 largeW.txt 和 largeT.txt 所需的时间。13701  
+##### 1.1.38 二分查找与暴力查找。根据 1.1.10.4 节给出的暴力查找法编写一个程序 `BruteForceSearch` ，在你的计算机上比较它和 `BinartSearch` 处理 largeW.txt 和 largeT.txt 所需的时间。
 ````java
 import edu.princeton.cs.algs4.*;
 import java.util.Arrays;
