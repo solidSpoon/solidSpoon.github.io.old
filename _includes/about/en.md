@@ -10,4 +10,4 @@ Hi, I am ShanLin an undergrafuate.
 
 ##### ·Email to me. [2571049276@qq.com](mailto:2571049276@qq.com)
 
-##### ·Welcome to my Github: [github.com/ShanLin257](https://github.com/ShanLin257)!
+##### ·Welcome to my Github: [github.com/ShanLin257](https://github.com/ShanLin257)
