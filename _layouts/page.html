@@ -170,6 +170,28 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
+                            <!--------------------------------------------------------------------------------------->
+                            {% if site.mail_username %}
+                            <li>
+                                <a target="_blank" href="mailto:{{ site.mail_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">邮</i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if site.wechat_username %}
+                            <li>
+                                <a target="_blank" href="/54/WeChat.html">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">微</i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <!---------------------------------------------------------------------------------------->
                             {% if site.linkedin_username %}
                             <li>
                                 <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
