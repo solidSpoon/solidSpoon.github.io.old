@@ -302,7 +302,7 @@ public class q1131{
 }
 ````
 运行结果（改成了红线，概率为 1 时）：
-![](\img\in-post\2018-7-28-algorithms4-1.1-TiGaoTi\q1131.jpg)
+![](\img\in-post\2018\7\28\q1131.jpg)
 
 ##### 1.1.32 直方图。假设标准输入流中含有一系列 `double` 值。编写一段程序，从命令行接受一个整数 N 和两个 `double` 值 l 和 r。将 `(l, r)` 分为 N 段并使用 `StdDraw` 画出输入流中的值落入每段的数量的直方图。
 ````java
@@ -416,7 +416,7 @@ public class q1132{
 }
 ````
 运行结果：
-![](\img\in-post\2018-7-28-algorithms4-1.1-TiGaoTi\q1132.jpg)
+![](\img\in-post\2018\7\28\q1132.jpg)
 
 ##### 1.1.33 矩阵库。编写一个 `Matrix` 库并实现以下API：
 ````
