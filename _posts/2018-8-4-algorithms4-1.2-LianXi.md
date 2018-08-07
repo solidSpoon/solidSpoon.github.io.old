@@ -140,3 +140,172 @@ java q123 10 0.1 0.9
 inersect:27;includenum:1
 ````
 ![](\img\in-post\2018\8\4\q123.jpg)
+
+##### 1.2.4 以下这段代码会打印出什么？
+````java
+String string1 = "hello";
+String string2 = string1;
+string1 = "world";
+StdOut.println(string1);
+StdOut.println(string2);
+````
+````
+world
+hello
+````
+
+##### 1.2.5 以下这段代码会打印出什么？
+````java
+String s = "Hello World"
+s.toUpperCase();
+s.substring(6,11);
+StdOut.println(s);
+````
+答： `"Hello World"` 。`String` 对象是不可变的—————所有字符串方法都会返回一个新的 `String` 对象（但他们不会改变参数对象的值）。这段代码忽略了返回的对象并直接打印了原字符串。要打印出 `"WORD"` ,请用 `s = s.tuUpperCase()` 和 `s = s.substring(6.11)` .
+
+##### 1.2.6 如果字符串 s 中的字符循环移动任意位置之后得到另一个字符串 t ，那么 s 就被称为 t 的回环变位（circular rotation）。例如，ACTGACG 就是 TGACGAC 的一个回环变位，反之亦然。判定这个条件在基因组排序的研究中是很重要的。编写一个程序检查给定的两个字符串 s 和 t 是否为回环变位。
+提示：答案只需要一行用到 `indexOf()` 、 `length()` 和字符串链接的代码。
+
+````java
+import edu.princeton.cs.algs4.*;
+public class q126{
+    /**
+     * 判断两个字符串是否为回环变位
+     * @param s 字符串一
+     * @param t 字符串二     
+     */
+    public static boolean isCircularRotation(String s, String t){
+        //将 t 和 t 自身连接，这样如果 t 是 s 的回环变位，那么s肯定是 “t+t” 的一个子串！
+        return (s.length() == t.length()) && ((t + t).indexOf(s) > 0);
+    }
+    public static void main(String[] args){
+        String s = args[0];
+        String t = args[1];
+        if (isCircularRotation(s, t)){
+            System.out.println("二者是回环变位");
+        } else {
+            System.out.println("二者不是回环变位");
+        }
+    }
+}
+````
+````
+java q126 ACTGACG TGACGAC
+二者是回环变位
+````
+
+##### 1.2.7 以下递归函数的返回值是什么？
+````java
+public static String mystery(String s){
+    int N = s.length();
+    if (N <= 1){
+        return s;
+    }
+    String a = s.substring(0, N/2);
+    String b = s.substring(N/2, N);
+    return mystery(b) + mystery(a);
+}
+````
+答：会将字符串的后半部分移到前边
+例：abcdefg => gfedcba
+
+##### 1.2.8 设 a[] 和 b[] 均为长数百万的整形数组。以下代码的作用是什么？有效吗？
+    int t = a; a = b; b = t;
+
+答：这段代码会将他们交换。它的效率不可能再高了，因为它复制的是引用而不需要复制数百万个元素。
+
+##### 1.2.9 修改 `BinarySearch` （请见 1.1.10.1 节中的二分查找代码），使用 `Counter` 统计在有查找中被检查的键的总数并在查找全部结束后打印该值。
+提示：在 `main()` 中创建一个 `Counter` 对象并将他作为参数传给 `rank()` 。
+
+````java
+import edu.princeton.cs.algs4.*;
+import java.util.Arrays;
+public class q129{
+    public static int rank(int key, int[] a, Counter counter){
+        //数组必须是有序的
+        int lo = 0;
+        int hi = a.length-1;
+        counter.increment();
+        while(lo <= hi){
+            //被查找的键要么不存在，要么必然存在于 a[lo..hi] 之中
+            int mid = lo + (hi - lo) / 2;
+            if (key < a[mid]){
+                hi = mid - 1;
+            } else if (key > a[mid]){
+                lo = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args){
+        int[] whitelist = In.readInts(args[0]);
+        Arrays.sort(whitelist);
+        Counter counter = new Counter("BinarySearch");
+        while (!StdIn.isEmpty()){
+            //读取键值，如果不存在于白名单中则将其打印
+            int key = StdIn.readInt();
+            if (rank(key, whitelist, counter) < 0){
+                StdOut.println(key);
+            }
+        }
+        System.out.println("总数：" + counter);
+    }
+}
+````
+````
+java q129 tinyW.txt < tinyT.txt
+50
+99
+13
+总数：18 BinarySearch
+````
+
+##### 1.2.10 编写一个类 `VisualCounter` ，支持加一和减一操作。它的构造函数接受两个参数 N 和 max ，其中 N 指定了操作的最大次数， max 指定了计数器的最大绝对值。作为副作用，用图像显示每次计数器变化后的值。
+````java
+import edu.princeton.cs.algs4.*;
+class VisualCounter{
+    private int count;
+    private int x;
+    public VisualCounter(int N, int max){
+        StdDraw.setXscale(0, N);
+        StdDraw.setYscale(-max, max);
+        StdDraw.setPenRadius(.007);
+    }
+    
+    public void increment(){
+        count++;
+        x++;
+        StdDraw.point(x, count);
+    }
+    public void decrement(){
+        count--;
+        x++;
+        StdDraw.point(x, count);
+    }
+}
+    
+public class q1210{
+    public static void main(String[] args){
+        int N = 100;
+        int max = 50;
+        double p = 0.7;
+        VisualCounter vc = new VisualCounter(N, max);
+        for (int t = 0; t < 100; t++){
+            boolean padd = StdRandom.bernoulli(p);//加的概率为p
+            if (padd){
+                vc.increment();
+            } else {
+                vc.decrement();
+            }
+        }
+    }
+}
+````
+![](\img\in-post\2018\8\4\q1210.jpg)
+
+##### 1.2.11 根据 `Date` 的 API 实现一个 `smartDate` 类型，在日期非法时抛出一个异常。
+````java
+
+````
