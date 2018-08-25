@@ -306,6 +306,225 @@ public class q1210{
 ![](\img\in-post\2018\8\4\q1210.jpg)
 
 ##### 1.2.11 根据 `Date` 的 API 实现一个 `smartDate` 类型，在日期非法时抛出一个异常。
-````java
 
+##### 1.2.12 为 `smartDate` 添加一个方法 `dayOfTheWeek()` ，为日期中每周的日返回 Monday、 Tuesday、 Wednesday、 Thursday、 Friday、 Saturday 和 Sunday 中的适当值。你可以假定时间是21世纪。
+````java
+import edu.princeton.cs.algs4.*;
+interface Date{
+    int day();
+    int month();
+    int year();
+    String toString();
+    boolean equals(Object that);
+    int compareTo(smartDate that);
+    int hashCode();
+}
+class smartDate implements Date {
+    private static final int[] DAYS = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    private final int month;   // month (between 1 and 12)
+    private final int day;     // day   (between 1 and DAYS[month]
+    private final int year;    // year
+
+   /**
+     * Initializes a new date from the month, day, and year.
+     * @param month the month (between 1 and 12)
+     * @param day the day (between 1 and 28-31, depending on the month)
+     * @param year the year
+     * @throws IllegalArgumentException if this date is invalid
+     */
+    public smartDate(int month, int day, int year) {
+        if (!isValid(month, day, year)) throw new IllegalArgumentException("Invalid date");
+        this.month = month;
+        this.day   = day;
+        this.year  = year;
+    }
+
+    /**
+     * Initializes new date specified as a string in form MM/DD/YYYY.
+     * @param date the string representation of this date
+     * @throws IllegalArgumentException if this date is invalid
+     */
+    public smartDate(String date) {
+        String[] fields = date.split("/");
+        if (fields.length != 3) {
+            throw new IllegalArgumentException("Invalid date");
+        }
+        month = Integer.parseInt(fields[0]);
+        day   = Integer.parseInt(fields[1]);
+        year  = Integer.parseInt(fields[2]);
+        if (!isValid(month, day, year)) throw new IllegalArgumentException("Invalid date");
+    }
+
+    /**
+     * Return the month.
+     * @return the month (an integer between 1 and 12)
+     */
+    public int month() {
+        return month;
+    }
+
+    /**
+     * Returns the day.
+     * @return the day (an integer between 1 and 31)
+     */
+    public int day() {
+        return day;
+    }
+
+    /**
+     * Returns the year.
+     * @return the year
+     */
+    public int year() {
+        return year;
+    }
+
+
+    // is the given date valid?
+    private static boolean isValid(int m, int d, int y) {
+        if (m < 1 || m > 12)      return false;
+        if (d < 1 || d > DAYS[m]) return false;
+        if (m == 2 && d == 29 && !isLeapYear(y)) return false;
+        return true;
+    }
+
+    // is y a leap year?
+    private static boolean isLeapYear(int y) {
+        if (y % 400 == 0) return true;
+        if (y % 100 == 0) return false;
+        return y % 4 == 0;
+    }
+
+
+    /**
+     * Returns a string representation of this date.
+     *
+     * @return the string representation in the format MM/DD/YYYY
+     */
+    @Override
+    public String toString() {
+        return month + "/" + day + "/" + year;
+    }
+
+    /**
+     * Compares this date to the specified date.
+     *
+     * @param  other the other date
+     * @return {@code true} if this date equals {@code other}; {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (other == null) return false;
+        if (other.getClass() != this.getClass()) return false;
+        smartDate that = (smartDate) other;
+        return (this.month == that.month) && (this.day == that.day) && (this.year == that.year);
+    }
+    
+        /**
+     * Returns the next date in the calendar.
+     *
+     * @return a date that represents the next day after this day
+     */
+    public smartDate next() {
+        if (isValid(month, day + 1, year))    return new smartDate(month, day + 1, year);
+        else if (isValid(month + 1, 1, year)) return new smartDate(month + 1, 1, year);
+        else                                  return new smartDate(1, 1, year + 1);
+    }
+
+    /**
+     * Compares two dates chronologically.
+     *
+     * @param  that the other date
+     * @return {@code true} if this date is after that date; {@code false} otherwise
+     */
+    public boolean isAfter(smartDate that) {
+        return compareTo(that) > 0;
+    }
+
+    /**
+     * Compares two dates chronologically.
+     *
+     * @param  that the other date
+     * @return {@code true} if this date is before that date; {@code false} otherwise
+     */
+    public boolean isBefore(smartDate that) {
+        return compareTo(that) < 0;
+    }
+
+    /**
+     * Compares two dates chronologically.
+     *
+     * @return the value {@code 0} if the argument date is equal to this date;
+     *         a negative integer if this date is chronologically less than
+     *         the argument date; and a positive ineger if this date is chronologically
+     *         after the argument date
+     */
+    
+    public int compareTo(smartDate that) {
+        if (this.year  < that.year)  return -1;
+        if (this.year  > that.year)  return +1;
+        if (this.month < that.month) return -1;
+        if (this.month > that.month) return +1;
+        if (this.day   < that.day)   return -1;
+        if (this.day   > that.day)   return +1;
+        return 0;
+    }
+    /**
+     * Difference between a and b
+     * @return the number of days between a and b
+     */
+    public int numBetween(smartDate b){
+        smartDate t = new smartDate(this.month, this.day, this.year);
+        int num = 0;
+        while (t.isBefore(b)){
+            t=t.next();
+            num++;
+        }
+        return num;
+    }
+    /**
+     * week
+     * @return The week of the smartDay
+     */
+    public String week(){
+        smartDate a = new smartDate(12, 31, 1999);
+        final String[] WEEK = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thurday", "Friday"};
+        return WEEK[a.numBetween(this)%7-1];
+        
+    }
+    /**
+     * Returns an integer hash code for this date.
+     *
+     * @return an integer hash code for this date
+     */
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31*hash + month;
+        hash = 31*hash + day;
+        hash = 31*hash + year;
+        return hash;
+    }
+
+}
+public class q1211{
+    public static void main(String[] args) {
+        smartDate today = new smartDate(2, 25, 2018);
+        smartDate birthday = new smartDate(10, 16, 1971);
+        StdOut.println(today);
+        StdOut.println(birthday);
+        StdOut.println(birthday.equals(today));
+        StdOut.println(today.week());
+    }
+}
 ````
+````
+java q1211
+2/25/2018
+10/16/1971
+false
+Sunday
+````
+
