@@ -307,6 +307,8 @@ public class q1210{
 
 ##### 1.2.11 根据 `Date` 的 API 实现一个 `smartDate` 类型，在日期非法时抛出一个异常。
 
+答案见 1.2.12
+
 ##### 1.2.12 为 `smartDate` 添加一个方法 `dayOfTheWeek()` ，为日期中每周的日返回 Monday、 Tuesday、 Wednesday、 Thursday、 Friday、 Saturday 和 Sunday 中的适当值。你可以假定时间是21世纪。
 ````java
 import edu.princeton.cs.algs4.*;
