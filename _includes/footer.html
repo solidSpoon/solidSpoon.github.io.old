@@ -68,6 +68,28 @@
                         </a>
                     </li>
                     {% endif %}
+                    <!--------------------------------------------------------------------------------------->
+                    {% if site.mail_username %}
+                    <li>
+                        <a target="view_window" href="mailto:{{ site.mail_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if site.wechat_username %}
+                    <li>
+                        <a target="view_window" href="/54/WeChat.html">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                       </li>
+                    {% endif %}
+                    <!---------------------------------------------------------------------------------------->
                     {% if site.linkedin_username %}
                     <li>
                         <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
@@ -82,8 +104,8 @@
                 <p class="copyright text-muted">
                     Copyright &copy; <a href="/about/">{{ site.title }}</a> {{ site.time | date: '%Y' }}
                     <br>
-                    <!--Theme by <a href="http://huangxuan.me">Hux</a> |
-                    <iframe
+                    Hosted by <a href="https://pages.coding.me">Coding Pages</a> | <a href="https://pages.github.com">Github Pages</a>
+                    <!--iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
