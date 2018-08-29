@@ -529,5 +529,3 @@ java q1211
 false
 Sunday
 ````
-
-##### 1.2.13 用我们对 Date 的实现（请见表 1.2.12）作为模板实现 Transaction 类型。
