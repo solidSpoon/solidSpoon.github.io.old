@@ -529,3 +529,67 @@ java q1211
 false
 Sunday
 ````
+
+##### 1.2.13 用我们对 `Date` 的实现（请见表1.2.12）作为模板实现 `Translation` 类型。
+
+````java
+import edu.princeton.cs.algs4.*;
+interface Transactions{
+    String who(); //客户名
+    Date when();  //交易日期
+    double amount(); //交易金额
+    String toString();
+}
+
+public class Transaction implements Transactions{
+    private final String  who;      // customer
+    private final Date    when;     // date
+    private final double  amount;   // amount
+
+    public Transaction(String who, Date when, double amount) {
+        if (Double.isNaN(amount) || Double.isInfinite(amount)){
+            throw new IllegalArgumentException("Amount cannot be NaN or infinite");
+        }
+        this.who    = who;
+        this.when   = when;
+        this.amount = amount;
+    }
+    
+    public Date when() {
+        return when;
+    }
+    
+    public String who() {
+        return who;
+    }
+    
+    public double amount() {
+        return amount;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%-10s %10s %8.2f", who, when, amount);
+    }
+    
+    public static void main(String[] args) {
+        Transaction a = new Transaction("Turing", new Date("6/17/1990"), 644.08);
+        StdOut.println(a);
+    }
+    
+}
+````
+
+##### 1.2.14 用我我们对 `Date` 中的 `equals()` 方法的实现（请见 1.2.5.8 节中的 `Date` 类代码框）作为模板，实现 `Translation` 中的 `equals()` 方法。
+
+````java
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (other == null) return false;
+        if (other.getClass() != this.getClass()) return false;
+        Transaction that = (Transaction) other;
+        return (this.amount == that.amount) && (this.who.equals(that.who))
+                                            && (this.when.equals(that.when));
+    }
+````
