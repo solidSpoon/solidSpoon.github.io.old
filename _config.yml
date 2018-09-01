@@ -93,7 +93,19 @@ service-worker: true
 
 # Friends
 friends: [
-      { title: "乱序",
+      {
+        title: "stormzhang",
+        href: "http://stormzhang.com/"
+    },{
+        title: "w4lle",
+        href: "http://w4lle.github.io/"
+    },{
+        title: "loody",
+        href: "http://loody.github.io/"
+    },{
+        title: "kaywu",
+        href: "http://kaywu.github.io/"
+    },{ title: "乱序",
         href: "http://mida.re/"
     },{
         title: "Luke 的自留地",
@@ -113,5 +125,8 @@ friends: [
     },{
         title: "尹峰以为",
         href: "http://ingf.github.io/"
+    },{
+        title: "jayway",
+        href: "https://blog.jayway.com"
     }
 ]
