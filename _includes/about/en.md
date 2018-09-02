@@ -3,7 +3,7 @@
 > Yet another man.
 
 
-Hi, I am ShanLin an undergrafuate. 
+Hi, I am ShanLin an undergraduate. 
 
 ##### ·WeChat public number: [solidSpoon](/54/WeChat.html)
 ---- If you have any questions, you can leave a message on the public account.
