@@ -1,10 +1,10 @@
 ---
 layout:       post
 title:        "Google 搜索技巧"
-subtitle:     "Google Hacking 系列 一"
+subtitle:     "Google Hacking 系列「一』"
 date:         2018-09-08 12:00:00
 author:       "ShaLin"
-header-img:   "img/in-post/home-bg-art.jpg"
+header-img:   "img/post-bg.jpg"
 header-mask:  0.3
 catalog:      true
 tags:
@@ -70,7 +70,7 @@ Google 的布尔运算符包括 `AND`, `OR` 和 `NOT`
 ### Google URL
 
 - Google URL 就是一个指向搜索结果页面的连接，它是动态的，每次访问的结果可能不同。每个 Google 查询都能表示成一个这样的 url，即地址栏显示的那串字符。
-    - *eg*. 搜索 ++hacking to zhe gate++
+    - *eg*. 搜索 <u>hacking to zhe gate</u>
     
         `https://www.google.com/search?q=hacking+to+zhe+gate&oq=hacking+to+zhe+gate&...` 此处省略部分字符
     - 其中 `www.google.com/search` 是 Google 搜索脚本的位置，`?` 表示紧接着的参数将要被传递到搜索脚本中去

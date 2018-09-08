@@ -4,7 +4,7 @@ title:        "《算法-第四版》答案系列-1.1 实验题篇"
 subtitle:     "本系列是《算法-第四版》一书的课后习题答案"
 date:         2018-07-30 12:00:00
 author:       "ShaLin"
-header-img:   "img/in-post/home-bg-art.jpg"
+header-img:   "img/post-bg.jpg"
 header-mask:  0.3
 catalog:      true
 tags:
