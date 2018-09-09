@@ -70,15 +70,15 @@ body, html {
 
 /* The card */
 .cbp_tmtimeline > li .cbp_tmlabel {
-	background: white;
-	color: rgb(78, 78, 78);
+	background: #555;
+	color: #f5f5f5;
 	/* line-height: 1.4; */
 	position: relative;
-	border-radius: 10px;
+	border-radius: 30px;
 	border: 1px solid #edeeee;
 	margin: 0 0 30px 0;
-	font-weight: 400;
-	font-size: 95%;
+	font-weight: 500;
+	font-size: 110%;
 }
 
 .cbp_tmtimeline > li .cbp_tmlabel h2 {

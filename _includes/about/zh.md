@@ -3,7 +3,7 @@
 
 Hey，我是时庆欢，大学生。
 
-##### ·微信公众号： [solidSpoon](/54/WeChat.html)
+##### ·微信公众号： [solidSpoon](/54/PublicNumber)
 ---- 有问题的话可以去公众号留言呀！
 
 ##### ·也可以给我发邮件：[2571049276@qq.com](mailto:2571049276@qq.com)
