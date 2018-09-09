@@ -3,7 +3,7 @@ layout: post
 title: "一篇散文"
 subtitle: "紧握忽视的盈盈暖意"
 date: 2018-06-08 18:00:00
-author: "ShanLin"
+author: "solidSpoon"
 header-img: "img/post-bg.jpg"
 tags: 
     - 散文

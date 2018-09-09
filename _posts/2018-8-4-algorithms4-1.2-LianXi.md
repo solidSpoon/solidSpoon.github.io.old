@@ -3,7 +3,7 @@ layout:       post
 title:        "《算法-第四版》答案系列-1.2 练习篇"
 subtitle:     "本系列是《算法-第四版》一书的课后习题答案"
 date:         2018-08-04 12:00:00
-author:       "ShaLin"
+author:       "solidSpoon"
 header-img:   "img/post-bg.jpg"
 header-mask:  0.3
 catalog:      true

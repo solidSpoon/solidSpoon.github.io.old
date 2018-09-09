@@ -3,7 +3,7 @@ layout:       post
 title:        "Git 是纯函数式数据结构"
 subtitle:     "对比 Git 与纯函数式数据结构的异同"
 date:         2018-9-1 12:00:00
-author:       "ShanLin"
+author:       "solidpoon"
 header-img:   "img/post-bg.jpg"
 header-mask:  0.3
 catalog:      true

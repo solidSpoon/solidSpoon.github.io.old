@@ -3,7 +3,7 @@ layout:       post
 title:        "Google 搜索技巧"
 subtitle:     "Google Hacking 系列「一』"
 date:         2018-09-08 12:00:00
-author:       "ShaLin"
+author:       "solidSpoon"
 header-img:   "img/post-bg.jpg"
 header-mask:  0.3
 catalog:      true
