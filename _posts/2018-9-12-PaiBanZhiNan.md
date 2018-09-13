@@ -93,7 +93,7 @@ tags:
 
 - 专有名词使用正确的大小写
 
-    eg. GitHub、iOS、iPhone 6S、MacBook Pro
+    eg. GitHub、iOS、iPhone XS Max、MacBook Pro
 
 - 首行不要缩进
 
@@ -105,7 +105,7 @@ tags:
     
 所以，我认为这种应该是最科学的方式，只要没有明确的格式要求，写作的排版无须首行缩进。
 
-### ▎关于公众号排版
+### ▎公众号排版
 
 用 Markdown 写作的确很方便。那么对于「不那么方便」的微信公众号，除了上面的那些外，又有什么是需要注意的呢？
 
