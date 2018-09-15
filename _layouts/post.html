@@ -90,20 +90,40 @@ layout: default
                     {% endif %}
                 </ul>
 
-
+				<!-- disqus 评论框 start>
                 {% if site.disqus_username %}
-                <!-- disqus 评论框 start -->
+                
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- disqus 评论框 end -->
+                
                 {% endif %}
-
-                {% if site.netease_comment %}
-                <!-- 网易云跟帖 评论框 start -->
+				<-- disqus 评论框 end -->
+				
+				<!--Valine评论-->
+				{% if site.lean_cloud_app_id %}
+					<div id="commentsid">
+						<div id="vcomments"></div>
+						<script>
+							new Valine({
+								el: '#vcomments' ,
+								appId: '{{site.lean_cloud_app_id}}',
+								appKey: '{{site.lean_cloud_app_key}}',
+								notify:false, 
+								verify:false, 
+								avatar:'mm', 
+								placeholder: 'write your comments here...' 
+							  })
+						</script>
+					</div>
+				{% endif %}
+				<!--Valine 评论 end-->
+                
+				
+                <!-- 网易云跟帖 评论框 start >
                 <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-                <!-- 网易云跟帖 评论框 end -->
-                {% endif %}
+                <-- 网易云跟帖 评论框 end -->
+                
             </div>  
 
     <!-- Side Catalog Container -->
@@ -163,7 +183,7 @@ layout: default
 
 
 {% if site.lean_cloud_app_id %}
-<!-- Valine 评论系统 -->
+<!-- Valine 评论系统 >
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <div id="vcomments"></div>
@@ -178,7 +198,24 @@ layout: default
             placeholder: 'just go go' 
         })
     </script>
-<!-- Vailine 评论系统 end -->
+<-- Vailine 评论系统 end -->
+{% endif %}
+
+
+{% if site.netease_comment %}
+<!-- 网易云跟帖JS代码 start -->
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "de25fc98a6fe48b3bc8a7ae765da99a0",
+    target: "cloud-tie-wrapper"
+  };
+  var yunManualLoad = true;
+  Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+</script>
+<!-- 网易云跟帖JS代码 end -->
 {% endif %}
 
 
