@@ -58,9 +58,9 @@ kramdown:
 #disqus_username: hux
 
 
-# Netease settings
-netease_comment: false
-
+# Valine 评论系统
+lean_cloud_app_id: q3J27xFB4BkkYJ6M2o4c5HfD-gzGzoHsz
+lean_cloud_app_key: 'U8i5kjAxt08fMCJJups1Rstg'
 
 # Analytics settings
 # Baidu Analytics 
