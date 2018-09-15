@@ -169,9 +169,13 @@ layout: default
     <div id="vcomments"></div>
     <script>
         new Valine({
-            el: '#vcomments',
-            appId: '{{lean_cloud_app_id}}',
-            appKey: '{{lean_cloud_app_key}}'
+            el: '#vcomments' ,
+            appId: '{{site.lean_cloud_app_id}}',
+            appKey: '{{site.lean_cloud_app_key}}',
+            notify:false, 
+            verify:false, 
+            avatar:'mm', 
+            placeholder: 'just go go' 
         })
     </script>
 <!-- Vailine 评论系统 end -->
