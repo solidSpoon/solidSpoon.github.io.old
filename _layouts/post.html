@@ -106,11 +106,11 @@ layout: default
 						<div id="vcomments"></div>
 						<script>
 							new Valine({
-								el: '#vcomments' ,
+								el: '#vcomments',
 								appId: '{{site.lean_cloud_app_id}}',
 								appKey: '{{site.lean_cloud_app_key}}',
-								notify:false, 
-								verify:false, 
+								notify:false, //邮件提醒
+								verify:true, //验证码
 								avatar:'mm', 
 								placeholder: 'write your comments here...' 
 							  })
