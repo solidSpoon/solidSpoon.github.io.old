@@ -128,5 +128,8 @@ friends: [
     },{
         title: "jayway",
         href: "https://blog.jayway.com"
+    },{
+        title: "wistbean",
+        href: "www.wistbean.com"
     }
 ]
