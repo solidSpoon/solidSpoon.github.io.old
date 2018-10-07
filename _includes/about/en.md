@@ -5,9 +5,9 @@
 
 Hi, I am solidSpoon an undergraduate. 
 
-##### ·WeChat public number: [solidSpoon](/PublicNumber)
+##### · WeChat public number: [solidSpoon](/PublicNumber)
 ---- If you have any questions, you can leave a message on the public account.
 
-##### ·Email to me： [2571049276@qq.com](mailto:2571049276@qq.com)
+##### · Email to me： [2571049276@qq.com](mailto:2571049276@qq.com)
 
-##### ·Welcome to my Github: [github.com/solidSpoon](https://github.com/solidSpoon)
+##### · Welcome to my Github: [github.com/solidSpoon](https://github.com/solidSpoon)
