@@ -1,0 +1,407 @@
+body {
+    background-color: gainsboro;
+}
+
+div {
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+.masonry {
+position: relative;
+    top: -15px;
+    display: flex;
+    flex-direction: column;
+    /*background-color: white;*/
+    width: 880px;
+    float: left;
+    margin: 10px;
+    /*height: 1500px;*/
+}
+.row {
+    /*width: 2000px;*/
+}
+.item {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    color: gold;
+}
+.item_content{
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+    margin: 10px;
+}
+/*答辩作业*/
+.title_up {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    border-bottom:1px solid dimgray;
+}
+.title_center {
+    width: 100%;
+    height: 30px;
+    background-color: white;
+}
+#logo{
+    position: absolute;
+    left: 150px;
+    top: 20px;
+    height: 50px;
+}
+ul
+{
+    float:left;
+    width:100%;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}
+.q
+{
+    text-align: center;
+    position: relative;
+    left: 150px;
+    float: left;
+    width:6em;
+    height: 30px;
+    text-decoration:none;
+    color: black;
+    background-color: white;
+    font-size: 150%;
+}
+.q:hover {color: coral}
+li {display:inline}
+
+.an_niu1:hover{background-color: mistyrose}
+.an_niu1 {
+    text-decoration:none;
+    color: black;
+    border-bottom:1px solid dimgray;
+    padding: 10px;
+}
+.an_niu2:hover{background-color: aqua}
+.an_niu2 {
+    text-decoration:none;
+    color: black;
+    border-bottom:1px solid dimgray;
+    background-color: #ff3300;
+    bottom: 1px;
+    width: 40px;
+    float: right;
+
+}
+#gerendang_jnniuzuo_qita{
+    background-color: white;
+    text-align: center;
+}
+.wen_zi_an_niu:hover{color: darkorange}
+.wen_zi_an_niu {
+
+}
+.wen_zi_an_niu2:hover{color: aqua}
+.wen_zi_an_niu2{
+    color: blue;
+    text-decoration:none;
+}
+#zuo_ce_cai_dan{
+    /*background-color: darkcyan;*/
+    width: 210px;
+    float: left;
+}
+#liu_yan_ban{
+    background-color: white;
+    text-align: center;
+    padding: 13px;
+
+}
+
+
+
+table {
+    border-radius: 8px;
+}
+fieldset{
+    border-radius: 8px;
+}
+/*答辩作业*/
+
+/*-------------------------------------------------------------*/
+
+/*
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body {
+    padding: 20px;
+}
+*/
+#container {
+    position: relative;
+    width: 990px;                     /*880*/
+    height: 550px;/**/
+    background-color: white;
+    /*overflow: hidden;*/
+    float: left;
+    margin: 20px;
+}
+.fen_shu{
+    background-color: white;
+    width: 970px;
+    margin: 20px;
+    padding: 10px;
+}
+
+
+#list {
+    position: absolute;
+    z-index: 1;
+    /*width: 4600px;*/
+    height: 600px;/**/
+    border: 90px;
+}
+#list img {
+    float: left;
+    width: 880px;/**/
+    height: 600px;/**/
+}
+/*#buttons {
+    position: absolute;
+    left: 250px;
+    bottom: 20px;
+    z-index: 2;
+    height: 10px;
+    width: 100px;
+}
+#buttons span {
+    float: left;
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+}
+#buttons .on {
+    background: orangered;
+}*/
+.arrow {
+    position: absolute;
+    top: 500px;
+    z-index: 2;
+    display: none;
+    width: 150px;
+    height: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 39px;
+    text-align: center;
+
+    color: blue;
+    cursor: pointer;
+}
+.arrow:hover {
+    color: mediumspringgreen;
+}
+#container:hover .arrow {
+    display: block;
+}
+#prev {
+    left: 20px;
+}
+#next {
+    right: 480px;
+}
+textarea{
+    border-radius: 8px;
+}
+
+
+
+
+/*                                   dongtai*/
+
+.div1_zhuye{
+
+    padding: 0;
+    width: 1000px;
+    background-color: aquamarine;
+}
+.zhuye{
+
+    padding: 10px;
+    background-color: white;
+    float: left;
+    width: 970px;
+    border-radius: 8px;
+    margin: 20px;
+}
+#apicture_zhuye {
+    margin: 0 auto;
+    width: 1000px;
+    border-radius: 8px;
+}
+/*form{
+    background-color: wheat;
+    width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+
+ul
+{
+    float:left;
+    width:100%;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}*/
+
+.a_zhuye{
+    float:left;
+    width:7em;
+    text-decoration:none;
+    color: black;
+    background-color: lightgoldenrodyellow;
+    padding:0.2em 0.6em;
+    border-right:1px solid white;
+}
+.a_zhuye:hover {background-color: coral}
+li {display:inline}
+
+.fd{
+    float:right;
+    width:327px;
+    margin:0 0 15px 20px;
+    padding:15px;
+
+}
+
+
+
+#ldiv_zhuye{
+    text-align: left;
+    margin: 5px;
+    float: right;
+    width: 300px;
+    height:150px;
+    overflow: auto;
+    background-color: whitesmoke;
+}
+#rdiv_zhuye{
+
+    text-align: left;
+    margin: 5px;
+    float: right;
+    width: 300px;
+    height:150px;
+    overflow: auto;
+    background-color: whitesmoke;
+}
+#cdiv_zhuye{
+    margin: 5px;
+    float: right;
+    width: 300px;
+    height:150px;
+    overflow: auto;
+    background-color: whitesmoke;
+}
+#zzzzzz_zhuye{
+    height: 350px;
+}
+.ye_me_wen_zi{
+    background-color: white;
+    float: left;
+    width: 990px;
+    border-radius: 8px;
+    margin: 20px;
+    text-align: center;
+    text-decoration:none;
+}
+/*                                              sheying*/
+
+
+
+.item_content .datu_sheying {
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.datu_sheying {
+    width: calc(200%/3);
+    float: left;
+}
+
+.masonry_sheying {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.column_sheying {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100%/3);
+}
+
+.item_sheiong {
+
+    background-color: white;
+}
+
+.item_content_sheying {
+
+}
+
+.text_area_sheying {
+    padding:20px;
+
+}
+
+
+.bo_dy_sheying{
+    background-color: white;
+    width: 990px;
+
+    float: left;
+    margin: 20px;
+}
+
+
+
+
+
+.scond_right4{
+    background-color: white;
+    padding: 20px;
+    font-size: 70%;
+    width: 950px;
+    margin: 20px;
+    float: left;
+
+}
+.shuoshuo_fieldset{
+    padding: 40px 20px 40px 20px;
+    background-color: white;
+
+}
+.shuoshuo_fieldset_div{
+    margin: 20px;
+    width: 990px;
+    float: left;
+
+}
+#shi_tou_jian_zi_bu_div{
+    margin: 20px;
+    float: left;
+    overflow: hidden;
+    border: 0;
+}

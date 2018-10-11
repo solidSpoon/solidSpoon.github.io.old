@@ -1,11 +1,11 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: solidSpoon
+SEOTitle: 杉临 | solidSpoon
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于程序与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
-url: "https://huangxuan.me"              # your host, for absolute URL
+email: s2571049276@gmail.com
+description: "昵称杉临，90后，在校大学生/灵魂摄影师，热爱技术&设计。很高兴能在这里与你分享我对技术和生活的思考"
+keyword: "时庆欢, 时庆欢的独立博客, 时庆欢的博客, ShanLin257, shanlin257, shanlin, ShanLin"
+url: "blog.solidspoon.xyz"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -13,10 +13,12 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+#weibo_username:     huxpro
+#zhihu_username:     huxpro
+mail_username:       2571049276@qq.com
+wechat_username:     solidSpoon
+github_username:     solidSpoon
+#twitter_username:   huxpro
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
@@ -49,30 +51,24 @@ plugins: [jekyll-paginate]
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
-  syntax_highlighter_opts:
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
 
 
 
 # Disqus settings
-disqus_username: hux
-
-# Netease settings
-netease_comment: false
+#disqus_username: hux
 
 
+# Valine 评论系统
+lean_cloud_app_id: q3J27xFB4BkkYJ6M2o4c5HfD-gzGzoHsz
+lean_cloud_app_key: U8i5kjAxt08fMCJJups1Rstg
 
 # Analytics settings
 # Baidu Analytics 
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-122665693-1'            # Format: UA-xxxxxx-xx
+ga_domain: shanlin257.github.io          # 域名
 
 
 
@@ -95,25 +91,22 @@ service-worker: true
 
 
 
-# MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: false
-
-
-
 # Friends
 friends: [
-    {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序",
+      {
+        title: "stormzhang",
+        href: "http://stormzhang.com/"
+    },{
+        title: "w4lle",
+        href: "http://w4lle.github.io/"
+    },{
+        title: "loody",
+        href: "http://loody.github.io/"
+    },{
+        title: "kaywu",
+        href: "http://kaywu.github.io/"
+    },{ title: "乱序",
         href: "http://mida.re/"
-    },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
     },{
         title: "Luke 的自留地",
         href: "http://hmqk1995.github.io"
@@ -133,7 +126,10 @@ friends: [
         title: "尹峰以为",
         href: "http://ingf.github.io/"
     },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+        title: "jayway",
+        href: "https://blog.jayway.com"
+    },{
+        title: "wistbean",
+        href: "www.wistbean.com"
     }
 ]
