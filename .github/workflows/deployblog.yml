@@ -10,7 +10,7 @@ jobs:
       matrix:
         node-version: 
           - 14.x
-          - 10.x
+          # - 10.x
 
     steps:
       - name: Checkout source
@@ -33,9 +33,9 @@ jobs:
           git config --global user.name "lujiahao0708"
       - name: Config hexo 
         run: |  
-          sudo chown -R `whoami` /usr/local/lib/node_modules
+          # sudo chown -R `whoami` /usr/local/lib/node_modules
           sudo npm install hexo-cli -g
-          sudo chown -R `whoami` /usr/local/bin/hexo
+          # sudo chown -R `whoami` /usr/local/bin/hexo
           sudo npm install
       - name: Hexo deploy
         run: |
