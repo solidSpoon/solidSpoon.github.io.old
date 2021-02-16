@@ -32,8 +32,8 @@ jobs:
       - name: Config hexo 
         run: |  
           sudo chown -R `whoami` /usr/local/lib/node_modules
-          sudo chown -R `whoami` /usr/local/bin/hexo
           npm install hexo-cli -g
+          sudo chown -R `whoami` /usr/local/bin/hexo
           npm install
       - name: Hexo deploy
         run: |
