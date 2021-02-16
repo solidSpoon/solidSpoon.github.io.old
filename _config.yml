@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: Hide
+subtitle: '方向是比速度更重要的追求'
+description: 'solidSpoon 的博客'
 keywords:
-author: John Doe
+author: solidSpoon
 language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: http://example.com
+url: http://solidSpoon.xyz
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
