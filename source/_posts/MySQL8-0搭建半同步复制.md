@@ -1,5 +1,5 @@
 ---
-title: MySQL8.0搭建半同步复制
+title: MySQL 8.0 搭建半同步复制
 date: 2021-02-16 21:35:34
 updated: 
 tags: 教程
