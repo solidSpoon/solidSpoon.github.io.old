@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
 
     steps:
       - name: Checkout source
@@ -15,8 +18,8 @@ jobs:
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
-          version: ${{ matrix.node_version }}
-      - name: Setup hexo
+          node-version: ${{ matrix.node_version }}
+      - name: Configuration environment
         env:
           ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
         run: |
@@ -26,6 +29,8 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "lujiahao0708@gmail.com"
           git config --global user.name "lujiahao0708"
+      - name: Config hexo 
+        run: |  
           npm install hexo-cli -g
           npm install
       - name: Hexo deploy
