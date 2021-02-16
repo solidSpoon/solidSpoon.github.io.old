@@ -31,6 +31,7 @@ jobs:
           git config --global user.name "lujiahao0708"
       - name: Config hexo 
         run: |  
+          sudo chown -R `whoami` /usr/local/lib/node_modules
           npm install hexo-cli -g
           npm install
       - name: Hexo deploy
