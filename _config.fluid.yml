@@ -854,10 +854,10 @@ links:
       image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210218231926.png"
     }
     - {
-      title: "Fluid Blog",
-      intro: "主题博客",
-      link: "https://hexo.fluid-dev.com/",
-      image: "/img/favicon.png"
+      title: "ReadHub",
+      intro: "科技新闻聚合阅读",
+      link: "https://readhub.cn/",
+      image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210218234909.png"
     }
     - {
       title: "Fluid Docs",
