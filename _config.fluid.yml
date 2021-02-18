@@ -848,6 +848,12 @@ links:
   # Member item of page
   items:
     - {
+      title: "语雀",
+      intro: "好用的笔记工具",
+      link: "https://www.yuque.com/",
+      image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210218231926.png"
+    }
+    - {
       title: "Fluid Blog",
       intro: "主题博客",
       link: "https://hexo.fluid-dev.com/",
