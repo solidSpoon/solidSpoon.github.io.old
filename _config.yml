@@ -106,3 +106,11 @@ deploy:
 - type: git
   repo: git@github.com:solidSpoon/solidSpoon.github.io.git # 使用仓库的ssh地址
   branch: master
+
+# # hexo-generator-sitemap
+# sitemap:
+#   path: sitemap.xml
+#   template: ./sitemap_template.xml
+#   rel: false
+#   tags: true
+#   categories: true
