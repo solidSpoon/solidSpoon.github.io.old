@@ -4,6 +4,7 @@ date: 2021-02-23 21:05:41
 updated: 
 tags: 
 categories: 
+mathjax: true
 ---
 
 ## 前言
@@ -34,7 +35,7 @@ categories:
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211803.png)
 如果让三种颜色第比例相同，那就变成了黑白灰。神奇吧，黑白灰的三原色比例相同，只是发光强度不同。从这个角度看，黑白灰其实是一种颜色，只是亮度不同。所以就不难理解如果想看到真正的「白色」，就必须拼命提高亮度，这也是我们希望显示器亮度更高的原因之一。
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211815.png)
-当我们把上面的哪些颜色块做的非常小，就变成了显示器中像素点。每个都是由红绿蓝三原色组成的，使用程序控制每个像素点的三原色比例，就显示出了不同的图案。下图就是显示器放大的样子。
+当我们把上面的那些颜色块做的非常小，就变成了显示器中像素点。每个都是由红绿蓝三原色组成的，使用程序控制每个像素点的三原色比例，就显示出了不同的图案。下图就是显示器放大的样子。
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211825.png)
 
 ### 修图就是计算
@@ -95,14 +96,14 @@ categories:
 
 典型示例如下图，上层图层是一个白色背景的水印，下层图层是一个风筝图片，它俩应用正片叠底之后水印的白色背景消失了。
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212214.png)
-正片叠底的英文是 Mutiply，跟它的名字一样，用公式表示就是：$$c=a \times b$$
+正片叠底的英文是 Mutiply，跟它的名字一样，用公式表示就是：{% mathjax %}c=a \times b{% endmathjax %}
 
 
-如果刚才那个扣水印的原理你没有看明白，那就用公式解释一下：白色的值是 1，如果 a 是白色，那么混合之后的结果就是 $$1 \times b=b$$，因此水印白色背景被扣掉了。
+如果刚才那个扣水印的原理你没有看明白，那就用公式解释一下：白色的值是 1，如果 a 是白色，那么混合之后的结果就是 {% mathjax %}1 \times b=b{% endmathjax %}，因此水印白色背景被扣掉了。
 
 
 如果自己跟自己做正片叠底呢？
-那公式就是 $$c = a ^ 2$$
+那公式就是 {% mathjax %}c = a ^ 2{% endmathjax %}
 
 图像如下，可见整体变暗了一些，亮度低的地方透明度低，变暗的幅度就比较大。
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212230.png)
@@ -114,11 +115,11 @@ categories:
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212317.jpeg)
 因此如果我们把水印的背景换成黑色，文字换成白色，它俩做滤色，就会得到白色的水印
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212335.png)
-公式是这样：$$C = 1-\left(1-a\right)\times\left(1-b\right)$$
+公式是这样：{% mathjax %}C = 1-\left(1-a\right)\times\left(1-b\right){% endmathjax %}
 也很好理解：(1 - a) 和 (1 - b) 代表 a 和 b 的负片，它俩做堆叠（乘法），最后再冲洗成正片（1 - x）
 
 自己叠底自己效果如下曲线
-$$c=1-\left(1-a\right)^2$$
+{% mathjax %}c=1-\left(1-a\right)^2{% endmathjax %}
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212357.png)
 可见整体偏亮了，同样可以用曲线工具模拟出来：
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212412.jpeg)
@@ -127,7 +128,7 @@ $$c=1-\left(1-a\right)^2$$
 叠加模式是「正片叠底」和「滤色」的混合模式，是个分段函数。它的公式如下：
 
 
-$${f(a, b)}=\left\{\begin{array}{ll}2 a b, & \text { if } a<0.5 \\ 1-2(1-a)(1-b), & \text { otherwise }\end{array}\right.$$
+{% mathjax %}{f(a, b)}=\left\{\begin{array}{ll}2 a b, & \text { if } a<0.5 \\ 1-2(1-a)(1-b), & \text { otherwise }\end{array}\right.{% endmathjax %}
 
 
 其中，a 是**底下的图层**，b 是上面的图层，就是说
