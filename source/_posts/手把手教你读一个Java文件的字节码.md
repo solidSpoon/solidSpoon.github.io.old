@@ -165,7 +165,7 @@ public class Hello {
        4: return
 ```
 
- `1: invokespecial #1` 的 `#1`，代表常量池位置 1.常量池通过 `javap -c -verbose demo.a.B` 就可以显示出来，你会发现它是从 1 开始的，位置 0 就是对自身的引用，如下所示
+ `1: invokespecial #1` 的 `#1`，代表常量池位置 1.常量池通过 `javap -c -verbose demo.a.B` 就可以显示出来，如下所示
 
 ```bash
 Constant pool:
