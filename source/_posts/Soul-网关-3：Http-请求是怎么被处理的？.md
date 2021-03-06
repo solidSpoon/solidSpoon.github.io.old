@@ -267,6 +267,8 @@ mathjax: false
 
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306160829.png)
 
+每个插件界面都有「选择器列表」和「选择器规则列表」，就是在这个地方匹配的
+
 ```java
     @Override
     public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
