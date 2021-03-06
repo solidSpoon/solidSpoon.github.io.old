@@ -9,7 +9,7 @@ categories: Soul 学习笔记
 mathjax: false
 ---
 
-前文体验了使用 divide 插件转发 Http 请求，本文来分析一个 Http 网络包在 Soul 网关中都经理了什么。
+前文体验了使用 divide 插件转发 Http 请求，本文来分析一个 Http 网络包在 Soul 网关中都经历了什么。
 
 ## 粗略观察
 
