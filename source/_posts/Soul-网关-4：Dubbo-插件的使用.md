@@ -1,7 +1,7 @@
 ---
 title: Soul 网关 4：Dubbo 插件的使用
 date: 2021-03-10 13:04:05
-updated: 
+updated: 2021-03-10 13:46:29
 tags: 
  - Soul
  - Dubbo
@@ -13,6 +13,15 @@ mathjax: false
 > [https://dromara.org/zh/projects/soul/dubbo-plugin/](https://dromara.org/zh/projects/soul/dubbo-plugin/)
 
 ## ZooKeeper
+
+### Docker
+
+```bash
+docker run -dit --name zk -p 2181:2181 zookeeper
+```
+
+### 安装
+
 本次实例需要 ZK ，下载地址
 > [https://zookeeper.apache.org/releases.html](https://zookeeper.apache.org/releases.html)
 
