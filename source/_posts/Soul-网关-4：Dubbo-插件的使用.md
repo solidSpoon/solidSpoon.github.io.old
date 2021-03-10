@@ -14,6 +14,8 @@ mathjax: false
 
 ## ZooKeeper
 
+本次实例需要 ZK，这里提供 Docker 和下载压缩文件两种方式。
+
 ### Docker
 
 ```bash
@@ -22,7 +24,7 @@ docker run -dit --name zk -p 2181:2181 zookeeper
 
 ### 安装
 
-本次实例需要 ZK ，下载地址
+下载地址
 > [https://zookeeper.apache.org/releases.html](https://zookeeper.apache.org/releases.html)
 
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210310130616.png)
