@@ -20,7 +20,7 @@ mathjax: false
 
 
 这是本次示例中 `SoulWebHandler` 持有的插件链，与上文同理，同样红色的插件被 Soul 跳过了。
-![本文插件链](https://cdn.nlark.com/yuque/0/2021/png/1548042/1615358486701-072a0235-1d20-4467-b5ee-6de9269e76b1.png)
+![本文插件链](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210312161204.png)
 下面的图片是前文分析 Http 的 Divide 插件时的插件链，对比二者还是有区别的，例如 Divide 插件被我们禁用了，所以没了。原本的好多 `AlibabaDubbo` 的 Plugin  变成了 `ApacheDubbo` 的 Plugin（注：红色部分指的是前文分析时那些插件被 Soul 跳过了）
 ![前文插件链](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210310210344.png)
 
@@ -30,7 +30,7 @@ mathjax: false
 `ApacheDubboPlugin`，该插件在调用链的第 9 位，因为前面进行了 `index++`，所以条件断点应该设置为 `index == 10`
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210310210826.png)
 顺便说一下，`SoulWebHandler` 判断是否跳过的逻辑在对应插件中实现的，`skip()` 是 `SoulPlugin` 接口定义的方法。
-![](https://cdn.nlark.com/yuque/0/2021/png/1548042/1615356869691-2687e917-799a-4bda-b981-413a7f4bd679.png#align=left&display=inline&height=271&margin=%5Bobject%20Object%5D&originHeight=271&originWidth=667&status=done&style=none&width=667)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210312161231.png)
 
 
 ```java
@@ -259,7 +259,7 @@ public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChai
 ## ApacheDubboBodyPlugin
 该插件直接继承 `SoulPlugin`，而不是继承 `AbstractSoulPlugin`。
 `BodyParamPlugin` 也是直接继承自 `SoulPlugin`，因为 `AbstractSoulPlugin` 主要进行了规则的匹配，可能这几个插件不需要。况且 soul-admin 也没有这些插件的界面。
-![image.png](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210310211108.png)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210310211108.png)
 前文说过修改路径为真实后端服务 RPC 路径，多个 RPC 会有多个相同的这个插件，本次示例 Soul 开启了两个 `DubboBodyParamPlugin`
 
 - ApacheDubboBodyParamPlugin -> Dubbo
