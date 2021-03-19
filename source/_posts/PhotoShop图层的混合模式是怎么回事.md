@@ -159,7 +159,7 @@ mathjax: true
 去掉多余的线条，就是下面这个，是一个增加对比度的曲线：
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212527.png)
 注意上面这个曲线是自己叠加自己的情况，看起来还是可以用曲线工具模拟出来
-![](https://cdn.nlark.com/yuque/0/2021/jpeg/1548042/1614071945339-87b62a00-d546-4322-9f68-259a0ba2f681.jpeg?x-oss-process=image%2Fresize%2Cw_1612)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210319193823.jpeg)
 
 ## 总结
 图层的混合模式分为几种，就像曲线一样，有的应用了之后会让整体变亮，有的会让整体变暗，有的会增加对比度。
