@@ -871,6 +871,13 @@ links:
       link: "https://github.com/fluid-dev/hexo-theme-fluid",
       image: "/img/favicon.png"
     }
+    - {
+      title: "Hux Blog",
+      intro: "一个优质博客、主题",
+      link: "https://huangxuan.me/",
+      image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210323145517.png"
+    }
+
 
 
 #---------------------------
