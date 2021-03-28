@@ -23,7 +23,7 @@ mathjax: false
 双击 Shift 打开 Search Everywhere 窗口搜索 `AbstractSoulPlugin` ，跳转到对应代码，点击左侧向下箭头，查看实现类，可以看到我们要找的 `DividePlugin`
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134447.png)
 `DividePlugin` 中有一个很大的 `doExecute` 方法，在这打个断点，使用 PostMan 发起请求，通过调用栈定位到了 `SoulWebHandler` 的 `execute()` 方法
-![](https://cdn.nlark.com/yuque/0/2021/png/1548042/1614948498804-0c8a9c48-5577-4817-b826-db781f65894f.png)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328105206.png)
 大概就是遍历所有的 `plugin` 来处理 `ServerWebExchange`
 
 ```java
@@ -443,7 +443,7 @@ mathjax: false
                 .bufferFactory().wrap(Objects.requireNonNull(JsonUtils.toJson(result)).getBytes())));
     }
 ```
-![](https://cdn.nlark.com/yuque/0/2021/png/1548042/1614967789870-7f02d744-580c-46d9-b8c5-31c6f7012bb8.png?x-oss-process=image%2Fresize%2Cw_1336)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328105232.png)
 这是 PostMan 得到的响应，与上图匹配
 ![image.png](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134834.png)
 
