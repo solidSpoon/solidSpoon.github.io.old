@@ -79,6 +79,6 @@ mathjax: false
 这个界面的选择器会对流量进行初始匹配，匹配通过后会由选择器规则列表进行最终匹配
 
 在选择器列表和选择器规则列表都添加下面的规则，设置返回状态码 504
-![](https://cdn.nlark.com/yuque/0/2021/png/1548042/1614942338264-15e9180f-23c5-4545-95e3-1204a85c8c79.png?x-oss-process=image%2Fresize%2Cw_1222)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328110046.png)
 使用 PostMan 测试，成功拦截
 ![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210305200306.png)
