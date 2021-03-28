@@ -33,7 +33,7 @@ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f github-deploy-key -N 
 ## GitHub 添加公钥
 在 GitHub 中博客工程中按照 `Settings->Deploye keys->Add deploy key` 找到对应的页面，然后进行公钥添加。该页面中 `Title` 自定义即可，`Key` 中添加 `github-deploy-key.pub` 文件中的内容。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1548042/1613468496216-29690050-70f8-4fb0-adcb-03cf28e1cf13.png##align=left&display=inline&height=417&margin=%5Bobject%20Object%5D&name=image.png&originHeight=833&originWidth=1698&size=98406&status=done&style=none&width=849)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164046.png)
 > 注意：切记不要多复制空格!!!
 > 切记要勾选 Allow write access，否则会出现无法部署的情况。
 
@@ -41,7 +41,8 @@ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f github-deploy-key -N 
 在 GitHub 中博客工程中按照 `Settings->Secrets->Add a new secrets` 找到对应的页面，然后进行私钥添加。该页面中 `Name` 自定义即可，`Value` 中添加 `github-deploy-key` 文件中的内容。
 
 我的名字叫做 `HEXO_DEPLOY_PRI`，这个跟下文的配置文件保持一致就行
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1548042/1613468640620-8fe657b6-b244-40cc-a7cc-5dc710ffc865.png##align=left&display=inline&height=442&margin=%5Bobject%20Object%5D&name=image.png&originHeight=884&originWidth=1839&size=147834&status=done&style=none&width=919.5)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164102.png)
+
 ## 创建编译脚本
 在博客源码分支（我这里是 `MyBlog2021` 分支）中创建 `.github/workflows/deployblog.yml` 文件，内容如下：
 
@@ -98,7 +99,7 @@ deploy:
 ```
 ## 验证
 push 好我们的分支之后，在项目 Action 目录即可看到
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1548042/1613469082707-ac72ddb3-6303-4210-b3b1-e057120d4c7b.png##align=left&display=inline&height=228&margin=%5Bobject%20Object%5D&name=image.png&originHeight=456&originWidth=1850&size=69817&status=done&style=none&width=925)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164128.png)
 
 ---
 
