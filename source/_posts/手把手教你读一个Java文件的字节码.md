@@ -46,7 +46,7 @@ javap -c -verbose demo.a.B // 详细输出
 安装该插件后，首先编译代码，然后
 菜单 👉 「view」 👉 「Show Bytecode With jclasslib」
 结果如下：
-![](https://cdn.nlark.com/yuque/0/2021/png/1548042/1609662630218-588f2129-cdf2-4cf2-a362-d944516bc132.png#align=left&display=inline&height=582&margin=%5Bobject%20Object%5D&originHeight=582&originWidth=1232&status=done&style=none&width=1232)
+![](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210402103711.png)
 
 
 ## 实验代码
