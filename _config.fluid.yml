@@ -137,6 +137,9 @@ color:
   # Color of navigation bar background
   navbar_bg_color: "#2f4154"
   navbar_bg_color_dark: "#1f3144"
+  # navbar_bg_color: "#0A0A0A"
+  # navbar_bg_color_dark: "#0A0A15"
+
 
   # 顶部菜单字体色
   # Color of navigation bar text
@@ -402,6 +405,8 @@ index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
+
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -474,6 +479,7 @@ index:
 #---------------------------
 post:
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -740,6 +746,7 @@ twikoo:
 #---------------------------
 archive:
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -752,6 +759,7 @@ archive:
 category:
   enable: true
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -777,6 +785,7 @@ category:
 tag:
   enable: true
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
@@ -795,6 +804,7 @@ tag:
 about:
   enable: true
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:  # 打字机内容
@@ -818,6 +828,7 @@ about:
 #---------------------------
 page:
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
@@ -829,6 +840,7 @@ page:
 page404:
   enable: true
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 85
   banner_mask_alpha: 0.3
   subtitle: "Page not found"
@@ -841,6 +853,7 @@ page404:
 links:
   enable: true
   banner_img: /img/default.png
+  # banner_img: /pic/cover.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:

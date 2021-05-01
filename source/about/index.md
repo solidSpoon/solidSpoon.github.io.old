@@ -13,3 +13,7 @@ layout: about
 下面是我的公众号
 
 ![扫码_搜索联合传播样式-白色版](https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210216200417.png)
+
+我的英文博客：
+
+> https://solidspoon.blogspot.com/
