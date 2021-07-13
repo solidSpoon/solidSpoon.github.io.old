@@ -908,6 +908,12 @@ links:
       link: "https://codechina.org/",
       image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210513204652.png"
     }
+    - {
+      title: "Yachen's Blog",
+      intro: "Liu Yachen",
+      link: "https://yach.me/",
+      image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210713161212.jpg"
+    }
 
 
 
