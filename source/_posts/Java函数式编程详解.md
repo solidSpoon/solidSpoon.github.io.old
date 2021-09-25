@@ -928,8 +928,6 @@ public class Callbacks {
 
     /*
     Callback function in js:
-
-    ```javascript
     function hello(firstName, lastName,callback) {
         console.log(firstName);
         if (lastName) {
@@ -938,12 +936,9 @@ public class Callbacks {
             callback();
         }
     }
-    ```
 
     Invoke it:
-    ```
     hello("john", null, function(){console.log("no lastname provided")})
-    ```
      */
 }
 ```
