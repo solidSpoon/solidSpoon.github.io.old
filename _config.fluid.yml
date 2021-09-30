@@ -914,6 +914,12 @@ links:
       link: "https://yach.me/",
       image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210713161212.jpg"
     }
+    - {
+      title: "老石谈芯",
+      intro: "老石",
+      link: "https://shilicon.com",
+      image: "https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/202109301553879.jpg"
+    }
 
 
 
