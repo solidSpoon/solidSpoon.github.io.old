@@ -1,3 +1,11 @@
+---
+title: Distributed locks with Redis
+date: 2022-03-23 09:10:48
+updated: 
+tags: Redis
+categories: 
+---
+
 # Distributed locks with Redis
 
 > 原文链接：[https://redis.io/topics/distlock](https://redis.io/topics/distlock)
