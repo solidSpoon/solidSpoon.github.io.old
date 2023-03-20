@@ -29,6 +29,13 @@ Hide 博客基于 Hexo 框架搭建，并由 Github Action 自动部署。🔧�
 - 有趣事物探索：🚀🎨 
   - solidSpoon 会在这里分享各种有趣的事物，无论是科技新发明、流行文化现象还是潮流趋势，让你时刻紧跟潮流。🕶️🎮
 
----
 
 solidSpoon致力于分享生活点滴经验，期待与您共同探讨人生方向与意义。💭💞
+
+---
+
+如果你也想部署跟我一样的博客，这几个参考资料或许对你有帮助：
+
+- [Link](https://hexo.io/docs/) Hexo Docs
+- [Link](https://github.com/fluid-dev/hexo-theme-fluid) Hexo Theme Fluid
+- [Link](https://solidspoon.xyz/2021/02/16/GitHubActions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo/) 配置 GitHub Action 自动部署
