@@ -2,7 +2,7 @@
 
 <div align="center">
 <a href="https://solidspoon.xyz" target="_blank">
-<img src="https://user-images.githubusercontent.com/39454841/226182043-6a95ec8a-82fe-44ae-a857-7a881b6c565b.png" width="40%" />
+<img src="https://user-images.githubusercontent.com/39454841/226335681-34398a43-2ae4-499f-bd48-15c2621c8c2b.png" width="40%" />
 </a>
 </div>
 
