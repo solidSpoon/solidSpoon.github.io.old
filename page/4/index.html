@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="方向是比速度更重要的追求">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Win10-MySQL5-7-Docker%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">Win10 - MySQL 5.7 - Docker 搭建主从复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Win10-MySQL5-7-Docker%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          
+搭建环境：Windows 10 Docker Desktop WSL 2 based engine
+
+创建首先创建两个数据库，一个作为主库，另一个作为从库
+编写 docker-conpose 文件首先安装 docker，docker-compose一般安装了 docker 都会安装 docker-compose，可以使用 docker-compose -verison 查看是否安装
+docker
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:30" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%AE%80%E4%BB%8B/">MySQL 主从复制简介</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%AE%80%E4%BB%8B/">
+          
+          
+            
+          
+          实现数据库主从复制是实现读写分离，提高吞吐量的好办法，下面介绍一下 MySQL 主从复制
+前言说到主从复制，一个最朴素的想法应该是手动将主库倒一个备份出来，然后将这个备份写入到从库中，这样便让主库和从库有了同样的数据，实现了主从复制。但不用我说，你也肯定知道，这会让主库停机，因为在整个过程中，如果主库的内容有变化，我们导出的这份备份就没用了。而且还有一点特别重要，这种操作是全量的，也就说如果之后主
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:28" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E6%80%8E%E4%B9%88%E7%9B%B4%E8%A7%82%E5%9C%B0%E7%BB%99%E7%BD%91%E9%A1%B5P%E5%9B%BE/">怎么直观地给网页「P 图」</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E6%80%8E%E4%B9%88%E7%9B%B4%E8%A7%82%E5%9C%B0%E7%BB%99%E7%BD%91%E9%A1%B5P%E5%9B%BE/">
+          
+          
+            
+          
+          你肯定知道在浏览器中按下 F12 打开开发者工具，在其中修改源代码就可以更改网页上的任意内容。那么有没有办法可以不看源码，通过「所见即所得」的方式直接在页面上修改呢
+
+下面这两个属性可以帮助我们实现这一想法：
+
+使用 contentEditable 属性
+使用 designMode 属性
+
+这两个属性用来帮助开发人员创建网页端的富文本编辑器，因此如果我们将整个网页都应用这两个属性，都可以达到可视化
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:27" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E5%88%A0%E9%99%A4%E6%88%96%E4%BF%AE%E6%94%B9Windows%E4%B8%AD%E8%A2%AB%E5%8D%A0%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/">删除或修改 Windows 中被占用的文件</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E5%88%A0%E9%99%A4%E6%88%96%E4%BF%AE%E6%94%B9Windows%E4%B8%AD%E8%A2%AB%E5%8D%A0%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/">
+          
+          
+            
+          
+          有时候我们想要在 Windows 中修改或删除一个文件，会收到一个「文件正在使用」的消息，而我们又不知道是哪个程序在使用，这时候该怎么办呢？
+当某一运行中的进程持有一个资源的句柄时，我们就不能修改该资源。解决办法是结束所有对资源有句柄的进程。我们可以在「资源监视器」中找到持有该句柄的所有进程，资源监视器的打开方式如下
+
+方法 1：
+
+&lt;Win + R&gt;，运行 resmon.exe
+
+方
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:25" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D3%E7%9A%84%E5%80%8D%E6%95%B0/">如何用正则表达式匹配 3 的倍数</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D3%E7%9A%84%E5%80%8D%E6%95%B0/">
+          
+          
+            
+          
+          如何用正则表达式匹配 3 的倍数如何用正则表达式匹配3的倍数
+最近在知乎上看到这样一个问题『如何用正则表达式匹配 3 的倍数』，原帖给出的答案非常有意思，遂研究了一番
+看一个数能否被 3 整除，最直接的办法就是将这个数用 3 除一下，如果余数是 0，那么这个数就可以被3 整除。然而正则并不具有计算的功能，正则算法的实现基于有穷状态自动机（finite automaton）
+以下是一个简单的示例
+这
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:23" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/">搭建简单好用的笔记系统</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/">
+          
+          
+            
+          
+          搭建简单好用的笔记系统你是不是也一直觉得 OneNote、印象笔记、有道云笔记等等工具用起来都有一点不太舒服。我只想用一个简单方便，到哪都能用的笔记系统，但是市面上常见的笔记软件越来越臃肿，小众良心的软件又担心它会不会死掉，这里我给你提供一个思路。
+如果你想要一个全平台通用的、适合记笔记的文件格式，那么 Markdown 应该是一个不错的选择。Markdown 的语法简单、排版漂亮，配合像 Typ
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:16" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%88%E7%8E%87/">效率</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/VsCode%E5%A4%9A%E5%85%89%E6%A0%87%E7%89%B9%E6%80%A7/">VsCode 多光标特性</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/VsCode%E5%A4%9A%E5%85%89%E6%A0%87%E7%89%B9%E6%80%A7/">
+          
+          
+            
+          
+          VsCode 多光标特性使用 VsCode 或者其他编辑器的时候，经常会碰到如下场景:
+12345.foo &#123;  padding: 5;  margin: 5;  font-size: 5;&#125;
+如何将上面的三个 5 改成 5px ？答案是创建多个光标，以下给出了创建多光标的几种方法：
+创建多个光标1. 使用鼠标
+先将将光标置于第一个『5』之后
+
+按住键盘上的 『alt 』,然后
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:14" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%88%E7%8E%87/">效率</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Git%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Git 是纯函数式数据结构</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Git%E6%98%AF%E7%BA%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+          
+          
+            
+          
+          
+最近一直在学习 Git，但是一直不知道它的原理是什么，直到看到国外的一个大牛的博客。这篇博文给了我很大的启发，所以翻译过来和大家分享。
+
+
+原文链接
+
+虽然近几年像 Git 这种分布式版本管理系统很火，但它看起来还是比像 SVN 这样的集中式版本控制系统复杂。我猜这可能是因为我们总是会把二者相比较：在 SVN 中这样做，但在 Git 中却需要那样做。
+我认为 Git 的真实含义应该是一个纯粹的函
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:12" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Git/">Git</a>
+            
+              <a href="/tags/%E7%BF%BB%E8%AF%91/">翻译</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B1/">有趣的三次握手与四次挥手 1</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B1/">
+          
+          
+            
+          
+          
+最近研究了以下 TCP\IP 协议中的三次握手与四次挥手，下面我将我的收获分享给大家。 
+
+IP 协议是一种在两点间建立传输的基础协议，可以说几乎所有的其他协议都建立在 IP 所提供的基础服务上进行传输。但 IP 协议是一种不可靠的传输协议，它既不保证一方发送的数据包到达另一方的顺序，也不保证发送的数据包能够送达到另一方，也就是说通过 IP 协议传输可能会发生丢包和延时。在一些需要保证数据完整性
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:10" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E6%9C%89%E6%84%9F/">一出好戏有感</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E6%9C%89%E6%84%9F/">
+          
+          
+            
+          
+          
+「一出好戏」其实已经上映很长时间了，之前早有所耳闻，直到最近有朋友推荐，我才观看了一下。这部影片是一部喜剧，剧情难免有浮夸和不合理的部分，但它仍然值得我们思考，因为它通过一个在荒岛中建立小型社会的故事反映了人性的本质。
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:06" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

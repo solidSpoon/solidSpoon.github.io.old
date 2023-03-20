@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>文章排版指南 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="文章排版指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 15:39" pubdate>
+        2021年2月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">文章排版指南</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>我们日常看文章的时候，其实已经在慢慢积累我们的审美意识，我们能分辨，哪篇推文看着舒服，哪篇文章看着辣眼睛。为了减少这种「辣眼睛」的情况出现，今天我就来谈谈关于文章排版的事情。</p>
+</blockquote>
+<h3 id="▎博客排版"><a href="#▎博客排版" class="headerlink" title="▎博客排版"></a>▎博客排版</h3><p>写博客的同学都知道，现在博客都是由 Markdown 排版。如果你还不知到 Markdown 的话就去学习一下吧，它可以很方便地帮助我们排版出漂亮的文章。但我们在写博文的时候，仍有一些细节是需要注意的。</p>
+<h4 id="1-空格"><a href="#1-空格" class="headerlink" title="1. 空格"></a>1. 空格</h4><p>每次看到网页上的中文字和英文、数字、符号挤在一起，就会坐立不安，忍不住想在他们之间加个空格。</p>
+<ul>
+<li><p>中英文之间需要加空格</p>
+<p>  <em>eg</em>. 大家可以微信搜一搜 solidSpoon 关注我。</p>
+</li>
+<li><p>中文与数字之间需要加空格</p>
+<p>  <em>eg</em>. 不知不觉，我已经写博客 3 个月了。</p>
+</li>
+<li><p>数字与单位之间需要加空格</p>
+<p>  <em>eg</em>. 我昨天买了一个 16 GB 的 U 盘。</p>
+</li>
+<li><p>完整的英文整句时标点后要加空格。</p>
+<p>  <em>eg</em>. Love me, love my dog.</p>
+</li>
+</ul>
+<p><strong>但是也有一些例外。</strong></p>
+<ul>
+<li><p>度的标志、百分号不加空格</p>
+<p>  <em>eg</em>. 水的沸点是 100°。</p>
+<p>  <em>eg</em>. 我的手机还有 75％ 的电量。</p>
+</li>
+<li><p>全角标点与其他字符之间不加空格</p>
+<p>  <em>eg</em>. 大家好，我是 solidSpoon，欢迎访问我的博客。</p>
+</li>
+</ul>
+<h4 id="2-标点"><a href="#2-标点" class="headerlink" title="2. 标点"></a>2. 标点</h4><p>说到标点，不得不说下全角和半角，很多人可能不了解全角和半角的概念，这里顺便介绍下。</p>
+<p>全角和半角是英文和中文的编码规范不同遗留下的问题，简单来说，全角占两个字节，半角占一个字节，你可以理解成中文汉子是全角，英文字母是半角，不过半角全角主要是针对标点符号来说的，中文标点占两个字节，英文标点占一个字节。体现在排版上的差异就是，全角字符屏幕打印宽度是两个，而半角字符屏幕打印宽度是一个，如中文逗号和英文逗号他们的显示分别是「，」和「,」。</p>
+<ul>
+<li><p>使用全角中文标点</p>
+<p>  中文排版中所有的标点都应该使用中文全角中文标点</p>
+<p>  <em>eg</em>. 大家好，我是 solidSpoon。</p>
+</li>
+<li><p>遇到英文整句、特殊名词时使用半角标点。</p>
+<p>  <em>eg</em>. 乔布斯说过：「Stay hungry, stay foolish.」</p>
+<p>  <em>eg</em>. Facebook, Inc.</p>
+</li>
+<li><p>使用直角引号</p>
+<ul>
+<li><p>我国国家标准要求弯引号，但是个人建议在新媒体排版时使用直角引号。</p>
+<p>  <em>eg</em>. 「我去吃饭了」，它起身说到。</p>
+</li>
+<li><p>如果引号再使用引号使用直角双引号。</p>
+<p>  <em>eg</em>. 我对他说：「乔布斯说过：『Stay hungry, stay follish.』」</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>微软拼音输入特殊符号方法：</strong></p>
+<p>首先在中文输入界面输入 <code>u</code> 进入「u 模式输入」，然后跟着屏幕提示就可以找到你要输入的特殊符号了。</p>
+<ul>
+<li><em>eg</em>. 中文界面输入 <code>uubd</code> 就可以找到直角引号。</li>
+</ul>
+<h4 id="3-其他"><a href="#3-其他" class="headerlink" title="3. 其他"></a>3. 其他</h4><p>除以上之外，还有一些其他标准推荐大家使用的。</p>
+<ul>
+<li><p>英文名词首字母尽量大写</p>
+<p>  eg. Google、Android、Facebook</p>
+</li>
+<li><p>专有名词使用正确的大小写</p>
+<p>  eg. GitHub、iOS、iPhone XS Max、MacBook Pro</p>
+</li>
+<li><p>首行不要缩进</p>
+</li>
+</ul>
+<p>关于首行不缩进可能有人不太同意，但是我要在这里解释下，在说明之前我们必须弄明白「首行缩进」的目的是什么。</p>
+<p>「每段之前空两格」是我们从小学写作文就养成的习惯，也是正式文体的格式要求，其目的是为了区分自然段。</p>
+<p>但是像我们现在接触的阅读，都是没有固定的格式要求的，如微信公众号、电子文档等，所以大家一般都采用「空出一行」进行自然段与自然段之间的区分，这种写作方式非常省事，而且很整齐。</p>
+<p>所以，我认为这种应该是最科学的方式，只要没有明确的格式要求，写作的排版无须首行缩进。</p>
+<h3 id="▎公众号排版"><a href="#▎公众号排版" class="headerlink" title="▎公众号排版"></a>▎公众号排版</h3><p>用 Markdown 写作的确很方便。那么对于「不那么方便」的微信公众号，除了上面的那些外，又有什么是需要注意的呢？</p>
+<h4 id="1-大小"><a href="#1-大小" class="headerlink" title="1. 大小"></a>1. 大小</h4><p>简单来说就是：标题要比正文大，正文要比标注大。</p>
+<h4 id="2-颜色"><a href="#2-颜色" class="headerlink" title="2. 颜色"></a>2. 颜色</h4><p>颜色搭配保持统一，个别字体使用特殊色强调，字体颜色尽量不超过三种，颜色不要选取太亮的颜色，例如纯黑，纯红，亮红配亮绿，都是不建议的，看久了眼睛难免会疲惫，不利于阅读。</p>
+<p><strong>建议使用字体颜色：</strong></p>
+<ul>
+<li>标题：使用公众号常用色，或者直接取 logo 或者行业色</li>
+<li>正文：选择亮度没这么高的字体，这是纯黑 <code>#000000</code> ，比较偏灰会更加适合阅读 <code>#595757</code> <code>#3f3f3f</code> 等</li>
+<li>批注：选择比正文亮度还低，更加浅的浅灰色，例如 <code>#595959</code> <code>#888888</code> <code>#d6d6d6</code> </li>
+</ul>
+<h4 id="3-形态"><a href="#3-形态" class="headerlink" title="3. 形态"></a>3. 形态</h4><p>和 word 编辑一样，公众号文字形态也可以做一些基本变化，例如 <strong>加粗</strong>、<em>斜体</em>、<u>下划线</u>、<del>删除线</del> 等，常用的是加粗，以及有趣（戏多）的删除线。</p>
+<h4 id="4-对齐"><a href="#4-对齐" class="headerlink" title="4. 对齐"></a>4. 对齐</h4><p>对齐，可以说是拯救强迫症的最佳设置。这里推荐对齐方式为：<strong>两端对齐</strong>。</p>
+<p>我们日常排版完会发现，因为句子的字符大小的原因，每行的最右边都会变得层次不齐，强迫症看着会非常的不舒服，这时候如果我们选择两端对齐，就会美观的多。</p>
+<h4 id="5-小符号"><a href="#5-小符号" class="headerlink" title="5. 小符号"></a>5. 小符号</h4><p>就像前面对标题的处理一样，简单的符号也能划分空间，也要常用引号，以此突出重点等</p>
+<h4 id="6-留白"><a href="#6-留白" class="headerlink" title="6. 留白"></a>6. 留白</h4><p>在经过了文字的排版以后，整个版面的风格已经出来了，但是我们会发现，推文里字句的间距太密了，看久了眼睛很不舒服。其实，这都是因为：<u>没有留白，没有呼吸感</u>。</p>
+<p>留白可以包括：</p>
+<ul>
+<li>页面边距</li>
+<li>段 / 字 / 行间距</li>
+<li>缩进</li>
+<li>空行</li>
+</ul>
+<p><strong>页面边距</strong></p>
+<p>页面边距指的是推文与手机屏幕两侧的距离。</p>
+<p>默认距离是 0，我们可以设置，让文字离屏幕远一点。我个人建议页边距设置为 0.5，或者 1，比较舒服。</p>
+<p><strong>段距</strong></p>
+<p>段落与段落之间，图片与文字之间，都可以使用段前距、段后距进行调整距离，当然也可以使用空格代替。</p>
+<p><strong>字间距</strong></p>
+<p>字体之间的距离太密，容易让人错过重点内容，调整文字间距会有意想不到的效果，呼吸感瞬间有了。和字间距一样，行间距是解放原有行与行之间的重要一步。</p>
+<ul>
+<li>推荐参数：行间距 1.5 ~ 1.75、字间距 1</li>
+</ul>
+<h4 id="7-图片与表情包"><a href="#7-图片与表情包" class="headerlink" title="7. 图片与表情包"></a>7. 图片与表情包</h4><p>适当的图片和表情可以增加阅读的兴趣</p>
+<p><strong>浮动设置</strong></p>
+<p>有的时候，我们会看到很多公众号通篇都是长图，而我们上传多图的时候，要么是图片太大上传不了，要么就是多图的时候出现空隙。这时候我们就只要让图片浮动就可以解决这个问题。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/GitHubActions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GitHub Actions 自动部署 Hexo</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/10/hello-world/">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

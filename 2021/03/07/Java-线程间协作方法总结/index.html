@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Java 线程间协作方法总结 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 线程间协作方法总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-07 01:58" pubdate>
+        2021年3月7日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 线程间协作方法总结</h1>
+            
+            <div class="markdown-body">
+              <p>本文总结一下我知道的 Java 线程间协作的方式，以计算斐波那契数列为例，新线程负责计算，主线程取得结果。</p>
+<h2 id="不使用多线程并发工具"><a href="#不使用多线程并发工具" class="headerlink" title="不使用多线程并发工具"></a>不使用多线程并发工具</h2><h3 id="使用循环判断"><a href="#使用循环判断" class="headerlink" title="使用循环判断"></a>使用循环判断</h3><p>指定一个变量作为信号，用循环的方式监控这个变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 使用循环不断判断</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NoLockMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Integer valve = <span class="hljs-keyword">null</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        valve = fibo(num);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (valve == <span class="hljs-keyword">null</span>) &#123;&#125;<br>        <span class="hljs-keyword">return</span> valve;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 再这里创建一个线程或线城池</span><br>        <span class="hljs-comment">// 异步执行 下面方法</span><br><br>        <span class="hljs-keyword">final</span> NoLockMethod method = <span class="hljs-keyword">new</span> NoLockMethod();<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>            method.sum(<span class="hljs-number">45</span>);<br>        &#125;);<br>        thread.start();<br>        <span class="hljs-keyword">int</span> result = method.getValue(); <span class="hljs-comment">// 这是得到的返回值</span><br><br>        <span class="hljs-comment">// 确保拿到 resut 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算的结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br><br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>    &#125;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算的结果为：1836311903</span><br><span class="hljs-comment">使用时间：6438 ms</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h3 id="使用-thread-join"><a href="#使用-thread-join" class="headerlink" title="使用 thread.join()"></a>使用 thread.join()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 使用 Thread Join</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadJoinMethod</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br>        AtomicInteger value = <span class="hljs-keyword">new</span> AtomicInteger();<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt;&#123;<br>            value.set(sum());<br>        &#125;);<br>        thread.start();<br>        thread.join();<br><br>        <span class="hljs-keyword">int</span> result = value.get(); <span class="hljs-comment">// 这是拿到的返回值</span><br><br>        <span class="hljs-comment">// 确保 拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>        <span class="hljs-comment">// 然后退出 main 线程</span><br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span> <span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> fibo(<span class="hljs-number">45</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算结果为：1836311903</span><br><span class="hljs-comment">使用时间：5413 ms</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h2 id="使用多线程并发工具"><a href="#使用多线程并发工具" class="headerlink" title="使用多线程并发工具"></a>使用多线程并发工具</h2><h3 id="不使用-Future（使用类似等待-通知机制）"><a href="#不使用-Future（使用类似等待-通知机制）" class="headerlink" title="不使用 Future（使用类似等待-通知机制）"></a>不使用 Future（使用类似等待-通知机制）</h3><h4 id="Synchronized-wait-notify"><a href="#Synchronized-wait-notify" class="headerlink" title="Synchronized-wait-notify"></a>Synchronized-wait-notify</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 通过的管程等待-通知机制，来获取值</span><br><span class="hljs-comment"> * wait() notify()</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronizedMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Integer value = <span class="hljs-keyword">null</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        value = fibo(num);<br>        notifyAll();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> ( a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a-<span class="hljs-number">1</span>) + fibo(a-<span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">while</span> (value == <span class="hljs-keyword">null</span>) &#123;<br>            wait();<br>        &#125;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br>        <span class="hljs-keyword">final</span> SynchronizedMethod method = <span class="hljs-keyword">new</span> SynchronizedMethod();<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>            method.sum(<span class="hljs-number">45</span>);<br>        &#125;);<br>        thread.start();<br><br>        <span class="hljs-keyword">int</span> result = method.getValue();<span class="hljs-comment">// 这是得到的返回值</span><br><br>        <span class="hljs-comment">// 确保拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算的结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算的结果为：1836311903</span><br><span class="hljs-comment">使用时间：5198 ms</span><br><span class="hljs-comment"> */</span><br><br></code></pre></td></tr></table></figure>
+<h4 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Semaphore 方式</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SemaphoreMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Integer value = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">final</span> Semaphore semaphore = <span class="hljs-keyword">new</span> Semaphore(<span class="hljs-number">1</span>);<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">this</span>.value = fibo(num);<br>        semaphore.release();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">int</span> result;<br>        semaphore.acquire();<br>        result = <span class="hljs-keyword">this</span>.value;<br>        semaphore.release();<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br><br>        <span class="hljs-keyword">final</span> SemaphoreMethod method = <span class="hljs-keyword">new</span> SemaphoreMethod();<br>        method.semaphore.acquire();<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                method.sum(<span class="hljs-number">45</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;);<br>        thread.start();<br>        <span class="hljs-keyword">int</span> result = method.getValue();<br>        System.out.println(<span class="hljs-string">&quot;异步计算结果为&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Lock-Condition"><a href="#Lock-Condition" class="headerlink" title="Lock-Condition"></a>Lock-Condition</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LockConditionMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Integer value = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">private</span> Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>    <span class="hljs-keyword">private</span> Condition calComplete = lock.newCondition();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        lock.lock();<br>        value = fibo(num);<br>        calComplete.signal();<br>        lock.unlock();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> </span>&#123;<br>        lock.lock();<br>        <span class="hljs-keyword">while</span> (value == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                calComplete.await();<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                lock.unlock();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br>        <span class="hljs-keyword">final</span> LockConditionMethod method = <span class="hljs-keyword">new</span> LockConditionMethod();<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>            method.sum(<span class="hljs-number">45</span>);<br>        &#125;);<br>        thread.start();<br>        <span class="hljs-keyword">int</span> result = method.getValue(); <span class="hljs-comment">// 这是得到的返回值</span><br><br>        <span class="hljs-comment">// 确保拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算的结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算的结果为：1836311903</span><br><span class="hljs-comment">使用时间：5402 ms</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h4 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * CyclicBarrierMethod 方式</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CyclicBarrierMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">volatile</span> Integer value = <span class="hljs-keyword">null</span>;<br>    CyclicBarrier barrier;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBarrier</span><span class="hljs-params">(CyclicBarrier barrier)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.barrier = barrier;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> <span class="hljs-keyword">throws</span> BrokenBarrierException, InterruptedException </span>&#123;<br>        value = fibo(num);<br>        System.out.println(barrier.await());<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a-<span class="hljs-number">1</span>) + fibo(a-<span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-keyword">final</span> CyclicBarrierMethod method = <span class="hljs-keyword">new</span> CyclicBarrierMethod();<br>        CyclicBarrier barrier = <span class="hljs-keyword">new</span> CyclicBarrier(<span class="hljs-number">1</span>, () -&gt; &#123;<br>            <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>; <span class="hljs-comment">// 这是得到的反回值</span><br>            result = method.getValue();<br><br>            <span class="hljs-comment">// 确保拿到 result 并输出</span><br>            System.out.println(<span class="hljs-string">&quot;异步计算结果为：&quot;</span> + result);<br>            System.out.println(<span class="hljs-string">&quot;使用时间为：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>        &#125;);<br>        method.setBarrier(barrier);<br><br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                method.sum(<span class="hljs-number">45</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (BrokenBarrierException e) &#123;<br>                e.printStackTrace();<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;);<br>        thread.start();<br><br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CountDownLatchMethod</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> Integer value = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">private</span> CountDownLatch latch;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        value = fibo(num);<br>        latch.countDown();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>)  + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        latch.await();<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * latch 没有重置功能，这个函数用来传入新的</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> latch</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setLatch</span><span class="hljs-params">(CountDownLatch latch)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.latch = latch;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br>        CountDownLatch latch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">final</span> CountDownLatchMethod method = <span class="hljs-keyword">new</span> CountDownLatchMethod();<br>        method.setLatch(latch);<br>        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt;&#123;<br>            method.sum(<span class="hljs-number">45</span>);<br>        &#125;);<br>        thread.start();<br>        <span class="hljs-keyword">int</span> result = method.getValue(); <span class="hljs-comment">// 这是得到的返回值</span><br><br>        <span class="hljs-comment">// 确保 拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>    &#125;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算结果为：1836311903</span><br><span class="hljs-comment">使用时间：5318 ms</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h3 id="使用-Future（使用线程池的-submit）"><a href="#使用-Future（使用线程池的-submit）" class="headerlink" title="使用 Future（使用线程池的 submit）"></a>使用 Future（使用线程池的 submit）</h3><h4 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Future</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureMethod</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> fibo(num);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> sum(<span class="hljs-number">45</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行 下面方法</span><br>        ExecutorService executorService = Executors.newFixedThreadPool(<span class="hljs-number">1</span>);<br>        Future&lt;Long&gt; future = executorService.submit(<span class="hljs-keyword">new</span> FutureMethod());<br>        <span class="hljs-keyword">long</span> result = future.get(); <span class="hljs-comment">// 这是得到的返回值i</span><br>        <span class="hljs-comment">// 确保 拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot;ms&quot;</span>);<br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>        executorService.shutdown();<br>    &#125;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">异步计算结果为：1836311903</span><br><span class="hljs-comment">使用时间：5277ms</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h4 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * FutureTask</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTaskMethod</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 取结果</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Get</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">Integer</span>&gt; </span>&#123;<br>        FutureTask&lt;Integer&gt; sum;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Get</span><span class="hljs-params">(FutureTask&lt;Integer&gt; sum)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.sum = sum;<br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>            <span class="hljs-keyword">return</span> sum.get();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 求结果</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sum</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">Integer</span>&gt; </span>&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>            <span class="hljs-keyword">return</span> fibo(<span class="hljs-number">45</span>);<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;<br>            <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br>        FutureTask&lt;Integer&gt; sum = <span class="hljs-keyword">new</span> FutureTask&lt;&gt;(<span class="hljs-keyword">new</span> Sum());<br>        FutureTask&lt;Integer&gt; get = <span class="hljs-keyword">new</span> FutureTask&lt;&gt;(<span class="hljs-keyword">new</span> Get(sum));<br><br>        Thread sumT = <span class="hljs-keyword">new</span> Thread(sum);<br>        sumT.start();<br>        Thread getT = <span class="hljs-keyword">new</span> Thread(get);<br>        getT.start();<br><br>        <span class="hljs-keyword">int</span> result = get.get(); <span class="hljs-comment">// 这是得到的返回值</span><br><br>        <span class="hljs-comment">// 确保拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算的结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br><br>        <span class="hljs-comment">// 然后退出 main 线程</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>call()</code> 没有输入参数，所以用两个 <code>call()</code> ，一个用来指定固定的输入参数，令一个用来获取结果。</p>
+<h4 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * CompletableFuture 方式</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CompleteableMethod</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        <span class="hljs-comment">// 在这里创建一个线程或线程池</span><br>        <span class="hljs-comment">// 异步执行下面方法</span><br><br>        <span class="hljs-keyword">int</span> result = CompletableFuture.supplyAsync(() -&gt; sum()).join();<br><br>        <span class="hljs-comment">// 确保 拿到 result 并输出</span><br>        System.out.println(<span class="hljs-string">&quot;异步计算的结果为：&quot;</span> + result);<br>        System.out.println(<span class="hljs-string">&quot;使用时间：&quot;</span> + (System.currentTimeMillis() - start) + <span class="hljs-string">&quot; ms&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> fibo(<span class="hljs-number">45</span>);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> fibo(a - <span class="hljs-number">1</span>) + fibo(a - <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/08/%E4%BD%BF%E7%94%A8-Java-%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0-AOP/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用 Java 的动态代理实现 AOP</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/06/Soul-%E7%BD%91%E5%85%B3-3%EF%BC%9AHttp-%E8%AF%B7%E6%B1%82%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/">
+                        <span class="hidden-mobile">Soul 网关 3：Http 请求是怎么被处理的？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

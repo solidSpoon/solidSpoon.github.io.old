@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>初识 JShell - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="初识 JShell">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 01:36" pubdate>
+        2021年2月23日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      756 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">初识 JShell</h1>
+            
+            <div class="markdown-body">
+              <h2 id="初识-JShell"><a href="#初识-JShell" class="headerlink" title="初识 JShell"></a>初识 JShell</h2><p>升级到 Java 11 后，有了 JShell 这个工具（其实 Java 9 就有了），它让 Java 可以像脚本语言一样直接在命令行交互，听起来好神奇，快来体验一下！！</p>
+<h2 id="启动与退出"><a href="#启动与退出" class="headerlink" title="启动与退出"></a>启动与退出</h2><p>保险起见，得先弄明白启动与退出</p>
+<p>直接在命令行输入 <code>jshell</code> 就启动了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  ~cedar jshell<br>|  Welcome to JShell -- Version 11.0.9.1<br>|  For an introduction <span class="hljs-built_in">type</span>: /<span class="hljs-built_in">help</span> intro<br><br>jshell&gt;<br></code></pre></td></tr></table></figure>
+<p>退出方式稍微有一些特别，命令是 <code>/exit</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /<span class="hljs-built_in">exit</span><br>|  Goodbye<br></code></pre></td></tr></table></figure>
+<p><code>jshell -h</code> 可以发现提供了几个选项，这仨比较有意思</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">-q                    Quiet feedback.  Same as: --feedback concise<br>-s                    Really quiet feedback.  Same as: --feedback silent<br>-v                    Verbose feedback.  Same as: --feedback verbose<br></code></pre></td></tr></table></figure>
+<p>试了一下 <code>-s</code> 非常安静的反馈，看起来真的清爽</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  ~cedar jshell -s<br>-&gt; int a = 1;<br>-&gt; int b = 2;<br></code></pre></td></tr></table></figure>
+<p>初学者还是别整这么安静了，使用 <code>-v</code> 开启详细反馈吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  ~cedar jshell -v<br>|  Welcome to JShell -- Version 11.0.9.1<br>|  For an introduction <span class="hljs-built_in">type</span>: /<span class="hljs-built_in">help</span> intro<br><br>jshell&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><p>赋几个值看看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; int a = 1<br>a ==&gt; 1<br>|  created variable a : int<br><br>jshell&gt; a + 1<br><span class="hljs-variable">$2</span> ==&gt; 2<br>|  created scratch variable <span class="hljs-variable">$2</span> : int<br><br>jshell&gt; <span class="hljs-variable">$2</span> + a<br><span class="hljs-variable">$3</span> ==&gt; 3<br>|  created scratch variable <span class="hljs-variable">$3</span> : int<br></code></pre></td></tr></table></figure>
+<p>可见：没有指定变量的数字会自动赋值给临时变量，我们也可以使用这个临时变量</p>
+<h3 id="方法与类"><a href="#方法与类" class="headerlink" title="方法与类"></a>方法与类</h3><p>那创建方法呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; String addMark(Word word) &#123;<br>   ...&gt; <span class="hljs-built_in">return</span> word.val + <span class="hljs-string">&quot;!&quot;</span>;<br>   ...&gt; &#125;<br>|  created method addMark(Word), however, it cannot be referenced until class Word is declared<br></code></pre></td></tr></table></figure>
+<p>这里方法传入了一个不存在的类，他告诉我们要定义这个类才能使用这个方法，那定义一下吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>jshell&gt; class Word &#123;<br>   ...&gt; String val;<br>   ...&gt; public <span class="hljs-function"><span class="hljs-title">Word</span></span>() &#123;<br>   ...&gt; val = <span class="hljs-string">&quot;hello word&quot;</span>;<br>   ...&gt; &#125;<br>   ...&gt; &#125;<br>|  created class Word<br>|    update replaced method addMark(Word)<br></code></pre></td></tr></table></figure>
+<p>创建个对象调用一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>jshell&gt; Word words = new Word()<br>words ==&gt; Word@2ef1e4fa<br>|  created variable words : Word<br><br>jshell&gt; addMark(words)<br><span class="hljs-variable">$4</span> ==&gt; <span class="hljs-string">&quot;hello word!&quot;</span><br>|  created scratch variable <span class="hljs-variable">$4</span> : String<br></code></pre></td></tr></table></figure>
+<h3 id="内置命令"><a href="#内置命令" class="headerlink" title="内置命令"></a>内置命令</h3><p>输入 <code>/help</code> 就能看到所有可以使用的命令，例如列出所有变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>jshell&gt; /vars<br>|    Word words = Word@2ef1e4fa<br>|    String <span class="hljs-variable">$4</span> = <span class="hljs-string">&quot;hello word!&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="外部编辑器"><a href="#外部编辑器" class="headerlink" title="外部编辑器"></a>外部编辑器</h2><p>有没有觉得在命令行定义类或者方法啥的太费事了，其实 JShell 支持使用编辑器</p>
+<h3 id="使用默认编辑器"><a href="#使用默认编辑器" class="headerlink" title="使用默认编辑器"></a>使用默认编辑器</h3><p>先定义一个类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; class Friend&#123;&#125;<br>|  已创建 类 Friend<br></code></pre></td></tr></table></figure>
+<p>调用自带的编辑器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /edit Friend<br></code></pre></td></tr></table></figure>
+<p>如下图，点击 Accept 就行</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223013703.png" srcset="/img/loading.gif" alt="img"></p>
+<p>注意一定是之前定义好的片段，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /list<br><br>   1 : int a = 1;<br>   2 : int b = 2;<br>   3 : int c = 1;<br>   6 : class Friend&#123;<br>       String val = <span class="hljs-string">&quot;No Friend !!!&quot;</span>;<br>       &#125;<br></code></pre></td></tr></table></figure>
+<p>否则会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /edit Dog<br>|  没有此类片段: Dog<br></code></pre></td></tr></table></figure>
+<h3 id="自定义编辑器"><a href="#自定义编辑器" class="headerlink" title="自定义编辑器"></a>自定义编辑器</h3><p>如果想自定义编辑器呢，自带的太不好用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /<span class="hljs-built_in">set</span> editor vim<br>|  编辑器设置为: vim<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /<span class="hljs-built_in">set</span> editor <span class="hljs-string">&quot;C:\\Users\\cedar\\AppData\\Local\\Programs\\Microsoft VS Code\\code&quot;</span> -w<br>|  编辑器设置为: C:\Users\cedar\AppData\Local\Programs\Microsoft VS Code\code -w<br></code></pre></td></tr></table></figure>
+<p>该 <code>-w</code> 选项设置等待文件关闭后再返回</p>
+<p>上述设置是一次性的，想永久设置的话，使用 <code>-retain</code> 选项</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">jshell&gt; /<span class="hljs-built_in">set</span> editor -retain vim<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/PhotoShop%E5%9B%BE%E5%B1%82%E7%9A%84%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PhotoShop 图层的混合模式是怎么回事</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/17/Redis%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/">
+                        <span class="hidden-mobile">Redis 配置主从复制与高可用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

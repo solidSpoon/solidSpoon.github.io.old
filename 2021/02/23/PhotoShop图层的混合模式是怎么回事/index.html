@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>PhotoShop 图层的混合模式是怎么回事 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PhotoShop 图层的混合模式是怎么回事">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 21:05" pubdate>
+        2021年2月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PhotoShop 图层的混合模式是怎么回事</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在修图软件中，调整混合模式就可以将两张照片用不同的风格混合在一起<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223210643.gif" srcset="/img/loading.gif"><br>上图就是将下面这两个图片用不同的混合模式叠加的效果，那么你有没有想过这是什么原理呢？本文就以几个经典的混合模式为例简单研究一下。</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223210706.png" srcset="/img/loading.gif"></div><div class="group-image-wrap"><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223210720.png" srcset="/img/loading.gif"></div></div></div>
+
+
+
+<h2 id="图像显示原理"><a href="#图像显示原理" class="headerlink" title="图像显示原理"></a>图像显示原理</h2><p>其实各种图层混合模式的灵感就是来源于胶片相机时代。那个时代的摄影师没有先进的计算机来修图，只能拍好胶片后（当然也有其他的感光材料做底片），在暗房通过各种骚操作来给自己的照片添加「特效」，其中很多方法在数字时代就演变成了修图软件中的混合模式。</p>
+<p>在修图软件中，图层就是一张张胶片叠在一起，而混合模式就是胶片与胶片之间的药水，不同的药水会让胶片之间产生不同的混合效果。当然要彻底理解修图软件的混合模式就必须得了解 RGB 色彩模型，因为这是混合模式的根基。</p>
+<h3 id="YES-RGB"><a href="#YES-RGB" class="headerlink" title="YES!!! RGB!!"></a>YES!!! RGB!!</h3><p>有谁能不喜欢 RGB 呢。课本上都讲过，光的三原色是红绿蓝，将这三种颜色按照不同的强度和不同的比例混合之后，就可以得到其他的颜色。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211659.png" srcset="/img/loading.gif"><br>计算机也是这样。在计算机中，红绿蓝的比例可以由一组在 [0 - 255] 之间的数据表示，数字越大对应颜色光强越大。就像下图这样，比如我们想显示纯红色，那就让红色的发光强度最大，绿色和蓝色不发光，因此红色就表示为 <code>RGB(255, 0, 0)</code><br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211735.png" srcset="/img/loading.gif"><br>如果想显示黄色呢？根据上面的三原色图，只需要让蓝色不发光，红色和绿色发光强度最大，就得到了黄色，<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211803.png" srcset="/img/loading.gif"><br>如果让三种颜色第比例相同，那就变成了黑白灰。神奇吧，黑白灰的三原色比例相同，只是发光强度不同。从这个角度看，黑白灰其实是一种颜色，只是亮度不同。所以就不难理解如果想看到真正的「白色」，就必须拼命提高亮度，这也是我们希望显示器亮度更高的原因之一。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211815.png" srcset="/img/loading.gif"><br>当我们把上面的那些颜色块做的非常小，就变成了显示器中像素点。每个都是由红绿蓝三原色组成的，使用程序控制每个像素点的三原色比例，就显示出了不同的图案。下图就是显示器放大的样子。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223211825.png" srcset="/img/loading.gif"></p>
+<h3 id="修图就是计算"><a href="#修图就是计算" class="headerlink" title="修图就是计算"></a>修图就是计算</h3><p>到这，你一定能理解，修图软件中的所有操作就是对每个像素点的 RGB 值做计算，比如想要提高一张照片的曝光，那就同时提高每个像素的 RGB 值，这样照片就会变得明亮。如果想提高对比度，那就让较亮的地方的 RGB 更大，较暗的地方 RGB 更小，如下图：</p>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212000.png" srcset="/img/loading.gif"></div><div class="group-image-wrap"><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212013.png" srcset="/img/loading.gif"></div></div></div>
+
+<blockquote>
+<p>对比度低的照片各像素点的 RGB 值都比较居中，提高对比度后，RGB 值较低（暗）和 RGB 值较高（亮）的像素点变多了。</p>
+</blockquote>
+<p>混合模式也是这个原理，既然是混合，那就得有两个或两个以上的对象。在修图软件中，这样的对象就以图层为载体，我们将两个图层叠放到一起的时候，就会有一个上下对应的关系。上层的一个像素点会对应到下层的一个像素点，混合模式就是对这一组组像素点进行计算。</p>
+<p>那么常见的混合模式是怎么计算像素点的呢？</p>
+<h2 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h2><p>为了计算两张照片的混合，首先要将个像素点 [0 - 255] 的值映射到 [0.00 - 1.00] 的小数区间，比如：</p>
+<ul>
+<li>0 = 0.00；</li>
+<li>128 = 0.50；</li>
+<li>256 = 1.00</li>
+</ul>
+<p>也就是每个像素点的三原色值变成了三个小数，这么处理了之后，就比较好计算，那先来两个简单的练练手</p>
+<h3 id="「变亮」和「变暗」"><a href="#「变亮」和「变暗」" class="headerlink" title="「变亮」和「变暗」"></a>「变亮」和「变暗」</h3><p>这俩操作的公式很简单，分别对比两个像素点的 RGB，变亮就是取大值，变暗就是取小值。</p>
+<p>比如有两个像素点：<code>a [84, 164, 109]</code>，<code>b [136, 100, 149]</code></p>
+<ul>
+<li>变亮：<code>c [136, 164, 149]</code></li>
+<li>变暗：<code>c [84, 100, 109]</code></li>
+</ul>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212124.png" srcset="/img/loading.gif"></p>
+<h3 id="正片叠底-Multiply"><a href="#正片叠底-Multiply" class="headerlink" title="正片叠底 Multiply"></a>正片叠底 Multiply</h3><p>什么是正片呢？</p>
+<blockquote>
+<p>正片（英语：Positive Film）为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BA%95%E7%89%87">底片</a>的分类标准之一，胶片功能类似相纸，利用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B2%A0%E7%89%87">负片</a>冲印得到正像显影，但不像负片和反转片是摄影胶片；由于以反转冲洗法（Reversal Process）的反转片（Reversal film）亦采正像显影方式<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E7%89%87#cite_note-1">[1]</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E7%89%87#cite_note-2">[2]</a>，“正片”遂成与负片相对的感光材料总称，可供<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%96%93%E6%AD%A3%E7%89%87">影片拷贝</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B9%BB%E7%87%88%E6%A9%9F">幻灯机</a>及灯箱观赏等用途上，也可印制照片、印刷制版。<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E7%89%87">https://zh.wikipedia.org/wiki/%E6%AD%A3%E7%89%87</a></p>
+</blockquote>
+<p>可见，正片上的色彩就是图像真实的色彩<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212157.jpeg" srcset="/img/loading.gif"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.google.com/url?sa=i&url=https://zh-cn.facebook.com/hi.xikon/posts/279712775851997/&psig=AOvVaw1f4r21n5CgNHNQKHowqq5b&ust=1614155052538000&source=images&cd=vfe&ved=2ahUKEwi_8LWlyv_uAhXPCIgKHRkvCTIQjB16BAgAEAg">图片来源</a></p>
+</blockquote>
+<p>那正片叠底就是把两个正片叠上，由于正片亮的地方是透明的，暗的地方是不透明的，叠上之后透明的地方就会显示出另一张正片的图案。</p>
+<p>典型示例如下图，上层图层是一个白色背景的水印，下层图层是一个风筝图片，它俩应用正片叠底之后水印的白色背景消失了。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212214.png" srcset="/img/loading.gif"><br>正片叠底的英文是 Mutiply，跟它的名字一样，用公式表示就是：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="8.93ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 3947 776" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-1-TEX-I-1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path id="MJX-1-TEX-N-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path><path id="MJX-1-TEX-I-1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D450"></use></g><g data-mml-node="mo" transform="translate(710.8, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="mi" transform="translate(1766.6, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(2517.8, 0)"><use xlink:href="#MJX-1-TEX-N-D7"></use></g><g data-mml-node="mi" transform="translate(3518, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g></g></g></svg></mjx-container></p>
+<p>如果刚才那个扣水印的原理你没有看明白，那就用公式解释一下：白色的值是 1，如果 a 是白色，那么混合之后的结果就是 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="8.855ex" height="1.756ex" role="img" focusable="false" viewBox="0 -694 3914 776" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-1-TEX-N-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path><path id="MJX-1-TEX-I-1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mn"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(722.2, 0)"><use xlink:href="#MJX-1-TEX-N-D7"></use></g><g data-mml-node="mi" transform="translate(1722.4, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g><g data-mml-node="mo" transform="translate(2429.2, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="mi" transform="translate(3485, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g></g></g></svg></mjx-container>，因此水印白色背景被扣掉了。</p>
+<p>如果自己跟自己做正片叠底呢？<br>那公式就是 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="6.107ex" height="2.072ex" role="img" focusable="false" viewBox="0 -833.9 2699.1 915.9" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-1-TEX-I-1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path id="MJX-1-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D450"></use></g><g data-mml-node="mo" transform="translate(710.8, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="msup" transform="translate(1766.6, 0)"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mn" transform="translate(529, 363) scale(0.707)"><use xlink:href="#MJX-1-TEX-N-32"></use></g></g></g></g></svg></mjx-container></p>
+<p>图像如下，可见整体变暗了一些，亮度低的地方透明度低，变暗的幅度就比较大。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212230.png" srcset="/img/loading.gif"><br>理论上，如果你能在曲线工具中调出一个标准的二次曲线，那它俩效果就是一样的！<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212253.jpeg" srcset="/img/loading.gif"></p>
+<h3 id="滤色-Screen"><a href="#滤色-Screen" class="headerlink" title="滤色 Screen"></a>滤色 Screen</h3><p>正片叠底是堆叠正片，滤色就是堆叠负片，负片就是正片颜色取反。较暗的场景在负片中变得较亮，较亮就意味着透明，叠上之后透明的地方就会显示出另一张负片的图案。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212317.jpeg" srcset="/img/loading.gif"><br>因此如果我们把水印的背景换成黑色，文字换成白色，它俩做滤色，就会得到白色的水印<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212335.png" srcset="/img/loading.gif"><br>公式是这样：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="24.881ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 10997.3 1000" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-1-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-1-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-1-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-1-TEX-I-1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path id="MJX-1-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJX-1-TEX-N-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path><path id="MJX-1-TEX-I-1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D436"></use></g><g data-mml-node="mo" transform="translate(1037.8, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="mn" transform="translate(2093.6, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(2815.8, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mrow" transform="translate(3816, 0)"><g data-mml-node="mo"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(389, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(1111.2, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mi" transform="translate(2111.4, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(2640.4, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g></g><g data-mml-node="mo" transform="translate(7067.7, 0)"><use xlink:href="#MJX-1-TEX-N-D7"></use></g><g data-mml-node="mrow" transform="translate(8067.9, 0)"><g data-mml-node="mo"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(389, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(1111.2, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mi" transform="translate(2111.4, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g><g data-mml-node="mo" transform="translate(2540.4, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g></g></g></g></svg></mjx-container><br>也很好理解：(1 - a) 和 (1 - b) 代表 a 和 b 的负片，它俩做堆叠（乘法），最后再冲洗成正片（1 - x）</p>
+<p>自己叠底自己效果如下曲线</p>
+<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="15.661ex" height="2.71ex" role="img" focusable="false" viewBox="0 -948 6922 1198" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-1-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-1-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-1-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-1-TEX-I-1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path id="MJX-1-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJX-1-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D450"></use></g><g data-mml-node="mo" transform="translate(710.8, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="mn" transform="translate(1766.6, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(2488.8, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="msup" transform="translate(3489, 0)"><g data-mml-node="mrow"><g data-mml-node="mo"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(389, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(1111.2, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mi" transform="translate(2111.4, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(2640.4, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g></g><g data-mml-node="mn" transform="translate(3029.4, 477.1) scale(0.707)"><use xlink:href="#MJX-1-TEX-N-32"></use></g></g></g></g></svg></mjx-container>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212357.png" srcset="/img/loading.gif"><br>可见整体偏亮了，同样可以用曲线工具模拟出来：<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212412.jpeg" srcset="/img/loading.gif"></p>
+<h3 id="叠加-Overlay"><a href="#叠加-Overlay" class="headerlink" title="叠加 Overlay"></a>叠加 Overlay</h3><p>叠加模式是「正片叠底」和「滤色」的混合模式，是个分段函数。它的公式如下：</p>
+<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -2.149ex" xmlns="http://www.w3.org/2000/svg" width="42.743ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 18892.6 2400" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path><path id="MJX-1-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-1-TEX-I-1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path id="MJX-1-TEX-N-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path id="MJX-1-TEX-I-1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path><path id="MJX-1-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJX-1-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-1-TEX-S3-7B" d="M618 -943L612 -949H582L568 -943Q472 -903 411 -841T332 -703Q327 -682 327 -653T325 -350Q324 -28 323 -18Q317 24 301 61T264 124T221 171T179 205T147 225T132 234Q130 238 130 250Q130 255 130 258T131 264T132 267T134 269T139 272T144 275Q207 308 256 367Q310 436 323 519Q324 529 325 851Q326 1124 326 1154T332 1205Q369 1358 566 1443L582 1450H612L618 1444V1429Q618 1413 616 1411L608 1406Q599 1402 585 1393T552 1372T515 1343T479 1305T449 1257T429 1200Q425 1180 425 1152T423 851Q422 579 422 549T416 498Q407 459 388 424T346 364T297 318T250 284T214 264T197 254L188 251L205 242Q290 200 345 138T416 3Q421 -18 421 -48T423 -349Q423 -397 423 -472Q424 -677 428 -694Q429 -697 429 -699Q434 -722 443 -743T465 -782T491 -816T519 -845T548 -868T574 -886T595 -899T610 -908L616 -910Q618 -912 618 -928V-943Z"></path><path id="MJX-1-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-1-TEX-N-A0" d=""></path><path id="MJX-1-TEX-N-69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z"></path><path id="MJX-1-TEX-N-66" d="M273 0Q255 3 146 3Q43 3 34 0H26V46H42Q70 46 91 49Q99 52 103 60Q104 62 104 224V385H33V431H104V497L105 564L107 574Q126 639 171 668T266 704Q267 704 275 704T289 705Q330 702 351 679T372 627Q372 604 358 590T321 576T284 590T270 627Q270 647 288 667H284Q280 668 273 668Q245 668 223 647T189 592Q183 572 182 497V431H293V385H185V225Q185 63 186 61T189 57T194 54T199 51T206 49T213 48T222 47T231 47T241 46T251 46H282V0H273Z"></path><path id="MJX-1-TEX-N-3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"></path><path id="MJX-1-TEX-N-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path id="MJX-1-TEX-N-2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path><path id="MJX-1-TEX-N-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path><path id="MJX-1-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-1-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-1-TEX-N-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path id="MJX-1-TEX-N-74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z"></path><path id="MJX-1-TEX-N-68" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 124T102 167T103 217T103 272T103 329Q103 366 103 407T103 482T102 542T102 586T102 603Q99 622 88 628T43 637H25V660Q25 683 27 683L37 684Q47 685 66 686T103 688Q120 689 140 690T170 693T181 694H184V367Q244 442 328 442Q451 442 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path id="MJX-1-TEX-N-65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z"></path><path id="MJX-1-TEX-N-72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z"></path><path id="MJX-1-TEX-N-77" d="M90 368Q84 378 76 380T40 385H18V431H24L43 430Q62 430 84 429T116 428Q206 428 221 431H229V385H215Q177 383 177 368Q177 367 221 239L265 113L339 328L333 345Q323 374 316 379Q308 384 278 385H258V431H264Q270 428 348 428Q439 428 454 431H461V385H452Q404 385 404 369Q404 366 418 324T449 234T481 143L496 100L537 219Q579 341 579 347Q579 363 564 373T530 385H522V431H529Q541 428 624 428Q692 428 698 431H703V385H697Q696 385 691 385T682 384Q635 377 619 334L559 161Q546 124 528 71Q508 12 503 1T487 -11H479Q460 -11 456 -4Q455 -3 407 133L361 267Q359 263 266 -4Q261 -11 243 -11H238Q225 -11 220 -3L90 368Z"></path><path id="MJX-1-TEX-N-73" d="M295 316Q295 356 268 385T190 414Q154 414 128 401Q98 382 98 349Q97 344 98 336T114 312T157 287Q175 282 201 278T245 269T277 256Q294 248 310 236T342 195T359 133Q359 71 321 31T198 -10H190Q138 -10 94 26L86 19L77 10Q71 4 65 -1L54 -11H46H42Q39 -11 33 -5V74V132Q33 153 35 157T45 162H54Q66 162 70 158T75 146T82 119T101 77Q136 26 198 26Q295 26 295 104Q295 133 277 151Q257 175 194 187T111 210Q75 227 54 256T33 318Q33 357 50 384T93 424T143 442T187 447H198Q238 447 268 432L283 424L292 431Q302 440 314 448H322H326Q329 448 335 442V310L329 304H301Q295 310 295 316Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><use xlink:href="#MJX-1-TEX-I-1D453"></use></g><g data-mml-node="mo" transform="translate(550, 0)"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(939, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(1468, 0)"><use xlink:href="#MJX-1-TEX-N-2C"></use></g><g data-mml-node="mi" transform="translate(1912.7, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g><g data-mml-node="mo" transform="translate(2341.7, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g></g><g data-mml-node="mo" transform="translate(3008.4, 0)"><use xlink:href="#MJX-1-TEX-N-3D"></use></g><g data-mml-node="mrow" transform="translate(4064.2, 0)"><g data-mml-node="mo"><use xlink:href="#MJX-1-TEX-S3-7B"></use></g><g data-mml-node="mtable" transform="translate(750, 0)"><g data-mml-node="mtr" transform="translate(0, 700)"><g data-mml-node="mtd"><g data-mml-node="mn"><use xlink:href="#MJX-1-TEX-N-32"></use></g><g data-mml-node="mi" transform="translate(500, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mi" transform="translate(1029, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g><g data-mml-node="mo" transform="translate(1458, 0)"><use xlink:href="#MJX-1-TEX-N-2C"></use></g></g><g data-mml-node="mtd" transform="translate(9459.3, 0)"><g data-mml-node="mtext"><use xlink:href="#MJX-1-TEX-N-A0"></use><use xlink:href="#MJX-1-TEX-N-69" transform="translate(250, 0)"></use><use xlink:href="#MJX-1-TEX-N-66" transform="translate(528, 0)"></use><use xlink:href="#MJX-1-TEX-N-A0" transform="translate(834, 0)"></use></g><g data-mml-node="mi" transform="translate(1084, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(1890.8, 0)"><use xlink:href="#MJX-1-TEX-N-3C"></use></g><g data-mml-node="mn" transform="translate(2946.6, 0)"><use xlink:href="#MJX-1-TEX-N-30"></use><use xlink:href="#MJX-1-TEX-N-2E" transform="translate(500, 0)"></use><use xlink:href="#MJX-1-TEX-N-35" transform="translate(778, 0)"></use></g></g></g><g data-mml-node="mtr" transform="translate(0, -700)"><g data-mml-node="mtd"><g data-mml-node="mn"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(722.2, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mn" transform="translate(1722.4, 0)"><use xlink:href="#MJX-1-TEX-N-32"></use></g><g data-mml-node="mo" transform="translate(2222.4, 0)"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(2611.4, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(3333.7, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mi" transform="translate(4333.9, 0)"><use xlink:href="#MJX-1-TEX-I-1D44E"></use></g><g data-mml-node="mo" transform="translate(4862.9, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g><g data-mml-node="mo" transform="translate(5251.9, 0)"><use xlink:href="#MJX-1-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(5640.9, 0)"><use xlink:href="#MJX-1-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(6363.1, 0)"><use xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mi" transform="translate(7363.3, 0)"><use xlink:href="#MJX-1-TEX-I-1D44F"></use></g><g data-mml-node="mo" transform="translate(7792.3, 0)"><use xlink:href="#MJX-1-TEX-N-29"></use></g><g data-mml-node="mo" transform="translate(8181.3, 0)"><use xlink:href="#MJX-1-TEX-N-2C"></use></g></g><g data-mml-node="mtd" transform="translate(9459.3, 0)"><g data-mml-node="mtext"><use xlink:href="#MJX-1-TEX-N-A0"></use><use xlink:href="#MJX-1-TEX-N-6F" transform="translate(250, 0)"></use><use xlink:href="#MJX-1-TEX-N-74" transform="translate(750, 0)"></use><use xlink:href="#MJX-1-TEX-N-68" transform="translate(1139, 0)"></use><use xlink:href="#MJX-1-TEX-N-65" transform="translate(1695, 0)"></use><use xlink:href="#MJX-1-TEX-N-72" transform="translate(2139, 0)"></use><use xlink:href="#MJX-1-TEX-N-77" transform="translate(2531, 0)"></use><use xlink:href="#MJX-1-TEX-N-69" transform="translate(3253, 0)"></use><use xlink:href="#MJX-1-TEX-N-73" transform="translate(3531, 0)"></use><use xlink:href="#MJX-1-TEX-N-65" transform="translate(3925, 0)"></use><use xlink:href="#MJX-1-TEX-N-A0" transform="translate(4369, 0)"></use></g></g></g></g><g data-mml-node="mo" transform="translate(14828.3, 0)"></g></g></g></g></svg></mjx-container>
+
+
+<p>其中，a 是<strong>底下的图层</strong>，b 是上面的图层，就是说</p>
+<ul>
+<li>当下面像素比较暗的时候，效果相当于两倍正片叠底，导致整体变暗</li>
+<li>当下面像素比较亮的时候，效果相当于两倍滤色，导致整体变亮</li>
+</ul>
+<p>注意观察公式：当其中一个像素某个值是 0.5 的时候（a = 0.5 或 b = 0.5），另一个像素对应值相当于没变。如果我们拿一个红绿蓝的亮度都是 0.5 的图片，也就是<code>RGB(128,128,128)</code> 和另一个图片做叠加，这个颜色就消失了，再扣个水印试试。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212427.jpeg" srcset="/img/loading.gif"><br>把水印放在<strong>下层</strong>，在上层应用「叠加」效果，<code>RGB(128,128,128)</code> 就被扣掉了，我来解释一下：</p>
+<ul>
+<li>白色水印部分比较亮，应用的是两倍滤色，前面说滤色会保留白色，因此白色被保留了下来</li>
+<li>黑色水印部分比较暗，应用的是两倍正片叠底，前面说正片叠底会保留黑色，因此黑色被保留了下来</li>
+</ul>
+<p><code>RGB(128,128,128)</code> 这个颜色叫做中性灰。也就是叠加模式可以扣掉中性灰，这里引申一点，常见的「中性灰修图法」原理就是上面列出的这几点，有兴趣可以去查一下。</p>
+<p>那叠加公式这个「两倍」是干嘛的，你说「叠加」是结合了「正片叠底」和「滤色」，那为什么不直接结合，非要弄个两倍呢？</p>
+<p>看一下图像就知道了，由于三维图不好展示，这里还是压缩成二维，也就是自己叠加自己，如果不加两倍直接结合的话会怎么样呢？<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212442.png" srcset="/img/loading.gif"><br>两条曲线在 x = 0.5 处根本就是不连续的嘛，这怎么能行呢，所以加上两倍是为了让它俩的图像连续，就下面这样<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212500.png" srcset="/img/loading.gif"><br>去掉多余的线条，就是下面这个，是一个增加对比度的曲线：<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210223212527.png" srcset="/img/loading.gif"><br>注意上面这个曲线是自己叠加自己的情况，看起来还是可以用曲线工具模拟出来<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210319193823.jpeg" srcset="/img/loading.gif"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>图层的混合模式分为几种，就像曲线一样，有的应用了之后会让整体变亮，有的会让整体变暗，有的会增加对比度。</p>
+<ul>
+<li>「正片叠底」就是一种变暗的模式，混合后最暗的黑色会被保留下来，最亮的白色会被丢弃。</li>
+<li>「滤色」是一种变亮的模式，混合之后最亮的白色会被保留下来，最暗的黑色会被丢弃。</li>
+<li>「叠加」是一种增加对比度的模式，它是「正片叠底」和「滤色」的结合体，会扣去中性灰。</li>
+</ul>
+<p>混合模式还有很多，但只是函数的曲线略有差别，但是他们的函数复杂，因此就不展开了。如果你有兴趣可以去维基百科上看看</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Blend_modes">https://en.wikipedia.org/wiki/Blend_modes</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/04/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E4%B8%80%E4%B8%AAJava%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">手把手教你读一个 Java 文件的字节码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/%E5%88%9D%E8%AF%86JShell/">
+                        <span class="hidden-mobile">初识 JShell</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

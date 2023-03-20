@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>MySQL 8.0 搭建半同步复制 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL 8.0 搭建半同步复制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 21:35" pubdate>
+        2021年2月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      730 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL 8.0 搭建半同步复制</h1>
+            
+            <div class="markdown-body">
+              <p>说明：搭建半同步复制需要预先有基本的主从复制环境，具体可以看我之前的文章：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/solidSpoon/solidSpoon.github.io/wiki">https://github.com/solidSpoon/solidSpoon.github.io/wiki</a></p>
+</blockquote>
+<p>半同步超时的时候，会自动降为异步工作。当Slave开启半同步后，或者当主从之间网络延迟恢复正常的时候，半同步复制会自动从异步复制又转为半同步复制，还是相当智能的。</p>
+<h2 id="Master-配置"><a href="#Master-配置" class="headerlink" title="Master 配置"></a>Master 配置</h2><p>安装半同步模块并启动</p>
+<p>这里 Windows 版本有个坑</p>
+<p>对于 Linux 来说：此模块位置在 <code>/usr/local/mysql/lib/plugin/semisync_master.so</code><br>对于 Windows Zip 版本来说：插件的位置本来在 <code>..\lib\semisync_master.dll</code> ，但是 MySQL 默认的位置是 <code>\bin\lib\plugin\semisync_master.so</code> </p>
+<p>要解决这个问题，我们把 lib 目录复制一份过去就好了。</p>
+<p>也可以在配置文件中指定插件目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">[mysqld]<br>plugin_dir=/path/to/plugin/directory<br></code></pre></td></tr></table></figure>
+<p>如果 <a target="_blank" rel="noopener" href="https://www.docs4dev.com/docs/zh/mysql/5.7/reference/server-system-variables.html#sysvar_plugin_dir">plugin_dir</a> 的值是相对路径名，则将其视为相对于 MySQL 基本目录（ <a target="_blank" rel="noopener" href="https://www.docs4dev.com/docs/zh/mysql/5.7/reference/server-system-variables.html#sysvar_basedir">basedir</a> 系统变量的值）。</p>
+<p>下面是安装模块的命令：</p>
+<p>Linux：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; install plugin rpl_semi_sync_master soname <span class="hljs-string">&#x27;semisync_master.so&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>Windows：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; install plugin rpl_semi_sync_master soname <span class="hljs-string">&#x27;semisync_master.dll&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>安装完后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; show global variables like <span class="hljs-string">&#x27;%semi%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; show global variables like <span class="hljs-string">&#x27;%semi%&#x27;</span>;<br>+-------------------------------------------+------------+<br>| Variable_name                             | Value      |<br>+-------------------------------------------+------------+<br>| rpl_semi_sync_master_enabled              | OFF        | -&gt; 是否启用半同步协议<br>| rpl_semi_sync_master_timeout              | 10000      | -&gt; 链接 Slave 超时时间<br>| rpl_semi_sync_master_trace_level          | 32         |<br>| rpl_semi_sync_master_wait_for_slave_count | 1          |<br>| rpl_semi_sync_master_wait_no_slave        | ON         |<br>| rpl_semi_sync_master_wait_point           | AFTER_SYNC | -&gt; MySQL 5.7 之后默认值<br>+-------------------------------------------+------------+<br>6 rows <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span>, 1 warning (0.02 sec)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; <span class="hljs-built_in">set</span> global rpl_semi_sync_master_enabled = 1;<br>mysql&gt; <span class="hljs-built_in">set</span> global rpl_semi_sync_master_timeout = 2000;<br></code></pre></td></tr></table></figure>
+
+<p>安装后启动和定制主从连接错误的超时时间默认是 10s 可改为 2s，一旦有一次超时自动降级为异步。（以上内容要想永久有效需要写到配置文件中）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@localhost ~]<span class="hljs-comment"># cat /etc/my.cnf</span><br>[mysqld]<br>rpl_semi_sync_master_enabled = 1;<br>rpl_semi_sync_master_timeout = 2000;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Slave-配置"><a href="#Slave-配置" class="headerlink" title="Slave 配置"></a>Slave 配置</h2><p>1）安装半同步模块并启动</p>
+<p>Linux：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; install plugin rpl_semi_sync_slave soname <span class="hljs-string">&#x27;semisync_slave.so&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>WIndows：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; install plugin rpl_semi_sync_slave soname <span class="hljs-string">&#x27;semisync_slave.dll&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>同样，如果报错就把插件目录移动一下</p>
+<p><code>lib</code> -&gt; <code>bin\lib</code></p>
+<p>接着执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; <span class="hljs-built_in">set</span> global rpl_semi_sync_slave_enabled = 1;<br>mysql&gt; show global variables like <span class="hljs-string">&#x27;%semi%&#x27;</span>;<br>+-------------------------------------------+------------+<br>| Variable_name                             | Value      |<br>+-------------------------------------------+------------+<br>| rpl_semi_sync_master_enabled              | ON         |<br>| rpl_semi_sync_master_timeout              | 10000      |<br>| rpl_semi_sync_master_trace_level          | 32         |<br>| rpl_semi_sync_master_wait_for_slave_count | 1          |<br>| rpl_semi_sync_master_wait_no_slave        | ON         |<br>| rpl_semi_sync_master_wait_point           | AFTER_SYNC |<br>| rpl_semi_sync_slave_enabled               | ON         |<br>| rpl_semi_sync_slave_trace_level           | 32         |<br>+-------------------------------------------+------------+<br>8 rows <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span>, 1 warning (0.00 sec)<br></code></pre></td></tr></table></figure>
+
+<p>2）从节点需要重新连接主服务器半同步才会生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; stop slave io_thread;<br>mysql&gt; start slave io_thread;<br></code></pre></td></tr></table></figure>
+
+<p>PS：如果想卸载异步模块就使用 uninstall 即可。</p>
+<p>Master 上查看是否启用了半同步</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210203214530.png" srcset="/img/loading.gif"></p>
+<p>现在半同步已经正常工作了，主要看 <code>Rpl_semi_sync_master_clients</code> 是否不为 0，<code>Rpl_semi_sync_master_status</code> 是否为 ON。如果 <code>Rpl_semi_sync_master_status</code> 为 OFF，说明出现了网络延迟或 Slave IO 线程延迟。</p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>半同步超时，是否会自动降为异步工作</p>
+<h3 id="Slave"><a href="#Slave" class="headerlink" title="Slave"></a>Slave</h3><h2 id="关闭半同步"><a href="#关闭半同步" class="headerlink" title="关闭半同步;"></a>关闭半同步;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; <span class="hljs-built_in">set</span> global rpl_semi_sync_slave_enabled = 0 ;<br>mysql&gt; stop slave io_thread;<br>mysql&gt; start slave io_thread;<br></code></pre></td></tr></table></figure>
+<h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; insert into t1(id) values(5),(4);<br>Query OK, 2 rows affected (10.06 sec)<br>mysql&gt; insert into t1(id) values(6),(7);<br>Query OK, 2 rows affected (0.03 sec)<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGTID%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Win10 - MySQL 8 Zip 版 - 搭建基于 GTID 的主从复制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/Win10-MySQL8-0-Docker%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                        <span class="hidden-mobile">Win10 - MySQL 8.0 - Docker 搭建主从复制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

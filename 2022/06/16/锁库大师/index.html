@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>锁库大师 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="锁库大师">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-16 01:41" pubdate>
+        2022年6月16日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">锁库大师</h1>
+            
+            <div class="markdown-body">
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>希望在顾客下单时对库存明细表中的商品进行库存锁定，库存明细表简化后如下所示：</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/202206130943348.png" srcset="/img/loading.gif" alt="背景"></p>
+<p>可见一条产品编码有可能存在多条库存明细，客户的订单大致会锁定几十行的库存，要求如下：</p>
+<ul>
+<li>尽可能快，并发也高，支持多节点</li>
+<li>为了数据的一致性，最好不用 redis 扣减的方案</li>
+<li>锁库同时在锁库流水表中插入锁库记录</li>
+</ul>
+<h2 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h2><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>通过分析系统现有的方案，发现锁库操作时间主要浪费在更新库存明细的锁库数量上，为了防止超卖，每一条更新必须加上库存校验（如下所示），一旦失败就要回滚，在加之 MySQL 并没有提供原生批量更新方法，只能每行库存执行一条 SQL，导致锁库时间较长。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">WHERE</span> (stock_quantity <span class="hljs-operator">-</span> locking_quantity) <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<h3 id="提高锁库速度"><a href="#提高锁库速度" class="headerlink" title="提高锁库速度"></a>提高锁库速度</h3><p>优化的第一步就是想要提高批量锁库的速度，有没有方法能够在 MySQL 中模拟批量更新呢？</p>
+<h4 id="WHEN-语句"><a href="#WHEN-语句" class="headerlink" title="WHEN 语句"></a>WHEN 语句</h4><p>答案就是使用 SQL 的 <code>when</code> 语句，在程序中拼接出如下的 SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs SQL">UPDATE p_stock_instance a  <br><span class="hljs-keyword">SET</span> a.locking_quantity <span class="hljs-operator">=</span> <span class="hljs-keyword">CASE</span> a.id  <br>                             <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;027dbba9c04a4ef0baab3983c64bc0b31123&#x27;</span> <span class="hljs-keyword">THEN</span> <span class="hljs-number">3</span>  <br>                             <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;025d4574cd934b69993703e7e99e8ca43&#x27;</span> <span class="hljs-keyword">THEN</span> <span class="hljs-number">6</span>  <br>                             <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;027dbba9c04a4ef0baab3983c64bc0b313&#x27;</span> <span class="hljs-keyword">THEN</span> <span class="hljs-number">2</span> <span class="hljs-keyword">END</span>,  <br>    a.update_date      <span class="hljs-operator">=</span> now()  <br><span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">CASE</span> a.id  <br>          <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;027dbba9c04a4ef0baab3983c64bc0b31123&#x27;</span> <span class="hljs-keyword">THEN</span> (a.stock_quantity <span class="hljs-operator">-</span> a.locking_quantity) <span class="hljs-operator">&gt;=</span> <span class="hljs-number">3</span><br>          <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;025d4574cd934b69993703e7e99e8ca43&#x27;</span> <span class="hljs-keyword">THEN</span> (a.stock_quantity <span class="hljs-operator">-</span> a.locking_quantity) <span class="hljs-operator">&gt;=</span> <span class="hljs-number">6</span><br>          <span class="hljs-keyword">WHEN</span> <span class="hljs-string">&#x27;027dbba9c04a4ef0baab3983c64bc0b313&#x27;</span> <span class="hljs-keyword">THEN</span> (a.stock_quantity <span class="hljs-operator">-</span> a.locking_quantity) <span class="hljs-operator">&gt;=</span> <span class="hljs-number">2</span><br>          <span class="hljs-keyword">ELSE</span> <span class="hljs-number">0</span> <span class="hljs-keyword">END</span>;<br></code></pre></td></tr></table></figure>
+<p>SQL 执行完毕后会返回更新行数，在程序中判断更新行数是否与预期相符即可判断是否更新成功，程序示意如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer num = pStockInstanceDao.operationStockSmallData(operationMapping);  <br><span class="hljs-keyword">if</span> (num != operationMapping.size()) &#123;  <br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;操作失败&quot;</span>);  <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这种方法的更新速度很快，在我的测试中，更新两万行库存记录的耗时大约 17 秒。但其实还有更快的方法。</p>
+<h4 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h4><p>使用<strong>临时表更新库存</strong>的方法在数据量比较大的情况下比 WHEN 语句的性能好很多，测试条件下更新两万行库存记录耗时大约 1 秒</p>
+<p>临时表是 MySQL 中的一种特殊表，他有如下几个特征：</p>
+<ul>
+<li>临时表是线程内可见，线程之间看不到其他线程创建的临时表</li>
+<li>线程推出后临时表就被销毁</li>
+<li>临时表与普通表重名时 MySQL 优先选择临时表操作</li>
+</ul>
+<p>本案例中创建临时表的语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> temporary <span class="hljs-keyword">table</span> temp_stock_operation  <br>(  <br>    stock_instance_id <span class="hljs-type">varchar</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">unique</span>   <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> comment <span class="hljs-string">&#x27;库存实例ID&#x27;</span>,  <br>    op_num            <span class="hljs-type">int</span>                  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> comment <span class="hljs-string">&#x27;操作数量&#x27;</span>,  <br>    success           tinyint(<span class="hljs-number">1</span>) <span class="hljs-keyword">default</span> <span class="hljs-number">0</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> comment <span class="hljs-string">&#x27;是否成功&#x27;</span>  <br>);<br></code></pre></td></tr></table></figure>
+<p><code>stock_instance_id</code> 就是库存明细表中的 <code>id</code></p>
+<p><strong>更新库存时</strong>：</p>
+<ol>
+<li>创建临时表</li>
+<li>先将每一行库存明细要锁定的库存数量插入到临时表中</li>
+<li>然后通过 UPDATE JOIN 语句批量更新库存，同时将是否更新成功的信息保存在临时表的 <code>success</code> 字段中</li>
+<li>统计 <code>success</code> 字段，判断是否回滚</li>
+<li>删除临时表</li>
+</ol>
+<p>使用的 UPDATE 语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs SQL">update temp_stock_operation o <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> p_stock_instance s  <br>    <span class="hljs-keyword">on</span> o.stock_instance_id <span class="hljs-operator">=</span> s.id  <br><span class="hljs-keyword">set</span> o.success          <span class="hljs-operator">=</span> <span class="hljs-number">1</span>,  <br>    s.locking_quantity <span class="hljs-operator">=</span> s.locking_quantity <span class="hljs-operator">+</span> o.op_num  <br><span class="hljs-keyword">where</span> s.stock_quantity <span class="hljs-operator">-</span> s.locking_quantity <span class="hljs-operator">&gt;=</span> o.op_num  <br>  <span class="hljs-keyword">and</span> o.success <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p>检查是否成功，该语句返回值为 0 或 1 。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">as</span> success  <br><span class="hljs-keyword">from</span> temp_stock_operation  <br><span class="hljs-keyword">where</span> success <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p>最后删除临时表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">drop</span> temporary <span class="hljs-keyword">table</span> temp_stock_operation;<br></code></pre></td></tr></table></figure>
+<h4 id="将二者结合"><a href="#将二者结合" class="headerlink" title="将二者结合"></a>将二者结合</h4><p>虽然使用临时表的方案更新大量数据时很快，但是如果使用这个方法来更新几十条库存时就会发现速度又变慢了，在我的测试中，更新三四十条的耗时几乎与更新两万条相等。</p>
+<p>就是说这条更新语句在数量少的时候性能会下降</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs SQL">update temp_stock_operation o <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> p_stock_instance s  <br>    <span class="hljs-keyword">on</span> o.stock_instance_id <span class="hljs-operator">=</span> s.id  <br><span class="hljs-keyword">set</span> o.success          <span class="hljs-operator">=</span> <span class="hljs-number">1</span>,  <br>    s.locking_quantity <span class="hljs-operator">=</span> s.locking_quantity <span class="hljs-operator">+</span> o.op_num  <br><span class="hljs-keyword">where</span> s.stock_quantity <span class="hljs-operator">-</span> s.locking_quantity <span class="hljs-operator">&gt;=</span> o.op_num  <br>  <span class="hljs-keyword">and</span> o.success <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p>分析它的执行计划，发现当更新行数小于 45 时，JOIN 操作便不会走索引，而是全表扫描，导致性能下降。这时候即使使用下面的 SQL 语句强制索引也是<strong>没用的</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs SQL">update temp_stock_operation o force index <span class="hljs-keyword">for</span> <span class="hljs-keyword">join</span> (stock_instance_id)<br>    <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> p_stock_instance s  <br>    <span class="hljs-keyword">on</span> o.stock_instance_id <span class="hljs-operator">=</span> s.id  <br><span class="hljs-keyword">set</span> o.success          <span class="hljs-operator">=</span> <span class="hljs-number">1</span>,  <br>    s.locking_quantity <span class="hljs-operator">=</span> s.locking_quantity <span class="hljs-operator">+</span> o.op_num  <br><span class="hljs-keyword">where</span> s.stock_quantity <span class="hljs-operator">-</span> s.locking_quantity <span class="hljs-operator">&gt;=</span> o.op_num  <br>  <span class="hljs-keyword">and</span> o.success <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p>所以我们要将这两种方法结合，来获得最佳的性能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (operationMapping.size() &lt; <span class="hljs-number">45</span>) &#123;  <br>    <span class="hljs-comment">// WHEN 语句方案</span><br>    Integer num = pStockInstanceDao.operationStockSmallData(operationMapping);  <br>    <span class="hljs-keyword">if</span> (num != operationMapping.size()) &#123;  <br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;操作失败&quot;</span>);  <br>    &#125;  <br>&#125; <span class="hljs-keyword">else</span> &#123;  <br>    <span class="hljs-comment">// 临时表方案</span><br>    Boolean success = pStockInstanceDao.operationStockBigData(operationMapping);  <br>    <span class="hljs-keyword">if</span> (!success) &#123;  <br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;操作失败&quot;</span>);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="提高并发量"><a href="#提高并发量" class="headerlink" title="提高并发量"></a>提高并发量</h3><p>由于并发时多个线程间存在竞态条件，可能导致库存扣减失败，而前面说到库存明细表中一件商品可能对应多条库存明细，就是说如果并发导致有一条库存明细扣减失败的话很可能这个商品在其他的库存明细中还有库存。而且由于无论更没更新成功，线程都会占有数据库行的写锁，这就要求我们更新失败时最好能够快速释放锁，这又会导致接口会误报库存不足。</p>
+<h4 id="商品编码锁"><a href="#商品编码锁" class="headerlink" title="商品编码锁"></a>商品编码锁</h4><p>一个解决办法如下</p>
+<ol>
+<li>线程在执行库存数量查询前为订单中的每个商品编码获取一个分布式锁，只有获得全部商品编码的锁时才进行库存的查询操作</li>
+<li>线程在更新完库存后释放所持有的商品编码锁</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">RLock[] locks = productSids.seream()  <br>        .distinct()  <br>        .map(key -&gt; <span class="hljs-string">&quot;ced:pStockInstance:&quot;</span> + key)  <br>        .sorted()  <br>        .map(key -&gt; redissonClient.getLock(key))  <br>        .toArray(RLock[]::<span class="hljs-keyword">new</span>);  <br>RLock skuLock = redissonClient.getMultiLock(locks);<br><br><span class="hljs-comment">// 加锁</span><br>skuLock.lock();<br><br><span class="hljs-comment">// 解锁</span><br>skuLock.unlockAsync();<br></code></pre></td></tr></table></figure>
+<p>这种方法当所有的订单都锁定同一个商品时就会导致程序退化成串行执行，效率很慢。</p>
+<h4 id="和并请求"><a href="#和并请求" class="headerlink" title="和并请求"></a>和并请求</h4><p>由于前文我们已经将库存更新的方法优化的足够快，因此想高效地解决竞态条件的问题，可以将各个请求的参数在应用程序中合并在一起，然后使用一个线程批量扣减，从而避免线程间扣减冲突。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/202206130944601.png" srcset="/img/loading.gif" alt="合并请求"></p>
+<p>使线程阻塞并被唤醒的关键代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GuardedObject</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">K</span>&gt; </span>&#123;  <br>    <span class="hljs-comment">//受保护的对象  </span><br>    T obj;  <br>    <span class="hljs-keyword">final</span> Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();  <br>    <span class="hljs-keyword">final</span> Condition done = lock.newCondition();  <br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> timeout = <span class="hljs-number">60</span>;  <br>    <span class="hljs-comment">//保存所有GuardedObject  </span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> Map&lt;Object, GuardedObject&gt; gos = <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;&gt;();  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GuardedObject</span><span class="hljs-params">(K key)</span> </span>&#123;  <br>        <span class="hljs-keyword">this</span>.key = key;  <br>    &#125;  <br>  <br>    K key;  <br>  <br>    <span class="hljs-comment">// 1. 被请求线程通过唯一 key 获得阻塞对象，然后将 key 存入消息，发送到扣减中心  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;K&gt; <span class="hljs-function">GuardedObject <span class="hljs-title">create</span><span class="hljs-params">(K key)</span> </span>&#123;  <br>        GuardedObject go = <span class="hljs-keyword">new</span> GuardedObject(key.toString());  <br>        gos.put(key, go);  <br>        <span class="hljs-keyword">return</span> go;  <br>    &#125;   <br>  <br>    <span class="hljs-comment">// 2. 被请求线程稍后调用阻塞对象的该方法，阻塞，等待被唤醒</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;T&gt; <span class="hljs-title">get</span><span class="hljs-params">(Predicate&lt;T&gt; p)</span> </span>&#123;  <br>        lock.lock();  <br>        Long start = System.currentTimeMillis();  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            <span class="hljs-keyword">while</span> (!p.test(obj)) &#123;  <br>                done.await(timeout, TimeUnit.SECONDS);  <br>                <span class="hljs-keyword">if</span> (System.currentTimeMillis() - start &gt;= timeout * <span class="hljs-number">1000</span>) &#123;  <br>                    gos.remove(key);  <br>                    <span class="hljs-keyword">break</span>;  <br>                &#125;  <br>            &#125;  <br>            <span class="hljs-keyword">return</span> Optional.ofNullable(obj);  <br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;  <br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);  <br>        &#125; <span class="hljs-keyword">finally</span> &#123;  <br>            lock.unlock();  <br>        &#125;  <br>    &#125;  <br><br>    <span class="hljs-comment">// 3. 结果监听器根据结果消息中的 key 找到对应阻塞对象，传入结果并唤醒对应线程</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;K, T&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fireEvent</span><span class="hljs-params">(K key, T obj)</span> </span>&#123;  <br>        GuardedObject go = gos.remove(key);  <br>        <span class="hljs-keyword">if</span> (go != <span class="hljs-keyword">null</span>) &#123;  <br>            go.onChanged(obj);  <br>        &#125;  <br>    &#125; <br>  <br>    <span class="hljs-comment">//事件通知方法  </span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onChanged</span><span class="hljs-params">(T obj)</span> </span>&#123;  <br>        lock.lock();  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            <span class="hljs-keyword">this</span>.obj = obj;  <br>            done.signalAll();  <br>        &#125; <span class="hljs-keyword">finally</span> &#123;  <br>            lock.unlock();  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>实验环境为了获得最坏情况下的性能，在库存明细中存入了两万五千条同一商品，并将每一条的数据的库存数量设置为 1</p>
+<p>在我的电脑中启动两个服务接收请求，启动若干线程对该商品进行扣减，结果如下</p>
+<table>
+<thead>
+<tr>
+<th>请求线程数量</th>
+<th>总计锁库行数</th>
+<th>全部处理耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>1000</td>
+<td>1 S</td>
+</tr>
+<tr>
+<td>500</td>
+<td>5000</td>
+<td>3 S</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>10000</td>
+<td>4 S</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>20000</td>
+<td>8 S</td>
+</tr>
+<tr>
+<td>3000</td>
+<td>25000</td>
+<td>12 S</td>
+</tr>
+</tbody></table>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>以下是我在编写代码时发现的一些需要注意的点：</p>
+<h3 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h3><p>在创建临时表时 <code>stock_instance_id</code> 要创建唯一索引，因为这个字段要充当 JOIN 语句的条件，实测不加唯一索引性能会很差。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> temporary <span class="hljs-keyword">table</span> temp_stock_operation  <br>(  <br>    stock_instance_id <span class="hljs-type">varchar</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">unique</span>   <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> comment <span class="hljs-string">&#x27;库存实例ID&#x27;</span>, <br></code></pre></td></tr></table></figure>
+<h3 id="加快消息队列读取"><a href="#加快消息队列读取" class="headerlink" title="加快消息队列读取"></a>加快消息队列读取</h3><p>扣减中心的库存扣减线程直接从消息队列读取消息效率较低，在本案例中，可以新建一个本地队列，用其他线程将消息队列中的消息搬运到本地队列，让扣减线程操作本地队列而不是消息队列，这样可以大幅提高扣减效率。</p>
+<hr>
+<p>源码请见：<a target="_blank" rel="noopener" href="https://github.com/solidSpoon/inventory-lock-master">https://github.com/solidSpoon/inventory-lock-master</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/16/Spring%20%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E7%89%B9%E6%80%A7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring 事务传播特性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/11/MongoDB%20%E5%88%9D%E6%8E%A2/">
+                        <span class="hidden-mobile">MongoDB 初探</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

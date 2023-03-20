@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>《算法-第四版》答案系列-1.2 练习篇 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="《算法-第四版》答案系列-1.2 练习篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 20:49" pubdate>
+        2021年2月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      54
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《算法-第四版》答案系列-1.2 练习篇</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>最近开始学习《算法-第四版》一书，将我自己做的书后习题分享给大家，本篇是这一系列的第二篇，包含了书上&lt;1.2 数据抽象&gt;的习题的练习部分,本篇习题位于 P71 ~ P73 ，如有错误，还请指正。</p>
+</blockquote>
+<blockquote>
+<p>本篇答案中部分 java 代码用到了书中的包，如需使用请去书中配套网站安装。</p>
+</blockquote>
+<p>以下的答案在电脑端查看可以显示目录</p>
+<a id="more"></a>
+
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><h5 id="1-2-1-编写一个-Point2D-的用例，从命令行接受一个整数-N-。在单位正方形中生成-N-个随机点，然后计算两点之间的最接近距离。"><a href="#1-2-1-编写一个-Point2D-的用例，从命令行接受一个整数-N-。在单位正方形中生成-N-个随机点，然后计算两点之间的最接近距离。" class="headerlink" title="1.2.1 编写一个 Point2D 的用例，从命令行接受一个整数 N 。在单位正方形中生成 N 个随机点，然后计算两点之间的最接近距离。"></a>1.2.1 编写一个 <code>Point2D</code> 的用例，从命令行接受一个整数 N 。在单位正方形中生成 N 个随机点，然后计算两点之间的最接近距离。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q121</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> N = Integer.parseInt(args[<span class="hljs-number">0</span>]);<br>        Point2D[] p = <span class="hljs-keyword">new</span> Point2D[N];<br>        <span class="hljs-keyword">double</span> min = <span class="hljs-number">2.00</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>; t &lt; N; t++)&#123;<br>            <span class="hljs-keyword">double</span> x = Math.random();<br>            <span class="hljs-keyword">double</span> y = Math.random();<br>            p[t] = <span class="hljs-keyword">new</span> Point2D(x, y);<br>            p[t].draw();<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N-<span class="hljs-number">1</span>; i++)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+<span class="hljs-number">1</span>; j &lt; N; j++)&#123;<br>                <span class="hljs-keyword">if</span> (p[i].distanceTo(p[j]) &lt; min)&#123;<br>                    min = p[i].distanceTo(p[j]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        StdOut.print(<span class="hljs-string">&quot;两点之间最近的距离是：&quot;</span> + min);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-2-编写一个-Interval1D-的用例，从命令行接受一个整数-N-。从保准输入中读取-N-个间隔（每个间隔有一对-double-值定义）并打印出所有相交的间隔对。"><a href="#1-2-2-编写一个-Interval1D-的用例，从命令行接受一个整数-N-。从保准输入中读取-N-个间隔（每个间隔有一对-double-值定义）并打印出所有相交的间隔对。" class="headerlink" title="1.2.2 编写一个 Interval1D 的用例，从命令行接受一个整数 N 。从保准输入中读取 N 个间隔（每个间隔有一对 double 值定义）并打印出所有相交的间隔对。"></a>1.2.2 编写一个 <code>Interval1D</code> 的用例，从命令行接受一个整数 N 。从保准输入中读取 N 个间隔（每个间隔有一对 double 值定义）并打印出所有相交的间隔对。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q122</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> N = Integer.parseInt(args[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">double</span>[] d = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">2</span>*N];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; d.length; i++)&#123;<br>            d[i] = StdIn.readDouble();<br>        &#125;<br>        <br>        Interval1D[] interval = <span class="hljs-keyword">new</span> Interval1D[N];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<br>            interval[i] = <span class="hljs-keyword">new</span> Interval1D(d[<span class="hljs-number">2</span>*i], d[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N-<span class="hljs-number">1</span>; i++)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+<span class="hljs-number">1</span>; j &lt; N; j++)&#123;<br>                <span class="hljs-keyword">if</span> (interval[i].intersects(interval[j]))&#123;<br>                StdOut.println(<span class="hljs-string">&quot;Interval(&quot;</span> + d[<span class="hljs-number">2</span>*i] + <span class="hljs-string">&quot;, &quot;</span> + d[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]+ <span class="hljs-string">&quot;) intersects with interval(&quot;</span> + d[<span class="hljs-number">2</span>*j] +<span class="hljs-string">&quot;, &quot;</span>+ d[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] + <span class="hljs-string">&quot;).&quot;</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">运行结果：<br><br>java q122 <span class="hljs-number">5</span><br><span class="hljs-number">.3</span> <span class="hljs-number">.5</span> <span class="hljs-number">.7</span> <span class="hljs-number">.9</span> <span class="hljs-number">.1</span> <span class="hljs-number">.3</span> <span class="hljs-number">.6</span> <span class="hljs-number">.8</span> <span class="hljs-number">.8</span> <span class="hljs-number">.9</span><br><br><span class="hljs-type">Interval</span>(<span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>) intersects <span class="hljs-keyword">with</span> <span class="hljs-type">interval</span>(<span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>).<br><span class="hljs-type">Interval</span>(<span class="hljs-number">0.7</span>, <span class="hljs-number">0.9</span>) intersects <span class="hljs-keyword">with</span> <span class="hljs-type">interval</span>(<span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>).<br><span class="hljs-type">Interval</span>(<span class="hljs-number">0.7</span>, <span class="hljs-number">0.9</span>) intersects <span class="hljs-keyword">with</span> <span class="hljs-type">interval</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>).<br><span class="hljs-type">Interval</span>(<span class="hljs-number">0.6</span>, <span class="hljs-number">0.8</span>) intersects <span class="hljs-keyword">with</span> <span class="hljs-type">interval</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>).<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-3-编写一个-Interval2D-的用例，从命令行接受参数-N、-min-和-max-。生成-N-个随机的-2D-间隔，其宽和高均匀地分布在单位正方形中的-min-和-max-之间。用-StdDraw-画出他们并打印出相交的间隔对的数量以及有包含关系的间隔对数量。"><a href="#1-2-3-编写一个-Interval2D-的用例，从命令行接受参数-N、-min-和-max-。生成-N-个随机的-2D-间隔，其宽和高均匀地分布在单位正方形中的-min-和-max-之间。用-StdDraw-画出他们并打印出相交的间隔对的数量以及有包含关系的间隔对数量。" class="headerlink" title="1.2.3 编写一个 Interval2D 的用例，从命令行接受参数 N、 min 和 max 。生成 N 个随机的 2D 间隔，其宽和高均匀地分布在单位正方形中的 min 和 max 之间。用 StdDraw 画出他们并打印出相交的间隔对的数量以及有包含关系的间隔对数量。"></a>1.2.3 编写一个 <code>Interval2D</code> 的用例，从命令行接受参数 N、 min 和 max 。生成 N 个随机的 2D 间隔，其宽和高均匀地分布在单位正方形中的 min 和 max 之间。用 <code>StdDraw</code> 画出他们并打印出相交的间隔对的数量以及有包含关系的间隔对数量。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q123</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> N = Integer.parseInt(args[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">double</span> min = Double.parseDouble(args[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">double</span> max = Double.parseDouble(args[<span class="hljs-number">2</span>]);<br>        <span class="hljs-keyword">double</span>[] point = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[N*<span class="hljs-number">4</span>];<br>        Point2D[] point2D = <span class="hljs-keyword">new</span> Point2D[N*<span class="hljs-number">2</span>];<span class="hljs-comment">//每个框对角线上的点 </span><br>        Interval1D[] interval1D = <span class="hljs-keyword">new</span> Interval1D[N*<span class="hljs-number">2</span>];<br>        Interval2D[] interval2D = <span class="hljs-keyword">new</span> Interval2D[N];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; interval1D.length; i++)&#123;<br>            <span class="hljs-keyword">double</span> a;<br>            <span class="hljs-keyword">double</span> b;<br>            <span class="hljs-keyword">do</span>&#123;<br>                a = StdRandom.uniform(min, max);<br>                b = StdRandom.uniform(min, max);<br>            &#125;<span class="hljs-keyword">while</span> (a &gt;= b);<br>            point[i*<span class="hljs-number">2</span>] = a;<br>            point[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>] = b;<br>            interval1D[i] = <span class="hljs-keyword">new</span> Interval1D(a, b);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; interval2D.length; i++)&#123;<br>        interval2D[i] = <span class="hljs-keyword">new</span> Interval2D(interval1D[<span class="hljs-number">2</span>*i], interval1D[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]);<br>        interval2D[i].draw();<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; interval2D.length; i++)&#123;<br>            point2D[i*<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Point2D(point[i*<span class="hljs-number">4</span>], point[i*<span class="hljs-number">4</span>+<span class="hljs-number">3</span>]);<br>            point2D[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Point2D(point[i*<span class="hljs-number">4</span>+<span class="hljs-number">1</span>], point[i*<span class="hljs-number">4</span>+<span class="hljs-number">2</span>]);<br>            <br>        &#125;<br>        <span class="hljs-keyword">int</span> intersectnum = <span class="hljs-number">0</span>;<span class="hljs-comment">//相交的个数</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, k = -<span class="hljs-number">1</span>; i &lt; N-<span class="hljs-number">1</span>; i++)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+<span class="hljs-number">1</span>; j &lt; N; j++)&#123;<br>                <span class="hljs-keyword">if</span> (interval2D[i].intersects(interval2D[j]))&#123;<br>                    intersectnum++;<br>                 &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">int</span> includenum = <span class="hljs-number">0</span>;<span class="hljs-comment">//包含的个数</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<span class="hljs-comment">//从不相交的中选出包含的</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;j &lt; N; j++)&#123;<br>                <span class="hljs-keyword">if</span>(interval2D[i].contains(point2D[<span class="hljs-number">2</span>*j]) &amp;&amp; interval2D[i].contains(point2D[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>]) &amp;&amp; i != j)&#123;<br>                    includenum++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        StdOut.println(<span class="hljs-string">&quot;inersect:&quot;</span> + intersectnum + <span class="hljs-string">&quot;;includenum:&quot;</span> + includenum);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">命令：<br><span class="hljs-keyword">java </span>q123 <span class="hljs-number">10</span> <span class="hljs-number">0</span>.<span class="hljs-number">1</span> <span class="hljs-number">0</span>.<span class="hljs-number">9</span><br>运行结果：<br><span class="hljs-symbol">inersect:</span><span class="hljs-number">27</span><span class="hljs-comment">;includenum:1</span><br></code></pre></td></tr></table></figure>
+<img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20200630222821.jpg" srcset="/img/loading.gif"/>
+
+<p><img src="%5Cimg%5Cin-post%5C2018%5C8%5C4%5Cq123.jpg" srcset="/img/loading.gif"></p>
+<h5 id="1-2-4-以下这段代码会打印出什么？"><a href="#1-2-4-以下这段代码会打印出什么？" class="headerlink" title="1.2.4 以下这段代码会打印出什么？"></a>1.2.4 以下这段代码会打印出什么？</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">String string1 = <span class="hljs-string">&quot;hello&quot;</span>;<br>String string2 = string1;<br>string1 = <span class="hljs-string">&quot;world&quot;</span>;<br>StdOut.println(string1);<br>StdOut.println(string2);<br></code></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">world</span><br><span class="hljs-attribute">hello</span><br></code></pre></td></tr></table></figure>
+<h5 id="1-2-5-以下这段代码会打印出什么？"><a href="#1-2-5-以下这段代码会打印出什么？" class="headerlink" title="1.2.5 以下这段代码会打印出什么？"></a>1.2.5 以下这段代码会打印出什么？</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">String s = <span class="hljs-string">&quot;Hello World&quot;</span><br>s.toUpperCase();<br>s.substring(<span class="hljs-number">6</span>,<span class="hljs-number">11</span>);<br>StdOut.println(s);<br></code></pre></td></tr></table></figure>
+<p>答： <code>&quot;Hello World&quot;</code> 。<code>String</code> 对象是不可变的—————所有字符串方法都会返回一个新的 <code>String</code> 对象（但他们不会改变参数对象的值）。这段代码忽略了返回的对象并直接打印了原字符串。要打印出 <code>&quot;WORD&quot;</code> ,请用 <code>s = s.tuUpperCase()</code> 和 <code>s = s.substring(6.11)</code> .</p>
+<h5 id="1-2-6-如果字符串-s-中的字符循环移动任意位置之后得到另一个字符串-t-，那么-s-就被称为-t-的回环变位（circular-rotation）。例如，ACTGACG-就是-TGACGAC-的一个回环变位，反之亦然。判定这个条件在基因组排序的研究中是很重要的。编写一个程序检查给定的两个字符串-s-和-t-是否为回环变位。"><a href="#1-2-6-如果字符串-s-中的字符循环移动任意位置之后得到另一个字符串-t-，那么-s-就被称为-t-的回环变位（circular-rotation）。例如，ACTGACG-就是-TGACGAC-的一个回环变位，反之亦然。判定这个条件在基因组排序的研究中是很重要的。编写一个程序检查给定的两个字符串-s-和-t-是否为回环变位。" class="headerlink" title="1.2.6 如果字符串 s 中的字符循环移动任意位置之后得到另一个字符串 t ，那么 s 就被称为 t 的回环变位（circular rotation）。例如，ACTGACG 就是 TGACGAC 的一个回环变位，反之亦然。判定这个条件在基因组排序的研究中是很重要的。编写一个程序检查给定的两个字符串 s 和 t 是否为回环变位。"></a>1.2.6 如果字符串 s 中的字符循环移动任意位置之后得到另一个字符串 t ，那么 s 就被称为 t 的回环变位（circular rotation）。例如，ACTGACG 就是 TGACGAC 的一个回环变位，反之亦然。判定这个条件在基因组排序的研究中是很重要的。编写一个程序检查给定的两个字符串 s 和 t 是否为回环变位。</h5><p>提示：答案只需要一行用到 <code>indexOf()</code> 、 <code>length()</code> 和字符串链接的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q126</span></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 判断两个字符串是否为回环变位</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> s 字符串一</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> t 字符串二     </span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isCircularRotation</span><span class="hljs-params">(String s, String t)</span></span>&#123;<br>        <span class="hljs-comment">//将 t 和 t 自身连接，这样如果 t 是 s 的回环变位，那么s肯定是 “t+t” 的一个子串！</span><br>        <span class="hljs-keyword">return</span> (s.length() == t.length()) &amp;&amp; ((t + t).indexOf(s) &gt; <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        String s = args[<span class="hljs-number">0</span>];<br>        String t = args[<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span> (isCircularRotation(s, t))&#123;<br>            System.out.println(<span class="hljs-string">&quot;二者是回环变位&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;二者不是回环变位&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">java </span>q126 ACTGACG TGACGAC<br>二者是回环变位<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-7-以下递归函数的返回值是什么？"><a href="#1-2-7-以下递归函数的返回值是什么？" class="headerlink" title="1.2.7 以下递归函数的返回值是什么？"></a>1.2.7 以下递归函数的返回值是什么？</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">mystery</span><span class="hljs-params">(String s)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> N = s.length();<br>    <span class="hljs-keyword">if</span> (N &lt;= <span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br>    String a = s.substring(<span class="hljs-number">0</span>, N/<span class="hljs-number">2</span>);<br>    String b = s.substring(N/<span class="hljs-number">2</span>, N);<br>    <span class="hljs-keyword">return</span> mystery(b) + mystery(a);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>答：会将字符串的后半部分移到前边<br>例：abcdefg =&gt; gfedcba</p>
+<h5 id="1-2-8-设-a-和-b-均为长数百万的整形数组。以下代码的作用是什么？有效吗？"><a href="#1-2-8-设-a-和-b-均为长数百万的整形数组。以下代码的作用是什么？有效吗？" class="headerlink" title="1.2.8 设 a[] 和 b[] 均为长数百万的整形数组。以下代码的作用是什么？有效吗？"></a>1.2.8 设 a[] 和 b[] 均为长数百万的整形数组。以下代码的作用是什么？有效吗？</h5><pre><code>int t = a; a = b; b = t;
+</code></pre>
+<p>答：这段代码会将他们交换。它的效率不可能再高了，因为它复制的是引用而不需要复制数百万个元素。</p>
+<h5 id="1-2-9-修改-BinarySearch-（请见-1-1-10-1-节中的二分查找代码），使用-Counter-统计在有查找中被检查的键的总数并在查找全部结束后打印该值。"><a href="#1-2-9-修改-BinarySearch-（请见-1-1-10-1-节中的二分查找代码），使用-Counter-统计在有查找中被检查的键的总数并在查找全部结束后打印该值。" class="headerlink" title="1.2.9 修改 BinarySearch （请见 1.1.10.1 节中的二分查找代码），使用 Counter 统计在有查找中被检查的键的总数并在查找全部结束后打印该值。"></a>1.2.9 修改 <code>BinarySearch</code> （请见 1.1.10.1 节中的二分查找代码），使用 <code>Counter</code> 统计在有查找中被检查的键的总数并在查找全部结束后打印该值。</h5><p>提示：在 <code>main()</code> 中创建一个 <code>Counter</code> 对象并将他作为参数传给 <code>rank()</code> 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q129</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">rank</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span>[] a, Counter counter)</span></span>&#123;<br>        <span class="hljs-comment">//数组必须是有序的</span><br>        <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> hi = a.length-<span class="hljs-number">1</span>;<br>        counter.increment();<br>        <span class="hljs-keyword">while</span>(lo &lt;= hi)&#123;<br>            <span class="hljs-comment">//被查找的键要么不存在，要么必然存在于 a[lo..hi] 之中</span><br>            <span class="hljs-keyword">int</span> mid = lo + (hi - lo) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (key &lt; a[mid])&#123;<br>                hi = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; a[mid])&#123;<br>                lo = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span>[] whitelist = In.readInts(args[<span class="hljs-number">0</span>]);<br>        Arrays.sort(whitelist);<br>        Counter counter = <span class="hljs-keyword">new</span> Counter(<span class="hljs-string">&quot;BinarySearch&quot;</span>);<br>        <span class="hljs-keyword">while</span> (!StdIn.isEmpty())&#123;<br>            <span class="hljs-comment">//读取键值，如果不存在于白名单中则将其打印</span><br>            <span class="hljs-keyword">int</span> key = StdIn.readInt();<br>            <span class="hljs-keyword">if</span> (rank(key, whitelist, counter) &lt; <span class="hljs-number">0</span>)&#123;<br>                StdOut.println(key);<br>            &#125;<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;总数：&quot;</span> + counter);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">java q129 tinyW<span class="hljs-selector-class">.txt</span> &lt; tinyT.txt<br><span class="hljs-number">50</span><br><span class="hljs-number">99</span><br><span class="hljs-number">13</span><br>总数：<span class="hljs-number">18</span> BinarySearch<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-10-编写一个类-VisualCounter-，支持加一和减一操作。它的构造函数接受两个参数-N-和-max-，其中-N-指定了操作的最大次数，-max-指定了计数器的最大绝对值。作为副作用，用图像显示每次计数器变化后的值。"><a href="#1-2-10-编写一个类-VisualCounter-，支持加一和减一操作。它的构造函数接受两个参数-N-和-max-，其中-N-指定了操作的最大次数，-max-指定了计数器的最大绝对值。作为副作用，用图像显示每次计数器变化后的值。" class="headerlink" title="1.2.10 编写一个类 VisualCounter ，支持加一和减一操作。它的构造函数接受两个参数 N 和 max ，其中 N 指定了操作的最大次数， max 指定了计数器的最大绝对值。作为副作用，用图像显示每次计数器变化后的值。"></a>1.2.10 编写一个类 <code>VisualCounter</code> ，支持加一和减一操作。它的构造函数接受两个参数 N 和 max ，其中 N 指定了操作的最大次数， max 指定了计数器的最大绝对值。作为副作用，用图像显示每次计数器变化后的值。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VisualCounter</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> x;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">VisualCounter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> N, <span class="hljs-keyword">int</span> max)</span></span>&#123;<br>        StdDraw.setXscale(<span class="hljs-number">0</span>, N);<br>        StdDraw.setYscale(-max, max);<br>        StdDraw.setPenRadius(<span class="hljs-number">.007</span>);<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span></span>&#123;<br>        count++;<br>        x++;<br>        StdDraw.point(x, count);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">decrement</span><span class="hljs-params">()</span></span>&#123;<br>        count--;<br>        x++;<br>        StdDraw.point(x, count);<br>    &#125;<br>&#125;<br>    <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1210</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> N = <span class="hljs-number">100</span>;<br>        <span class="hljs-keyword">int</span> max = <span class="hljs-number">50</span>;<br>        <span class="hljs-keyword">double</span> p = <span class="hljs-number">0.7</span>;<br>        VisualCounter vc = <span class="hljs-keyword">new</span> VisualCounter(N, max);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>; t &lt; <span class="hljs-number">100</span>; t++)&#123;<br>            <span class="hljs-keyword">boolean</span> padd = StdRandom.bernoulli(p);<span class="hljs-comment">//加的概率为p</span><br>            <span class="hljs-keyword">if</span> (padd)&#123;<br>                vc.increment();<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                vc.decrement();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20200630223133.jpg" srcset="/img/loading.gif"/>
+
+<p><img src="%5Cimg%5Cin-post%5C2018%5C8%5C4%5Cq1210.jpg" srcset="/img/loading.gif"></p>
+<h5 id="1-2-11-根据-Date-的-API-实现一个-smartDate-类型，在日期非法时抛出一个异常。"><a href="#1-2-11-根据-Date-的-API-实现一个-smartDate-类型，在日期非法时抛出一个异常。" class="headerlink" title="1.2.11 根据 Date 的 API 实现一个 smartDate 类型，在日期非法时抛出一个异常。"></a>1.2.11 根据 <code>Date</code> 的 API 实现一个 <code>smartDate</code> 类型，在日期非法时抛出一个异常。</h5><p>答案见 1.2.12</p>
+<h5 id="1-2-12-为-smartDate-添加一个方法-dayOfTheWeek-，为日期中每周的日返回-Monday、-Tuesday、-Wednesday、-Thursday、-Friday、-Saturday-和-Sunday-中的适当值。你可以假定时间是21世纪。"><a href="#1-2-12-为-smartDate-添加一个方法-dayOfTheWeek-，为日期中每周的日返回-Monday、-Tuesday、-Wednesday、-Thursday、-Friday、-Saturday-和-Sunday-中的适当值。你可以假定时间是21世纪。" class="headerlink" title="1.2.12 为 smartDate 添加一个方法 dayOfTheWeek() ，为日期中每周的日返回 Monday、 Tuesday、 Wednesday、 Thursday、 Friday、 Saturday 和 Sunday 中的适当值。你可以假定时间是21世纪。"></a>1.2.12 为 <code>smartDate</code> 添加一个方法 <code>dayOfTheWeek()</code> ，为日期中每周的日返回 Monday、 Tuesday、 Wednesday、 Thursday、 Friday、 Saturday 和 Sunday 中的适当值。你可以假定时间是21世纪。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Date</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">day</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">month</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">year</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function">String <span class="hljs-title">toString</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object that)</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(smartDate that)</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">smartDate</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Date</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] DAYS = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">31</span>, <span class="hljs-number">29</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span> &#125;;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> month;   <span class="hljs-comment">// month (between 1 and 12)</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> day;     <span class="hljs-comment">// day   (between 1 and DAYS[month]</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> year;    <span class="hljs-comment">// year</span><br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Initializes a new date from the month, day, and year.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> month the month (between 1 and 12)</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> day the day (between 1 and 28-31, depending on the month)</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> year the year</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IllegalArgumentException if this date is invalid</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">smartDate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> month, <span class="hljs-keyword">int</span> day, <span class="hljs-keyword">int</span> year)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!isValid(month, day, year)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Invalid date&quot;</span>);<br>        <span class="hljs-keyword">this</span>.month = month;<br>        <span class="hljs-keyword">this</span>.day   = day;<br>        <span class="hljs-keyword">this</span>.year  = year;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Initializes new date specified as a string in form MM/DD/YYYY.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> date the string representation of this date</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IllegalArgumentException if this date is invalid</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">smartDate</span><span class="hljs-params">(String date)</span> </span>&#123;<br>        String[] fields = date.split(<span class="hljs-string">&quot;/&quot;</span>);<br>        <span class="hljs-keyword">if</span> (fields.length != <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Invalid date&quot;</span>);<br>        &#125;<br>        month = Integer.parseInt(fields[<span class="hljs-number">0</span>]);<br>        day   = Integer.parseInt(fields[<span class="hljs-number">1</span>]);<br>        year  = Integer.parseInt(fields[<span class="hljs-number">2</span>]);<br>        <span class="hljs-keyword">if</span> (!isValid(month, day, year)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Invalid date&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Return the month.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the month (an integer between 1 and 12)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">month</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> month;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns the day.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the day (an integer between 1 and 31)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">day</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> day;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns the year.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the year</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">year</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> year;<br>    &#125;<br><br><br>    <span class="hljs-comment">// is the given date valid?</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> d, <span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (m &lt; <span class="hljs-number">1</span> || m &gt; <span class="hljs-number">12</span>)      <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (d &lt; <span class="hljs-number">1</span> || d &gt; DAYS[m]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (m == <span class="hljs-number">2</span> &amp;&amp; d == <span class="hljs-number">29</span> &amp;&amp; !isLeapYear(y)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// is y a leap year?</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isLeapYear</span><span class="hljs-params">(<span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (y % <span class="hljs-number">400</span> == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">if</span> (y % <span class="hljs-number">100</span> == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">return</span> y % <span class="hljs-number">4</span> == <span class="hljs-number">0</span>;<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns a string representation of this date.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the string representation in the format MM/DD/YYYY</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> month + <span class="hljs-string">&quot;/&quot;</span> + day + <span class="hljs-string">&quot;/&quot;</span> + year;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Compares this date to the specified date.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span>  other the other date</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> true&#125; if this date equals &#123;<span class="hljs-doctag">@code</span> other&#125;; &#123;<span class="hljs-doctag">@code</span> false&#125; otherwise</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object other)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (other == <span class="hljs-keyword">this</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">if</span> (other == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (other.getClass() != <span class="hljs-keyword">this</span>.getClass()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        smartDate that = (smartDate) other;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>.month == that.month) &amp;&amp; (<span class="hljs-keyword">this</span>.day == that.day) &amp;&amp; (<span class="hljs-keyword">this</span>.year == that.year);<br>    &#125;<br>    <br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns the next date in the calendar.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> a date that represents the next day after this day</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> smartDate <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (isValid(month, day + <span class="hljs-number">1</span>, year))    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> smartDate(month, day + <span class="hljs-number">1</span>, year);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isValid(month + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, year)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> smartDate(month + <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, year);<br>        <span class="hljs-keyword">else</span>                                  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> smartDate(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, year + <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Compares two dates chronologically.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span>  that the other date</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> true&#125; if this date is after that date; &#123;<span class="hljs-doctag">@code</span> false&#125; otherwise</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isAfter</span><span class="hljs-params">(smartDate that)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> compareTo(that) &gt; <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Compares two dates chronologically.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span>  that the other date</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> true&#125; if this date is before that date; &#123;<span class="hljs-doctag">@code</span> false&#125; otherwise</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isBefore</span><span class="hljs-params">(smartDate that)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> compareTo(that) &lt; <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Compares two dates chronologically.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the value &#123;<span class="hljs-doctag">@code</span> 0&#125; if the argument date is equal to this date;</span><br><span class="hljs-comment">     *         a negative integer if this date is chronologically less than</span><br><span class="hljs-comment">     *         the argument date; and a positive ineger if this date is chronologically</span><br><span class="hljs-comment">     *         after the argument date</span><br><span class="hljs-comment">     */</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(smartDate that)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.year  &lt; that.year)  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.year  &gt; that.year)  <span class="hljs-keyword">return</span> +<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.month &lt; that.month) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.month &gt; that.month) <span class="hljs-keyword">return</span> +<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.day   &lt; that.day)   <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.day   &gt; that.day)   <span class="hljs-keyword">return</span> +<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Difference between a and b</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> the number of days between a and b</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numBetween</span><span class="hljs-params">(smartDate b)</span></span>&#123;<br>        smartDate t = <span class="hljs-keyword">new</span> smartDate(<span class="hljs-keyword">this</span>.month, <span class="hljs-keyword">this</span>.day, <span class="hljs-keyword">this</span>.year);<br>        <span class="hljs-keyword">int</span> num = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (t.isBefore(b))&#123;<br>            t=t.next();<br>            num++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> num;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * week</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> The week of the smartDay</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">week</span><span class="hljs-params">()</span></span>&#123;<br>        smartDate a = <span class="hljs-keyword">new</span> smartDate(<span class="hljs-number">12</span>, <span class="hljs-number">31</span>, <span class="hljs-number">1999</span>);<br>        <span class="hljs-keyword">final</span> String[] WEEK = &#123;<span class="hljs-string">&quot;Saturday&quot;</span>, <span class="hljs-string">&quot;Sunday&quot;</span>, <span class="hljs-string">&quot;Monday&quot;</span>, <span class="hljs-string">&quot;Tuesday&quot;</span>, <span class="hljs-string">&quot;Wednesday&quot;</span>, <span class="hljs-string">&quot;Thurday&quot;</span>, <span class="hljs-string">&quot;Friday&quot;</span>&#125;;<br>        <span class="hljs-keyword">return</span> WEEK[a.numBetween(<span class="hljs-keyword">this</span>)%<span class="hljs-number">7</span>-<span class="hljs-number">1</span>];<br>        <br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Returns an integer hash code for this date.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> an integer hash code for this date</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> hash = <span class="hljs-number">17</span>;<br>        hash = <span class="hljs-number">31</span>*hash + month;<br>        hash = <span class="hljs-number">31</span>*hash + day;<br>        hash = <span class="hljs-number">31</span>*hash + year;<br>        <span class="hljs-keyword">return</span> hash;<br>    &#125;<br><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1211</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        smartDate today = <span class="hljs-keyword">new</span> smartDate(<span class="hljs-number">2</span>, <span class="hljs-number">25</span>, <span class="hljs-number">2018</span>);<br>        smartDate birthday = <span class="hljs-keyword">new</span> smartDate(<span class="hljs-number">10</span>, <span class="hljs-number">16</span>, <span class="hljs-number">1971</span>);<br>        StdOut.println(today);<br>        StdOut.println(birthday);<br>        StdOut.println(birthday.equals(today));<br>        StdOut.println(today.week());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> q<span class="hljs-number">1211</span><br><span class="hljs-attribute">2</span>/<span class="hljs-number">25</span>/<span class="hljs-number">2018</span><br><span class="hljs-attribute">10</span>/<span class="hljs-number">16</span>/<span class="hljs-number">1971</span><br><span class="hljs-attribute">false</span><br><span class="hljs-attribute">Sunday</span><br></code></pre></td></tr></table></figure>
+<h5 id="1-2-13-用我们对-Date-的实现（请见表1-2-12）作为模板实现-Translation-类型。"><a href="#1-2-13-用我们对-Date-的实现（请见表1-2-12）作为模板实现-Translation-类型。" class="headerlink" title="1.2.13 用我们对 Date 的实现（请见表1.2.12）作为模板实现 Translation 类型。"></a>1.2.13 用我们对 <code>Date</code> 的实现（请见表1.2.12）作为模板实现 <code>Translation</code> 类型。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Transactions</span></span>&#123;<br>    <span class="hljs-function">String <span class="hljs-title">who</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//客户名</span><br>    <span class="hljs-function">Date <span class="hljs-title">when</span><span class="hljs-params">()</span></span>;  <span class="hljs-comment">//交易日期</span><br>    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">amount</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//交易金额</span><br>    <span class="hljs-function">String <span class="hljs-title">toString</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Transaction</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Transactions</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String  who;      <span class="hljs-comment">// customer</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Date    when;     <span class="hljs-comment">// date</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>  amount;   <span class="hljs-comment">// amount</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Transaction</span><span class="hljs-params">(String who, Date when, <span class="hljs-keyword">double</span> amount)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (Double.isNaN(amount) || Double.isInfinite(amount))&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Amount cannot be NaN or infinite&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">this</span>.who    = who;<br>        <span class="hljs-keyword">this</span>.when   = when;<br>        <span class="hljs-keyword">this</span>.amount = amount;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">when</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> when;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">who</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> who;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">amount</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> amount;<br>    &#125;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">&quot;%-10s %10s %8.2f&quot;</span>, who, when, amount);<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Transaction a = <span class="hljs-keyword">new</span> Transaction(<span class="hljs-string">&quot;Turing&quot;</span>, <span class="hljs-keyword">new</span> Date(<span class="hljs-string">&quot;6/17/1990&quot;</span>), <span class="hljs-number">644.08</span>);<br>        StdOut.println(a);<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="1-2-14-用我我们对-Date-中的-equals-方法的实现（请见-1-2-5-8-节中的-Date-类代码框）作为模板，实现-Translation-中的-equals-方法。"><a href="#1-2-14-用我我们对-Date-中的-equals-方法的实现（请见-1-2-5-8-节中的-Date-类代码框）作为模板，实现-Translation-中的-equals-方法。" class="headerlink" title="1.2.14 用我我们对 Date 中的 equals() 方法的实现（请见 1.2.5.8 节中的 Date 类代码框）作为模板，实现 Translation 中的 equals() 方法。"></a>1.2.14 用我我们对 <code>Date</code> 中的 <code>equals()</code> 方法的实现（请见 1.2.5.8 节中的 <code>Date</code> 类代码框）作为模板，实现 <code>Translation</code> 中的 <code>equals()</code> 方法。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object other)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (other == <span class="hljs-keyword">this</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    <span class="hljs-keyword">if</span> (other == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">if</span> (other.getClass() != <span class="hljs-keyword">this</span>.getClass()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    Transaction that = (Transaction) other;<br>    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>.amount == that.amount) &amp;&amp; (<span class="hljs-keyword">this</span>.who.equals(that.who))<br>                                        &amp;&amp; (<span class="hljs-keyword">this</span>.when.equals(that.when));<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/">算法第四版</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E7%AE%97%E6%B3%95-%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AD%94%E6%A1%88%E7%B3%BB%E5%88%97-1-2%E6%8F%90%E9%AB%98%E9%A2%98%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《算法-第四版》答案系列-1-2 提高题篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E7%AE%97%E6%B3%95-%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AD%94%E6%A1%88%E7%B3%BB%E5%88%97-1-1%E5%AE%9E%E9%AA%8C%E9%A2%98%E7%AF%87/">
+                        <span class="hidden-mobile">《算法-第四版》答案系列-1.1 实验题篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

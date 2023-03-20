@@ -1,0 +1,890 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="方向是比速度更重要的追求">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/06/Soul-%E7%BD%91%E5%85%B3-3%EF%BC%9AHttp-%E8%AF%B7%E6%B1%82%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/">Soul 网关 3：Http 请求是怎么被处理的？</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/06/Soul-%E7%BD%91%E5%85%B3-3%EF%BC%9AHttp-%E8%AF%B7%E6%B1%82%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/">
+          
+          
+            
+          
+          前文体验了使用 divide 插件转发 Http 请求，本文来分析一个 Http 网络包在 Soul 网关中都经历了什么。
+粗略观察用 PostMan 发送网络包，观察日志，摘要如下
+122021-03-05 19:34:12.367  INFO 21748 --- [work-threads-20] o.d.soul.plugin.base.AbstractSoulPlugin  : divid
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-06 13:43" pubdate>
+              2021-03-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Soul-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Soul 学习笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Soul/">Soul</a>
+            
+              <a href="/tags/Http/">Http</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/05/Soul-%E7%BD%91%E5%85%B3-2%EF%BC%9Adivide-%E6%8F%92%E4%BB%B6%E4%B8%8E-Http-%E4%BB%A3%E7%90%86/">Soul 网关 2：divide 插件与 Http 代理</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/05/Soul-%E7%BD%91%E5%85%B3-2%EF%BC%9Adivide-%E6%8F%92%E4%BB%B6%E4%B8%8E-Http-%E4%BB%A3%E7%90%86/">
+          
+          
+            
+          
+          
+divide 插件是进行 http 正向代理的插件，所有 http 类型的请求，都是由该插件进行负载均衡的调用。
+
+配置插件文档：https://dromara.org/zh/projects/soul/divide-plugin/据文档描述，在 soul-bootsrap 的 pom.xml 引入如下依赖
+123456789101112&lt;!--if you use http proxy 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-05 19:57" pubdate>
+              2021-03-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Soul-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Soul 学习笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Soul/">Soul</a>
+            
+              <a href="/tags/Http/">Http</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/05/Soul-%E7%BD%91%E5%85%B3-1%EF%BC%9A%E5%88%9D%E6%AD%A5%E8%BF%90%E8%A1%8C/">Soul 网关 1：初步运行</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/05/Soul-%E7%BD%91%E5%85%B3-1%EF%BC%9A%E5%88%9D%E6%AD%A5%E8%BF%90%E8%A1%8C/">
+          
+          
+            
+          
+          官网：https://dromara.org/GitHub：https://github.com/dromara/soul
+下载拉取代码
+1git clone git@github.com:dromara/soul.git
+新建临时分支
+1git checkout -b read
+1mvn clean package install -Dmaven.test.skip=true -Dmaven.j
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-05 19:49" pubdate>
+              2021-03-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Soul-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Soul 学习笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Soul/">Soul</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/05/%E8%87%AA%E5%AE%9A%E4%B9%89-ClassLoader-%E5%8A%A0%E8%BD%BD%E4%B8%80%E4%B8%AA%E5%8A%A0%E5%AF%86-class-%E6%96%87%E4%BB%B6/">自定义 ClassLoader 加载一个加密 class 文件</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/05/%E8%87%AA%E5%AE%9A%E4%B9%89-ClassLoader-%E5%8A%A0%E8%BD%BD%E4%B8%80%E4%B8%AA%E5%8A%A0%E5%AF%86-class-%E6%96%87%E4%BB%B6/">
+          
+          
+            
+          
+          跟着我体验一下传说中非常厉害的类加载器吧！
+制作加密 class目标类我们要加载的类很简单，它只有一个 hello() 方法。编译这个类生成 class 文件，待会要用
+12345678910package ClassLoader;public class Hello &#123;    public void hello()&#123;         System.out.println(&q
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-05 12:49" pubdate>
+              2021-03-05
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/JVM/">JVM</a>
+            
+              <a href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">类加载器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/04/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E4%B8%80%E4%B8%AAJava%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81/">手把手教你读一个 Java 文件的字节码</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/04/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E4%B8%80%E4%B8%AAJava%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81/">
+          
+          
+            
+          
+          想要读懂 Java 的字节码其实没那么难。当然，如果你有汇编语言的经验就会更好上手。本文手把手教你阅读一个简单 Java 文件的字节码。
+如何得到字节码？以下面这段示例代码为例，他存放在一个包中：
+1234package demo.apublic class B&#123;    ...&#125;
+通过下面这几个方法就可以查看代码的字节码：
+方法 1 、命令行相关命令如下
+123javac de
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-04 01:37" pubdate>
+              2021-03-04
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E5%AD%97%E8%8A%82%E7%A0%81/">字节码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/23/PhotoShop%E5%9B%BE%E5%B1%82%E7%9A%84%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/">PhotoShop 图层的混合模式是怎么回事</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/23/PhotoShop%E5%9B%BE%E5%B1%82%E7%9A%84%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/">
+          
+          
+            
+          
+          前言在修图软件中，调整混合模式就可以将两张照片用不同的风格混合在一起上图就是将下面这两个图片用不同的混合模式叠加的效果，那么你有没有想过这是什么原理呢？本文就以几个经典的混合模式为例简单研究一下。
+
+
+
+
+图像显示原理其实各种图层混合模式的灵感就是来源于胶片相机时代。那个时代的摄影师没有先进的计算机来修图，只能拍好胶片后（当然也有其他的感光材料做底片），在暗房通过各种骚操作来给自己的照片添加「特效
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-23 21:05" pubdate>
+              2021-02-23
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/23/%E5%88%9D%E8%AF%86JShell/">初识 JShell</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/23/%E5%88%9D%E8%AF%86JShell/">
+          
+          
+            
+          
+          初识 JShell升级到 Java 11 后，有了 JShell 这个工具（其实 Java 9 就有了），它让 Java 可以像脚本语言一样直接在命令行交互，听起来好神奇，快来体验一下！！
+启动与退出保险起见，得先弄明白启动与退出
+直接在命令行输入 jshell 就启动了
+12345➜  ~cedar jshell|  Welcome to JShell -- Version 11.0.9.1| 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-23 01:36" pubdate>
+              2021-02-23
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/17/Redis%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/">Redis 配置主从复制与高可用</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/17/Redis%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/">
+          
+          
+            
+          
+          Redis 配置主从复制与高可用前文搭建了 Redis 的主从复制，主从复制的一大好处就是可以实现高可用，那就试试吧
+搭建主从复制环境这里复习一下如何搭建主从复制，启动三个 Docker，第一个当作主节点，剩下的当作从节点
+123docker run -dit --name redis1 -p 6381:6379 -p 16381:16381 redis docker run -dit --nam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-17 14:16" pubdate>
+              2021-02-17
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/17/Win10DockerRedis%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">在 Win 10 Docker 上搭建 Redis 主从复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/17/Win10DockerRedis%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          在 Win 10 Docker 上搭建 Redis 主从复制前面介绍了 MySQL 可以主从复制，Rdies 当然也可以，而且是极简风格，只需要一个命令 replicaof，如果你对 Docker 的操作不熟悉的话，可以看看下面的详细步骤
+启动节点使用 Docker 创建三个 redis 节点
+启动主节点1234docker pull redisdocker run -itd --name red
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-17 13:43" pubdate>
+              2021-02-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Redis/">Redis</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/17/Windows%E4%B8%8B%E4%B8%BAGit%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/">Windows 下为 Git 设置代理</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/17/Windows%E4%B8%8B%E4%B8%BAGit%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/">
+          
+          
+            
+          
+          Windows 下为 Git 设置代理命令行上 GitHub 真是龟速，偶尔体验一下国内的 Gitee 就感觉爽爆了，还是快给 Git 整个代理吧！Git 支持两种协议，SSH 和 HTTPS，配置的方式不一样，这两种方式平时都得用，下面分别介绍一下
+设置 SSH 代理打开用户目录下 .ssh 文件夹，也就是 C:\Users\&lt;用户名&gt;\.ssh  ，在这个目录下新建一个叫做 con
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-17 13:23" pubdate>
+              2021-02-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

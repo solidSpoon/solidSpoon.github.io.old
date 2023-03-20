@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Soul 网关 3：Http 请求是怎么被处理的？ - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Soul 网关 3：Http 请求是怎么被处理的？">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-06 13:43" pubdate>
+        2021年3月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      40
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Soul 网关 3：Http 请求是怎么被处理的？</h1>
+            
+            <div class="markdown-body">
+              <p>前文体验了使用 divide 插件转发 Http 请求，本文来分析一个 Http 网络包在 Soul 网关中都经历了什么。</p>
+<h2 id="粗略观察"><a href="#粗略观察" class="headerlink" title="粗略观察"></a>粗略观察</h2><p>用 PostMan 发送网络包，观察日志，摘要如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">2021-03-05 19:34:12.367  INFO 21748 --- [work-threads-20] o.d.soul.plugin.base.AbstractSoulPlugin  : divide selector success match , selector name :/http<br>2021-03-05 19:34:12.367  INFO 21748 --- [work-threads-20] o.d.soul.plugin.base.AbstractSoulPlugin  : divide rule success match , rule name :/http/order/findById<br></code></pre></td></tr></table></figure>
+<p>这些日志与 divide 插件有关，是 <code>AbstractSoulPlugin</code> 打印出来的<br>双击 Shift 打开 Search Everywhere 窗口搜索 <code>AbstractSoulPlugin</code> ，跳转到对应代码，点击左侧向下箭头，查看实现类，可以看到我们要找的 <code>DividePlugin</code><br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134447.png" srcset="/img/loading.gif"><br><code>DividePlugin</code> 中有一个很大的 <code>doExecute</code> 方法，在这打个断点，使用 PostMan 发起请求，通过调用栈定位到了 <code>SoulWebHandler</code> 的 <code>execute()</code> 方法<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328105206.png" srcset="/img/loading.gif"><br>大概就是遍历所有的 <code>plugin</code> 来处理 <code>ServerWebExchange</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Delegate to the next &#123;<span class="hljs-doctag">@code</span> WebFilter&#125; in the chain.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> exchange the current server exchange</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> Mono&lt;Void&gt;&#125; to indicate when request handling is complete</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">execute</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerWebExchange exchange)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> Mono.defer(() -&gt; &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.index &lt; plugins.size()) &#123;<br>                SoulPlugin plugin = plugins.get(<span class="hljs-keyword">this</span>.index++);<br>                Boolean skip = plugin.skip(exchange);<br>                <span class="hljs-keyword">if</span> (skip) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.execute(exchange);<br>                &#125;<br>                <span class="hljs-keyword">return</span> plugin.execute(exchange, <span class="hljs-keyword">this</span>);<br>            &#125;<br>            <span class="hljs-keyword">return</span> Mono.empty();<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接着往上翻阅代码，发现是 <code>SoulWebHandler</code> 的 <code>handle()</code> 方法调用的上面这个 <code>execute()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Handle the web server exchange.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> exchange the current server exchange</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> Mono&lt;Void&gt;&#125; to indicate when request handling is complete</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> <span class="hljs-keyword">final</span> ServerWebExchange exchange)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DefaultSoulPluginChain(plugins).execute(exchange).subscribeOn(scheduler);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在上面的函数上打断点，再次调试，进入了 <code>DefaultWebFilterChain</code> 类的 <code>filter()</code> 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">filter</span><span class="hljs-params">(ServerWebExchange exchange)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> Mono.defer(() -&gt;<br>      <span class="hljs-keyword">this</span>.currentFilter != <span class="hljs-keyword">null</span> &amp;&amp; <span class="hljs-keyword">this</span>.chain != <span class="hljs-keyword">null</span> ?<br>          invokeFilter(<span class="hljs-keyword">this</span>.currentFilter, <span class="hljs-keyword">this</span>.chain, exchange) :<br>          <span class="hljs-keyword">this</span>.handler.handle(exchange));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>再次在上面方法上打断点<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134621.png" srcset="/img/loading.gif"><br>来到 <code>FilteringWebHandler</code> 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(ServerWebExchange exchange)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.chain.filter(exchange);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>WebHandlerDecorator</code> 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(ServerWebExchange exchange)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.delegate.handle(exchange);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>ExceptionHandlingWebHandler</code> 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(ServerWebExchange exchange)</span> </span>&#123;<br>  Mono&lt;Void&gt; completion;<br>  <span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">// 当前位置</span><br>    completion = <span class="hljs-keyword">super</span>.handle(exchange);<br>  &#125;<br>  <span class="hljs-keyword">catch</span> (Throwable ex) &#123;<br>    completion = Mono.error(ex);<br>  &#125;<br><br>  <span class="hljs-keyword">for</span> (WebExceptionHandler handler : <span class="hljs-keyword">this</span>.exceptionHandlers) &#123;<br>    completion = completion.onErrorResume(ex -&gt; handler.handle(exchange, ex));<br>  &#125;<br>  <span class="hljs-keyword">return</span> completion;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>HttpWebHandlerAdapter</code> 类，之前一直在传递的 <code>ServerWebExchange</code> 就是在这生成的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(ServerHttpRequest request, ServerHttpResponse response)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.forwardedHeaderTransformer != <span class="hljs-keyword">null</span>) &#123;<br>    request = <span class="hljs-keyword">this</span>.forwardedHeaderTransformer.apply(request);<br>  &#125;<br>  <br>  <span class="hljs-comment">// 生成 exchange</span><br>  ServerWebExchange exchange = createExchange(request, response);<br><br>  LogFormatUtils.traceDebug(logger, traceOn -&gt;<br>      exchange.getLogPrefix() + formatRequest(exchange.getRequest()) +<br>          (traceOn ? <span class="hljs-string">&quot;, headers=&quot;</span> + formatHeaders(exchange.getRequest().getHeaders()) : <span class="hljs-string">&quot;&quot;</span>));<br><br>  <span class="hljs-comment">// 在这调用</span><br>  <span class="hljs-keyword">return</span> getDelegate().handle(exchange)<br>      .doOnSuccess(aVoid -&gt; logResponse(exchange))<br>      .onErrorResume(ex -&gt; handleUnresolvedError(exchange, ex))<br>      .then(Mono.defer(response::setComplete));<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>来到 <code>ReactiveWebServerApplicationContext</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">handle</span><span class="hljs-params">(ServerHttpRequest request, ServerHttpResponse response)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handler.handle(request, response);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>ReactorHttpHandlerAdapter</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">apply</span><span class="hljs-params">(HttpServerRequest reactorRequest, HttpServerResponse reactorResponse)</span> </span>&#123;<br>  NettyDataBufferFactory bufferFactory = <span class="hljs-keyword">new</span> NettyDataBufferFactory(reactorResponse.alloc());<br>  <span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-comment">// 生成了 exchange 需要的 request 和 response</span><br>    ReactorServerHttpRequest request = <span class="hljs-keyword">new</span> ReactorServerHttpRequest(reactorRequest, bufferFactory);<br>    ServerHttpResponse response = <span class="hljs-keyword">new</span> ReactorServerHttpResponse(reactorResponse, bufferFactory);<br><br>    <span class="hljs-keyword">if</span> (request.getMethod() == HttpMethod.HEAD) &#123;<br>      response = <span class="hljs-keyword">new</span> HttpHeadResponseDecorator(response);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.httpHandler.handle(request, response)<br>        .doOnError(ex -&gt; logger.trace(request.getLogPrefix() + <span class="hljs-string">&quot;Failed to complete: &quot;</span> + ex.getMessage()))<br>        .doOnSuccess(aVoid -&gt; logger.trace(request.getLogPrefix() + <span class="hljs-string">&quot;Handling completed&quot;</span>));<br>  &#125;<br>  <span class="hljs-keyword">catch</span> (URISyntaxException ex) &#123;<br>    <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) &#123;<br>      logger.debug(<span class="hljs-string">&quot;Failed to get request URI: &quot;</span> + ex.getMessage());<br>    &#125;<br>    reactorResponse.status(HttpResponseStatus.BAD_REQUEST);<br>    <span class="hljs-keyword">return</span> Mono.empty();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>HttpServerHandle</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStateChange</span><span class="hljs-params">(Connection connection, State newState)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (newState == HttpServerState.REQUEST_RECEIVED) &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">if</span> (log.isDebugEnabled()) &#123;<br>        log.debug(format(connection.channel(), <span class="hljs-string">&quot;Handler is being applied: &#123;&#125;&quot;</span>), handler);<br>      &#125;<br>      HttpServerOperations ops = (HttpServerOperations) connection;<br>      Mono.fromDirect(handler.apply(ops, ops))<br>          .subscribe(ops.disposeSubscriber());<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (Throwable t) &#123;<br>      log.error(format(connection.channel(), <span class="hljs-string">&quot;&quot;</span>), t);<br>      connection.channel()<br>                .close();<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>TcpServerBind</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStateChange</span><span class="hljs-params">(Connection connection, State newState)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (newState == State.DISCONNECTING) &#123;<br>      <span class="hljs-keyword">if</span> (connection.channel()<br>                    .isActive() &amp;&amp; !connection.isPersistent()) &#123;<br>        connection.dispose();<br>      &#125;<br>    &#125;<br><br>    childObs.onStateChange(connection, newState);<br><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>HttpServerOperations</code> 再然后就是 Netty 的东西了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInboundNext</span><span class="hljs-params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (msg <span class="hljs-keyword">instanceof</span> HttpRequest) &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      listener().onStateChange(<span class="hljs-keyword">this</span>, HttpServerState.REQUEST_RECEIVED);<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      onInboundError(e);<br>      ReferenceCountUtil.release(msg);<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (msg <span class="hljs-keyword">instanceof</span> FullHttpRequest) &#123;<br>      <span class="hljs-keyword">super</span>.onInboundNext(ctx, msg);<br>      <span class="hljs-keyword">if</span> (isHttp2()) &#123;<br>        onInboundComplete();<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (msg <span class="hljs-keyword">instanceof</span> HttpContent) &#123;<br>    <span class="hljs-keyword">if</span> (msg != LastHttpContent.EMPTY_LAST_CONTENT) &#123;<br>      <span class="hljs-keyword">super</span>.onInboundNext(ctx, msg);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (msg <span class="hljs-keyword">instanceof</span> LastHttpContent) &#123;<br>      onInboundComplete();<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">super</span>.onInboundNext(ctx, msg);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>HttpServerOperations : 接受 Netty 请求的地方</li>
+<li>TcpServerBind</li>
+<li>HttpServerHandle</li>
+<li>ReactorHttpHandlerAdapter ：生成 response 和 request</li>
+<li>ReactiveWebServerApplicationContext</li>
+<li>HttpWebHandlerAdapter ：exchange 的生成</li>
+<li>ExceptionHandlingWebHandler</li>
+<li>WebHandlerDecorator</li>
+<li>FilteringWebHandler</li>
+<li>DefaultWebFilterChain</li>
+<li>SoulWebHandler ：plugins 调用链</li>
+<li>DividePlugin ：plugin 具体处理<h2 id="调用链"><a href="#调用链" class="headerlink" title="调用链"></a>调用链</h2>接下来看看<br><code>SoulWebHandler</code> 的 plugins 调用链，在下面的函数上打断点分析 plugin 的执行情况<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134700.png" srcset="/img/loading.gif"><br>下图红色的插件被跳过了<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134715.png" srcset="/img/loading.gif"><br>下面是 <code>AbstractSoulPlugin</code> 的 <code>execute()</code>，注释位置要判断是否 enable，我们只启用了  <code>DividePlugin</code>，<code>WafPlugin</code> ，所以只有这两个插件会运行这个方法的 <code>if</code> 部分，在 <code>if</code> 中进行了一些规则的匹配。</li>
+</ul>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306160806.png" srcset="/img/loading.gif"></p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134730.png" srcset="/img/loading.gif"></p>
+<p>看一下 SoulAdmin 的界面</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306160829.png" srcset="/img/loading.gif"></p>
+<p>每个插件界面都有「选择器列表」和「选择器规则列表」，就是在这个地方匹配的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">execute</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerWebExchange exchange, <span class="hljs-keyword">final</span> SoulPluginChain chain)</span> </span>&#123;<br>    String pluginName = named();<br>    <span class="hljs-keyword">final</span> PluginData pluginData = BaseDataCache.getInstance().obtainPluginData(pluginName);<br>    <span class="hljs-comment">// 此处判断插件是否启用</span><br>    <span class="hljs-keyword">if</span> (pluginData != <span class="hljs-keyword">null</span> &amp;&amp; pluginData.getEnabled()) &#123;<br>        <span class="hljs-keyword">final</span> Collection&lt;SelectorData&gt; selectors = BaseDataCache.getInstance().obtainSelectorData(pluginName);<br>        <span class="hljs-keyword">if</span> (CollectionUtils.isEmpty(selectors)) &#123;<br>            <span class="hljs-keyword">return</span> handleSelectorIsNull(pluginName, exchange, chain);<br>        &#125;<br>        <span class="hljs-comment">// 匹配选择器</span><br>        <span class="hljs-keyword">final</span> SelectorData selectorData = matchSelector(exchange, selectors);<br>        <span class="hljs-keyword">if</span> (Objects.isNull(selectorData)) &#123;<br>            <span class="hljs-keyword">return</span> handleSelectorIsNull(pluginName, exchange, chain);<br>        &#125;<br>        <span class="hljs-comment">// 打印日志</span><br>        selectorLog(selectorData, pluginName);<br>        <span class="hljs-keyword">final</span> List&lt;RuleData&gt; rules = BaseDataCache.getInstance().obtainRuleData(selectorData.getId());<br>        <span class="hljs-keyword">if</span> (CollectionUtils.isEmpty(rules)) &#123;<br>            <span class="hljs-keyword">return</span> handleRuleIsNull(pluginName, exchange, chain);<br>        &#125;<br>        <span class="hljs-comment">// 匹配选择器规则</span><br>        RuleData rule;<br>        <span class="hljs-keyword">if</span> (selectorData.getType() == SelectorTypeEnum.FULL_FLOW.getCode()) &#123;<br>            <span class="hljs-comment">//get last</span><br>            rule = rules.get(rules.size() - <span class="hljs-number">1</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 匹配规则</span><br>            rule = matchRule(exchange, rules);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (Objects.isNull(rule)) &#123;<br>            <span class="hljs-keyword">return</span> handleRuleIsNull(pluginName, exchange, chain);<br>        &#125;<br>        <span class="hljs-comment">// 日志</span><br>        ruleLog(rule, pluginName);<br>        <span class="hljs-comment">// 进入插件的处理方法</span><br>        <span class="hljs-keyword">return</span> doExecute(exchange, chain, selectorData, rule);<br>    &#125;<br>    <span class="hljs-keyword">return</span> chain.execute(exchange);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>以 divide 插件为例，上面方法会打印日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">2021-03-06 15:06:51.105  INFO 22368 --- [-work-threads-1] o.d.soul.plugin.base.AbstractSoulPlugin  : divide selector success match , selector name :/http<br>2021-03-06 15:07:03.683  INFO 22368 --- [-work-threads-1] o.d.soul.plugin.base.AbstractSoulPlugin  : divide rule success match , rule name :/http/order/findById<br></code></pre></td></tr></table></figure>
+<p>然后再 <code>WebClientPlugin</code> 中看到了似乎发送了网络请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">execute</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerWebExchange exchange, <span class="hljs-keyword">final</span> SoulPluginChain chain)</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);<br>    <span class="hljs-keyword">assert</span> soulContext != <span class="hljs-keyword">null</span>;<br>    String urlPath = exchange.getAttribute(Constants.HTTP_URL);<br>    <span class="hljs-keyword">if</span> (StringUtils.isEmpty(urlPath)) &#123;<br>        Object error = SoulResultWrap.error(SoulResultEnum.CANNOT_FIND_URL.getCode(), SoulResultEnum.CANNOT_FIND_URL.getMsg(), <span class="hljs-keyword">null</span>);<br>        <span class="hljs-keyword">return</span> WebFluxResultUtils.result(exchange, error);<br>    &#125;<br>    <span class="hljs-keyword">long</span> timeout = (<span class="hljs-keyword">long</span>) Optional.ofNullable(exchange.getAttribute(Constants.HTTP_TIME_OUT)).orElse(<span class="hljs-number">3000L</span>);<br>    <span class="hljs-keyword">int</span> retryTimes = (<span class="hljs-keyword">int</span>) Optional.ofNullable(exchange.getAttribute(Constants.HTTP_RETRY)).orElse(<span class="hljs-number">0</span>);<br>    log.info(<span class="hljs-string">&quot;The request urlPath is &#123;&#125;, retryTimes is &#123;&#125;&quot;</span>, urlPath, retryTimes);<br>    HttpMethod method = HttpMethod.valueOf(exchange.getRequest().getMethodValue());<br>    WebClient.RequestBodySpec requestBodySpec = webClient.method(method).uri(urlPath);<br>    <span class="hljs-keyword">return</span> handleRequestBody(requestBodySpec, exchange, timeout, retryTimes, chain);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> Mono&lt;Void&gt; <span class="hljs-title">handleRequestBody</span><span class="hljs-params">(<span class="hljs-keyword">final</span> WebClient.RequestBodySpec requestBodySpec,</span></span><br><span class="hljs-function"><span class="hljs-params">                                     <span class="hljs-keyword">final</span> ServerWebExchange exchange,</span></span><br><span class="hljs-function"><span class="hljs-params">                                     <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> timeout,</span></span><br><span class="hljs-function"><span class="hljs-params">                                     <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> retryTimes,</span></span><br><span class="hljs-function"><span class="hljs-params">                                     <span class="hljs-keyword">final</span> SoulPluginChain chain)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> requestBodySpec.headers(httpHeaders -&gt; &#123;<br>        httpHeaders.addAll(exchange.getRequest().getHeaders());<br>        httpHeaders.remove(HttpHeaders.HOST);<br>    &#125;)<br>            .contentType(buildMediaType(exchange))<br>            .body(BodyInserters.fromDataBuffers(exchange.getRequest().getBody()))<br>            .exchange()<br>            .doOnError(e -&gt; log.error(e.getMessage()))<br>            .timeout(Duration.ofMillis(timeout))<br>            .retryWhen(Retry.onlyIf(x -&gt; x.exception() <span class="hljs-keyword">instanceof</span> ConnectTimeoutException)<br>                .retryMax(retryTimes)<br>                .backoff(Backoff.exponential(Duration.ofMillis(<span class="hljs-number">200</span>), Duration.ofSeconds(<span class="hljs-number">20</span>), <span class="hljs-number">2</span>, <span class="hljs-keyword">true</span>)))<br>            .flatMap(e -&gt; doNext(e, exchange, chain));<br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> Mono&lt;Void&gt; <span class="hljs-title">doNext</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ClientResponse res, <span class="hljs-keyword">final</span> ServerWebExchange exchange, <span class="hljs-keyword">final</span> SoulPluginChain chain)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (res.statusCode().is2xxSuccessful()) &#123;<br>        exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.ERROR.getName());<br>    &#125;<br>    exchange.getAttributes().put(Constants.CLIENT_RESPONSE_ATTR, res);<br>    <span class="hljs-keyword">return</span> chain.execute(exchange);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>来到 <code>WebClientResponsePlugin</code> ，好像返回了一个 response</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Process the Web request and (optionally) delegate to the next</span><br><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@code</span> WebFilter&#125; through the given &#123;<span class="hljs-doctag">@link</span> SoulPluginChain&#125;.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> exchange the current server exchange</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> chain    provides a way to delegate to the next filter</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@code</span> Mono&lt;Void&gt;&#125; to indicate when request processing is complete</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;Void&gt; <span class="hljs-title">execute</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerWebExchange exchange, <span class="hljs-keyword">final</span> SoulPluginChain chain)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> chain.execute(exchange).then(Mono.defer(() -&gt; &#123;<br>        ServerHttpResponse response = exchange.getResponse();<br>        ClientResponse clientResponse = exchange.getAttribute(Constants.CLIENT_RESPONSE_ATTR);<br>        <span class="hljs-keyword">if</span> (Objects.isNull(clientResponse)<br>                || response.getStatusCode() == HttpStatus.BAD_GATEWAY<br>                || response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) &#123;<br>            Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_RESULT_ERROR.getCode(), SoulResultEnum.SERVICE_RESULT_ERROR.getMsg(), <span class="hljs-keyword">null</span>);<br>            <span class="hljs-keyword">return</span> WebFluxResultUtils.result(exchange, error);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (response.getStatusCode() == HttpStatus.GATEWAY_TIMEOUT) &#123;<br>            Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_TIMEOUT.getCode(), SoulResultEnum.SERVICE_TIMEOUT.getMsg(), <span class="hljs-keyword">null</span>);<br>            <span class="hljs-keyword">return</span> WebFluxResultUtils.result(exchange, error);<br>        &#125;<br>        response.setStatusCode(clientResponse.statusCode());<br>        response.getCookies().putAll(clientResponse.cookies());<br>        response.getHeaders().putAll(clientResponse.headers().asHttpHeaders());<br>        <span class="hljs-keyword">return</span> response.writeWith(clientResponse.body(BodyExtractors.toDataBuffers()));<br>    &#125;));<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="复查"><a href="#复查" class="headerlink" title="复查"></a>复查</h2><p>详细看一下 WafPlugin、DividePlugin 、WebClientPlugin 、 WebClientResponsePlugin 等</p>
+<h3 id="DividePlugin"><a href="#DividePlugin" class="headerlink" title="DividePlugin"></a>DividePlugin</h3><p>发送一个错误请求试试，这个请求多打了一个字母 <code>d</code></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://localhost:9195/http/order/findByIdd?id=1">http://localhost:9195/http/order/findByIdd?id=1</a></li>
+</ul>
+<p>发现下面这俩东西</p>
+<p><code>FallbackUtils</code> 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * get no rule result.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> pluginName the plugin name</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> exchange   the exchange</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> the mono</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Mono&lt;Void&gt; <span class="hljs-title">getNoRuleResult</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String pluginName, <span class="hljs-keyword">final</span> ServerWebExchange exchange)</span> </span>&#123;<br>    log.error(<span class="hljs-string">&quot;can not match rule data: &#123;&#125;&quot;</span>, pluginName);<br>    Object error = SoulResultWrap.error(SoulResultEnum.RULE_NOT_FIND.getCode(), SoulResultEnum.RULE_NOT_FIND.getMsg(), <span class="hljs-keyword">null</span>);<br>    <span class="hljs-keyword">return</span> WebFluxResultUtils.result(exchange, error);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>WebFluxResultUtils</code>，这里构建错误响应</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Error mono.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> exchange the exchange</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> result    the result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> the mono</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Mono&lt;Void&gt; <span class="hljs-title">result</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerWebExchange exchange, <span class="hljs-keyword">final</span> Object result)</span> </span>&#123;<br>    exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);<br>    <span class="hljs-keyword">return</span> exchange.getResponse().writeWith(Mono.just(exchange.getResponse()<br>            .bufferFactory().wrap(Objects.requireNonNull(JsonUtils.toJson(result)).getBytes())));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328105232.png" srcset="/img/loading.gif"><br>这是 PostMan 得到的响应，与上图匹配<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134834.png" srcset="/img/loading.gif" alt="image.png"></p>
+<h3 id="WafPlugin"><a href="#WafPlugin" class="headerlink" title="WafPlugin"></a>WafPlugin</h3><p>发送一条可以被 WafPlugin 拒绝的请求。同样会到 <code>WebFluxResultUtils</code> 来构建错误响应。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306161025.png" srcset="/img/loading.gif"></p>
+<h3 id="WebClientPlugin"><a href="#WebClientPlugin" class="headerlink" title="WebClientPlugin"></a>WebClientPlugin</h3><p>前面猜测 <code>WebClientPlugin</code> 的 <code>handleRequestBody</code> 会给真正的后台服务发送请求，<code>doNext()</code>，会做接下来的处理，为了验证这个猜测，首先定位到 <code>soul-examples-http</code> - <code>controller</code> - 的 <code>OrderController</code> 类，里面的 <code>findById()</code> 就是我们之前请求的方法，给他加上个日志功能。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134850.png" srcset="/img/loading.gif"><br>然后在 <code>WebClientPlugin</code> 的 <code>handleRequestBody</code> 和 <code>doNext()</code> 上打上断点，再发送一个正确的请求，发现日志的确是在这个时候打印出来的。</p>
+<h3 id="WebClientResponsePlugin"><a href="#WebClientResponsePlugin" class="headerlink" title="WebClientResponsePlugin"></a>WebClientResponsePlugin</h3><p>之前猜测 <code>WebClientResponsePlugin</code> 的 <code>execute()</code> 方法会返回请求的数据给 <code>postman()</code>，打断点，发现<code>execute()</code> 执行完后会返回到 <code>SoulWebHandler</code> 也就是前文调用链的地方。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134902.png" srcset="/img/loading.gif" alt="image.png"><br>之分析调用链的时候已经知道 <code>WebClientResponsePlugin</code> 是最后一个插件，它后边两个都是跳过的状态，在之后就是一些 reactor 和 Netty 的东西了，相信应该是刚刚那个地方给 PostMan 返回的结果。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306134917.png" srcset="/img/loading.gif"></p>
+<h3 id="DefaultWebFilterChain"><a href="#DefaultWebFilterChain" class="headerlink" title="DefaultWebFilterChain"></a>DefaultWebFilterChain</h3><p>还记得 DefaultWebFilterChain 的这个方法吗？在这打个断点看看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">@Override<br>public Mono&lt;Void&gt; filter(ServerWebExchange exchange) &#123;<br>  <span class="hljs-built_in">return</span> Mono.defer(() -&gt;<br>      this.currentFilter != null &amp;&amp; this.chain != null ?<br>          invokeFilter(this.currentFilter, this.chain, exchange) :<br>          this.handler.handle(exchange));<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>发现了下面几个相关类，也就跟据名字猜测一下意思吧。</p>
+<ul>
+<li><p>MetricsWebFilter</p>
+</li>
+<li><p>HealthFilter</p>
+</li>
+<li><p>FileSizeFilter</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></li>
+<li><p>HttpServerOperations : 接收 Netty 请求的地方</p>
+</li>
+<li><p>ReactorHttpHandlerAdapter ：生成 response 和 request</p>
+</li>
+<li><p>HttpWebHandlerAdapter ：exchange 的生成</p>
+</li>
+<li><p>DefaultWebFilterChain </p>
+</li>
+<li><p>SoulWebHandler：plugins 调用链</p>
+</li>
+</ul>
+<p>请求由 Netty 收到后，来到 Filter，这里进行一些处理：健康检查，文件大小检查等待，然后来到核心的 plugins，这里实现了 Soul 的核心功能：过滤，转发，返回等等。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210306161215.png" srcset="/img/loading.gif" alt="Soul plugins 调用链"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Soul-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Soul 学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Soul/">Soul</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Http/">Http</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/07/Java-%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%8D%8F%E4%BD%9C%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 线程间协作方法总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/05/Soul-%E7%BD%91%E5%85%B3-2%EF%BC%9Adivide-%E6%8F%92%E4%BB%B6%E4%B8%8E-Http-%E4%BB%A3%E7%90%86/">
+                        <span class="hidden-mobile">Soul 网关 2：divide 插件与 Http 代理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

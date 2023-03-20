@@ -1,0 +1,591 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>《算法-第四版》答案系列-1.1 实验题篇 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="《算法-第四版》答案系列-1.1 实验题篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 20:47" pubdate>
+        2021年2月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《算法-第四版》答案系列-1.1 实验题篇</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>最近开始学习《算法-第四版》一书，将我自己做的书后习题分享给大家，本篇是这一系列的第一篇，包含了书上&lt;1.1 基础编程模型&gt;的习题的实验题部分,本篇习题位于 P32 ~ P37 ，如有错误，还请指正。</p>
+</blockquote>
+<blockquote>
+<p>本篇答案中部分 java 代码用到了书中的包，如需使用请去书中配套网站安装。</p>
+</blockquote>
+<p>以下的答案在电脑端查看可以显示目录</p>
+<h3 id="实验题"><a href="#实验题" class="headerlink" title="实验题"></a>实验题</h3><h5 id="1-1-35-模拟掷骰子。以下代码能够计算每种两个骰子之和的准确概率分布："><a href="#1-1-35-模拟掷骰子。以下代码能够计算每种两个骰子之和的准确概率分布：" class="headerlink" title="1.1.35 模拟掷骰子。以下代码能够计算每种两个骰子之和的准确概率分布："></a>1.1.35 模拟掷骰子。以下代码能够计算每种两个骰子之和的准确概率分布：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> SIDES = <span class="hljs-number">6</span>;<br><span class="hljs-keyword">double</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= SIDES; i++)&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= SIDES; j++)&#123;<br>        dist[i+j] += <span class="hljs-number">1.0</span>;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">2</span>; k &lt;= <span class="hljs-number">2</span>*SIDES; k++)&#123;<br>    disk[k] /= <span class="hljs-number">36.0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>dist[i]</code> 的值就是两个骰子之和为 i 的概率。用实验模拟 N 次掷骰子，并在计算两个 1 到 6 之间的随机整数之和时记录每个值出现的频率以验证他们的概率。 N 要多大才能保证你的经验数据和准确数据的吻合程度达到小数点后三位？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1135</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> SIDES = <span class="hljs-number">6</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算每种两个骰子之和的准确概率分布</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span>[] theoryThrow()&#123;<br>         <span class="hljs-keyword">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br>         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;=  SIDES; i++)&#123;<br>             <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= SIDES; j++)&#123;<br>                 dist[i+j] ++;<br>             &#125;<br>         &#125;<br>         <span class="hljs-keyword">double</span>[] disk = frequency(dist);<br>         <span class="hljs-keyword">return</span> disk;<br>     &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 计算概率</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> num[] 投掷频数数组</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span>[] frequency(<span class="hljs-keyword">int</span>[] num)&#123;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">double</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>*SIDES; i++)&#123;<br>            sum += num[i];<br>        &#125;<br>        <span class="hljs-keyword">double</span> dsume = sum*<span class="hljs-number">1.0</span>;<br>        <span class="hljs-keyword">double</span>[] disk = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">2</span>; k &lt;= <span class="hljs-number">2</span>*SIDES; k++)&#123;<br>            disk[k] = (num[k]*<span class="hljs-number">1.0</span>)/dsume;<br>        &#125;<br>        <span class="hljs-keyword">return</span> disk;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 掷骰子 n 次，返回得到的所有可能值得数目</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n 投掷得次数</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] dice(<span class="hljs-keyword">int</span> n)&#123;<br>        <span class="hljs-keyword">int</span>[] dist = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-keyword">int</span> a = StdRandom.uniform(<span class="hljs-number">1</span>, SIDES+<span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">int</span> b = StdRandom.uniform(<span class="hljs-number">1</span>, SIDES+<span class="hljs-number">1</span>);<br>            dist[a+b]++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dist;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 比较a与b的误差是否在10的-k次方之内</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> a[]</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> b[]</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> k 10的-k次方</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">statisticalError</span><span class="hljs-params">(<span class="hljs-keyword">double</span>[] a, <span class="hljs-keyword">double</span>[] b, <span class="hljs-keyword">int</span> k)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(a.length != b.length)&#123;<br>            System.exit(<span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">double</span> m = <span class="hljs-number">1.0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i++)&#123;<br>            m /= <span class="hljs-number">10.0</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++)&#123;<br>            <span class="hljs-keyword">if</span> (a[i]-b[i] &gt; m)&#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> timesall = <span class="hljs-number">10000</span>;<span class="hljs-comment">//试验次数</span><br>        <span class="hljs-keyword">double</span>[] average = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[timesall];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> times = <span class="hljs-number">0</span>; times &lt; timesall; times++)&#123;<br>            <span class="hljs-keyword">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<span class="hljs-comment">//保存总频数</span><br>            <span class="hljs-keyword">int</span> n = <span class="hljs-number">100</span>;<span class="hljs-comment">//每次增加的次数</span><br>            <span class="hljs-keyword">int</span> N = <span class="hljs-number">0</span>;<span class="hljs-comment">//实验总次数</span><br>            <span class="hljs-keyword">int</span> k = <span class="hljs-number">3</span>;<span class="hljs-comment">//10的-3次方</span><br>            <span class="hljs-keyword">double</span>[] thought = theoryThrow();<br>            <span class="hljs-keyword">double</span>[] actual = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">2</span>*SIDES+<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">do</span>&#123;<br>                <span class="hljs-keyword">int</span>[] a = dice(n);<span class="hljs-comment">//掷骰子n次</span><br>                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++)&#123;<br>                    count[i] += a[i];<br>                &#125;<br>                N += n;<span class="hljs-comment">//统计总数</span><br>                actual = frequency(count);<span class="hljs-comment">//计算频率</span><br>            &#125; <span class="hljs-keyword">while</span> (!statisticalError(thought, actual, k));<br>            average[times] = N;<br>        &#125;<br>        System.out.println(StdStats.mean(average));<br>    &#125;     <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>答：在运行一万次后，发现平均 128639.41 次就可保证经验数据和准确数据的吻合程度达到小数点后三位</p>
+<h5 id="1-1-36-乱序检查。通过实验检查表-1-1-10-中的乱序代码是否能够产生预期的效果。编写一个程序-ShuffleTest-接受命令行参数-M-和-N-，将大小为-M-的数组打乱-N-次切每次打乱之前都将数组重新初始化为-a-i-i-。打印一个-M×M-的表格，对于所欲的列-j-，行-i-表示的是-i-在打乱之后落到-j-的位置的次数。-数组中的所有元素的值都应该接近于N-M。"><a href="#1-1-36-乱序检查。通过实验检查表-1-1-10-中的乱序代码是否能够产生预期的效果。编写一个程序-ShuffleTest-接受命令行参数-M-和-N-，将大小为-M-的数组打乱-N-次切每次打乱之前都将数组重新初始化为-a-i-i-。打印一个-M×M-的表格，对于所欲的列-j-，行-i-表示的是-i-在打乱之后落到-j-的位置的次数。-数组中的所有元素的值都应该接近于N-M。" class="headerlink" title="1.1.36 乱序检查。通过实验检查表 1.1.10 中的乱序代码是否能够产生预期的效果。编写一个程序 ShuffleTest ,接受命令行参数 M 和 N ，将大小为 M 的数组打乱 N 次切每次打乱之前都将数组重新初始化为 a[i] = i 。打印一个 M×M 的表格，对于所欲的列 j ，行 i 表示的是 i 在打乱之后落到 j 的位置的次数。 数组中的所有元素的值都应该接近于N/M。"></a>1.1.36 乱序检查。通过实验检查表 1.1.10 中的乱序代码是否能够产生预期的效果。编写一个程序 <code>ShuffleTest</code> ,接受命令行参数 M 和 N ，将大小为 M 的数组打乱 N 次切每次打乱之前都将数组重新初始化为 a[i] = i 。打印一个 M×M 的表格，对于所欲的列 j ，行 i 表示的是 i 在打乱之后落到 j 的位置的次数。 数组中的所有元素的值都应该接近于N/M。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1136</span></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 随机将 double 数组中的元素排序</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shuffle</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> N = a.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<br>            <span class="hljs-comment">//将 a[i] 和 a[i..N-i] 中任意一个元素交换</span><br>            <span class="hljs-keyword">int</span> r = i + StdRandom.uniform(N-i);<br>            <span class="hljs-keyword">int</span> temp = a[i];<br>            a[i] = a[r];<br>            a[r] = temp;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> M = StdIn.readInt();<span class="hljs-comment">//数组大小</span><br>        <span class="hljs-keyword">int</span> N = StdIn.readInt();<span class="hljs-comment">//打乱次数</span><br>        <span class="hljs-keyword">int</span>[] array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[M];<br>        <span class="hljs-keyword">int</span>[][] exal = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[M][M];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; M; j++)&#123;<br>                <span class="hljs-comment">//System.out.println(&quot;j:&quot;+j);</span><br>                array[j] = j;<br>            &#125;<br>            shuffle(array);<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; M; k++)&#123;<br>                exal [array[k]][k]++;<br>                <span class="hljs-comment">//System.out.println(array[k]);</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; M; i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; M; j++)&#123;<br>                System.out.print(exal[i][j]+<span class="hljs-string">&quot;\t&quot;</span>);<br>            &#125;<br>            System.out.println();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dns">M=<span class="hljs-number">10</span><br>N=<span class="hljs-number">10000000</span><br>运行结果：<br><span class="hljs-number">1000125</span> <span class="hljs-number">1002701</span> <span class="hljs-number">1000123</span> <span class="hljs-number">999941</span>  <span class="hljs-number">998460</span>  <span class="hljs-number">998247</span>  <span class="hljs-number">1001654</span> <span class="hljs-number">998478</span>  <span class="hljs-number">1000194</span> <span class="hljs-number">1000077</span><br><span class="hljs-number">998618</span>  <span class="hljs-number">1001400</span> <span class="hljs-number">1000146</span> <span class="hljs-number">1000526</span> <span class="hljs-number">999514</span>  <span class="hljs-number">1000185</span> <span class="hljs-number">1000057</span> <span class="hljs-number">1000484</span> <span class="hljs-number">998135</span>  <span class="hljs-number">1000935</span><br><span class="hljs-number">998984</span>  <span class="hljs-number">1001470</span> <span class="hljs-number">1000030</span> <span class="hljs-number">999937</span>  <span class="hljs-number">1000037</span> <span class="hljs-number">999900</span>  <span class="hljs-number">999298</span>  <span class="hljs-number">1000187</span> <span class="hljs-number">1000275</span> <span class="hljs-number">999882</span><br><span class="hljs-number">999302</span>  <span class="hljs-number">997559</span>  <span class="hljs-number">999851</span>  <span class="hljs-number">1000042</span> <span class="hljs-number">1000360</span> <span class="hljs-number">1000301</span> <span class="hljs-number">1001621</span> <span class="hljs-number">1000925</span> <span class="hljs-number">1000557</span> <span class="hljs-number">999482</span><br><span class="hljs-number">999465</span>  <span class="hljs-number">997970</span>  <span class="hljs-number">999940</span>  <span class="hljs-number">1001040</span> <span class="hljs-number">999667</span>  <span class="hljs-number">1001078</span> <span class="hljs-number">1000853</span> <span class="hljs-number">999033</span>  <span class="hljs-number">1001058</span> <span class="hljs-number">999896</span><br><span class="hljs-number">1000576</span> <span class="hljs-number">999557</span>  <span class="hljs-number">999687</span>  <span class="hljs-number">1000324</span> <span class="hljs-number">998885</span>  <span class="hljs-number">1000500</span> <span class="hljs-number">1000763</span> <span class="hljs-number">1000869</span> <span class="hljs-number">999800</span>  <span class="hljs-number">999039</span><br><span class="hljs-number">1001858</span> <span class="hljs-number">1000688</span> <span class="hljs-number">999901</span>  <span class="hljs-number">999096</span>  <span class="hljs-number">999045</span>  <span class="hljs-number">1000684</span> <span class="hljs-number">998944</span>  <span class="hljs-number">999273</span>  <span class="hljs-number">1000210</span> <span class="hljs-number">1000301</span><br><span class="hljs-number">1001321</span> <span class="hljs-number">998768</span>  <span class="hljs-number">1001317</span> <span class="hljs-number">998415</span>  <span class="hljs-number">1001425</span> <span class="hljs-number">1000167</span> <span class="hljs-number">999267</span>  <span class="hljs-number">999064</span>  <span class="hljs-number">999873</span>  <span class="hljs-number">1000383</span><br><span class="hljs-number">999501</span>  <span class="hljs-number">999099</span>  <span class="hljs-number">998095</span>  <span class="hljs-number">1000804</span> <span class="hljs-number">1001714</span> <span class="hljs-number">999615</span>  <span class="hljs-number">999237</span>  <span class="hljs-number">1000303</span> <span class="hljs-number">1000350</span> <span class="hljs-number">1001282</span><br><span class="hljs-number">1000250</span> <span class="hljs-number">1000788</span> <span class="hljs-number">1000910</span> <span class="hljs-number">999875</span>  <span class="hljs-number">1000893</span> <span class="hljs-number">999323</span>  <span class="hljs-number">998306</span>  <span class="hljs-number">1001384</span> <span class="hljs-number">999548</span>  <span class="hljs-number">998723</span><br></code></pre></td></tr></table></figure>
+<p>答：打乱10000000次后，数组中所有元素的值都接近 N/M ，该乱序代码可以产生预期的效果。</p>
+<h5 id="1-1-37-糟糕的打乱。假设在我们的乱序代码中你选择的是一个-0-到-N-1-而非-i-到-N-1-之间的随机整数。证明得到的结果并非均匀地分布在-N-种可能性之间。用上一题中的测试检验这个版本。"><a href="#1-1-37-糟糕的打乱。假设在我们的乱序代码中你选择的是一个-0-到-N-1-而非-i-到-N-1-之间的随机整数。证明得到的结果并非均匀地分布在-N-种可能性之间。用上一题中的测试检验这个版本。" class="headerlink" title="1.1.37 糟糕的打乱。假设在我们的乱序代码中你选择的是一个 0 到 N-1 而非 i 到 N-1 之间的随机整数。证明得到的结果并非均匀地分布在 N! 种可能性之间。用上一题中的测试检验这个版本。"></a>1.1.37 糟糕的打乱。假设在我们的乱序代码中你选择的是一个 0 到 N-1 而非 i 到 N-1 之间的随机整数。证明得到的结果并非均匀地分布在 N! 种可能性之间。用上一题中的测试检验这个版本。</h5><p>答：将1.1.36中 <code>int r = i + StdRandom.uniform(N-i);</code> 替换为 <code>int r = i + StdRandom.uniform(N-i);</code> 后，再次运行10000000次，可以发现，结果不是均匀分布。</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs tap">M=10<br>N=10000000<br>运行结果：<br>1000512<span class="hljs-number"> 998403 </span><span class="hljs-number"> 998755 </span><span class="hljs-number"> 1001409 </span>999491 <span class="hljs-number"> 1001334 </span>999986 <span class="hljs-number"> 999791 </span><span class="hljs-number"> 1000627 </span>999692<br>0      <span class="hljs-number"> 1015798 </span>1035054<span class="hljs-number"> 1069850 </span>1131659<span class="hljs-number"> 1201769 </span>1166053<span class="hljs-number"> 1144051 </span>1124908 1110858<br>0      <span class="hljs-number"> 638419 </span><span class="hljs-number"> 1070539 </span>1142224<span class="hljs-number"> 1266417 </span>1401483<span class="hljs-number"> 1333772 </span>1287170<span class="hljs-number"> 1248904 </span>611072<br>0      <span class="hljs-number"> 472150 </span><span class="hljs-number"> 1024152 </span>1216205<span class="hljs-number"> 1401275 </span>1599316<span class="hljs-number"> 1498780 </span>1426079<span class="hljs-number"> 917823 </span> 444220<br>0      <span class="hljs-number"> 388051 </span><span class="hljs-number"> 857665 </span><span class="hljs-number"> 1464177 </span>1533597<span class="hljs-number"> 1799259 </span>1666849<span class="hljs-number"> 1178928 </span>749903  361571<br>0      <span class="hljs-number"> 388336 </span><span class="hljs-number"> 858027 </span><span class="hljs-number"> 1464694 </span>2333409<span class="hljs-number"> 1000428 </span>1666780<span class="hljs-number"> 1177122 </span>750201  361003<br>0      <span class="hljs-number"> 638571 </span><span class="hljs-number"> 1355932 </span>2214444<span class="hljs-number"> 533755 </span><span class="hljs-number"> 798620 </span><span class="hljs-number"> 666697 </span><span class="hljs-number"> 1929717 </span>1250644 611620<br>0      <span class="hljs-number"> 1305738 </span>2692216<span class="hljs-number"> 213467 </span><span class="hljs-number"> 399844 </span><span class="hljs-number"> 598315 </span><span class="hljs-number"> 500518 </span><span class="hljs-number"> 428702 </span><span class="hljs-number"> 2582851 </span>1278349<br>0      <span class="hljs-number"> 4140574 </span>71709  <span class="hljs-number"> 142410 </span><span class="hljs-number"> 267287 </span><span class="hljs-number"> 399491 </span><span class="hljs-number"> 333710 </span><span class="hljs-number"> 285574 </span><span class="hljs-number"> 249436 </span> 4109809<br>8999488<span class="hljs-number"> 13960 </span> <span class="hljs-number"> 35951 </span> <span class="hljs-number"> 71120 </span> <span class="hljs-number"> 133266 </span><span class="hljs-number"> 199985 </span><span class="hljs-number"> 166855 </span><span class="hljs-number"> 142866 </span><span class="hljs-number"> 124703 </span> 111806<br></code></pre></td></tr></table></figure>
+<h5 id="1-1-38-二分查找与暴力查找。根据-1-1-10-4-节给出的暴力查找法编写一个程序-BruteForceSearch-，在你的计算机上比较它和-BinartSearch-处理-largeW-txt-和-largeT-txt-所需的时间。"><a href="#1-1-38-二分查找与暴力查找。根据-1-1-10-4-节给出的暴力查找法编写一个程序-BruteForceSearch-，在你的计算机上比较它和-BinartSearch-处理-largeW-txt-和-largeT-txt-所需的时间。" class="headerlink" title="1.1.38 二分查找与暴力查找。根据 1.1.10.4 节给出的暴力查找法编写一个程序 BruteForceSearch ，在你的计算机上比较它和 BinartSearch 处理 largeW.txt 和 largeT.txt 所需的时间。"></a>1.1.38 二分查找与暴力查找。根据 1.1.10.4 节给出的暴力查找法编写一个程序 <code>BruteForceSearch</code> ，在你的计算机上比较它和 <code>BinartSearch</code> 处理 largeW.txt 和 largeT.txt 所需的时间。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1138</span></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 二分查找</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key,<span class="hljs-keyword">int</span>[] a)</span></span>&#123;<br>        <span class="hljs-comment">//数组必须是有序的</span><br>        <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> hi = a.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(lo &lt;= hi)&#123;<br>            <span class="hljs-comment">//被查找的键要么不存在，要么必然存在与a[lo~hi]之中</span><br>            <span class="hljs-keyword">int</span> mid = lo + (hi - lo) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(key &lt; a[mid])&#123;<br>                hi = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; a[mid]) &#123;<br>                lo = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 暴力查找</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">BruteForceSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span>[] a)</span></span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++)&#123;<br>            <span class="hljs-keyword">if</span> (a[i] == key)&#123;<br>                <span class="hljs-keyword">return</span> i;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-keyword">int</span>[] whitelist = In.readInts(args[<span class="hljs-number">0</span>]);<br>        Arrays.sort(whitelist);<br>        <span class="hljs-keyword">long</span> t1=System.currentTimeMillis();<br>        <span class="hljs-keyword">while</span>(!StdIn.isEmpty())&#123;<br>            <span class="hljs-comment">//读取键值，如果不存在与白名单中则将其打印</span><br>            <span class="hljs-keyword">int</span> key = StdIn.readInt();<br>            BinarySearch(key,whitelist);<span class="hljs-comment">//二分</span><br>            <span class="hljs-comment">//BruteForceSearch(key,whitelist);//暴力</span><br>        &#125;<br>        <span class="hljs-keyword">long</span> t2=System.currentTimeMillis();<br>        System.out.println(t2 - t1);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在阿里云Ecs学生机上运行：</p>
+<ol>
+<li>二分查找：13701毫秒 = 13.701秒</li>
+<li>暴力查找：1925849毫秒 = 1925.849秒 大约半小时</li>
+</ol>
+<h5 id="1-1-39-随机匹配。编写一个使用-BinarySearch-的程序，它从命令行接受一个整形参数-T-，并分别会针对-N-103-104-105-和-106-将一下实验运行-T-遍：生成两个大小为-N-的随机-6-位正整数数组并找出同时存在于两个数组中的整数的数量。-打印一个表格，对于每个-N-，给出-T-次实验中该数量的平均值。"><a href="#1-1-39-随机匹配。编写一个使用-BinarySearch-的程序，它从命令行接受一个整形参数-T-，并分别会针对-N-103-104-105-和-106-将一下实验运行-T-遍：生成两个大小为-N-的随机-6-位正整数数组并找出同时存在于两个数组中的整数的数量。-打印一个表格，对于每个-N-，给出-T-次实验中该数量的平均值。" class="headerlink" title="1.1.39 随机匹配。编写一个使用 BinarySearch 的程序，它从命令行接受一个整形参数 T ，并分别会针对 N = 103, 104, 105 和 106 将一下实验运行 T 遍：生成两个大小为 N 的随机 6 位正整数数组并找出同时存在于两个数组中的整数的数量。 打印一个表格，对于每个 N ，给出 T 次实验中该数量的平均值。"></a>1.1.39 随机匹配。编写一个使用 <code>BinarySearch</code> 的程序，它从命令行接受一个整形参数 T ，并分别会针对 N = 10<sup>3</sup>, 10<sup>4</sup>, 10<sup>5</sup> 和 10<sup>6</sup> 将一下实验运行 T 遍：生成两个大小为 N 的随机 6 位正整数数组并找出同时存在于两个数组中的整数的数量。 打印一个表格，对于每个 N ，给出 T 次实验中该数量的平均值。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> edu.princeton.cs.algs4.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">q1139</span></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 二分查找</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key,<span class="hljs-keyword">int</span>[] a)</span></span>&#123;<br>        <span class="hljs-comment">//数组必须是有序的</span><br>        <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> hi = a.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(lo &lt;= hi)&#123;<br>            <span class="hljs-comment">//被查找的键要么不存在，要么必然存在与a[lo~hi]之中</span><br>            <span class="hljs-keyword">int</span> mid = lo + (hi - lo) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(key &lt; a[mid])&#123;<br>                hi = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; a[mid]) &#123;<br>                lo = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成大小为 N 的六位随机数组</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] buld (<span class="hljs-keyword">int</span> N)&#123;<br>        <span class="hljs-keyword">int</span>[] array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[N];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<br>            StdOut.println(<span class="hljs-string">&quot;i&quot;</span>+ i);<br>            array[i] = StdRandom.uniform(<span class="hljs-number">100000</span>, <span class="hljs-number">1000000</span>);<br>            <br>        &#125;<br>        <span class="hljs-keyword">return</span> array;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 做实验</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> T 实验次数</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> N 生成数组大小</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span>[] running(<span class="hljs-keyword">int</span> T, <span class="hljs-keyword">int</span> N)&#123;<br>        <span class="hljs-keyword">double</span>[] num = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[T];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>; t &lt; T; t++)&#123;<br>            <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">int</span>[] a = buld(N);<br>            <span class="hljs-keyword">int</span>[] b = buld(N);<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;<br>                <span class="hljs-keyword">int</span> c = BinarySearch(a[i], b);<br>                <span class="hljs-keyword">if</span>(c &gt;= <span class="hljs-number">0</span>)&#123;<br>                    ans++;<br>                &#125;<br>            &#125;<br>            num[t] = ans*<span class="hljs-number">1.0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> num;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        StdOut.print(<span class="hljs-string">&quot;实验次数：&quot;</span>);<br>        <span class="hljs-keyword">int</span> T = StdIn.readInt();<br>        StdOut.println();<br>        <span class="hljs-keyword">double</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[T];<span class="hljs-comment">//存储结果</span><br>        &#123;<br>            <span class="hljs-keyword">int</span> N = <span class="hljs-number">1000</span>;<br>            <span class="hljs-keyword">double</span>[] answer = running(T, N);<br>            StdOut.println(<span class="hljs-string">&quot;N=&quot;</span> + N +<span class="hljs-string">&quot;，T=&quot;</span> + T + <span class="hljs-string">&quot;，平均值:&quot;</span>+StdStats.mean(answer));<br>        &#125;<br>        &#123;<br>            <span class="hljs-keyword">int</span> N = <span class="hljs-number">10000</span>;<br>            <span class="hljs-keyword">double</span>[] answer = running(T, N);<br>            StdOut.println(<span class="hljs-string">&quot;N=&quot;</span> + N +<span class="hljs-string">&quot;，T=&quot;</span> + T + <span class="hljs-string">&quot;，平均值:&quot;</span>+StdStats.mean(answer));<br>        &#125;<br>        &#123;<br>            <span class="hljs-keyword">int</span> N = <span class="hljs-number">100000</span>;<br>            <span class="hljs-keyword">double</span>[] answer = running(T, N);<br>            StdOut.println(<span class="hljs-string">&quot;N=&quot;</span> + N +<span class="hljs-string">&quot;，T=&quot;</span> + T + <span class="hljs-string">&quot;，平均值:&quot;</span>+StdStats.mean(answer));<br>        &#125;<br>        &#123;<br>            <span class="hljs-keyword">int</span> N = <span class="hljs-number">1000000</span>;<br>            <span class="hljs-keyword">double</span>[] answer = running(T, N);<br>            StdOut.println(<span class="hljs-string">&quot;N=&quot;</span> + N +<span class="hljs-string">&quot;，T=&quot;</span> + T + <span class="hljs-string">&quot;，平均值:&quot;</span>+StdStats.mean(answer));<br>        &#125;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dns">实验次数：<span class="hljs-number">1000000</span><br><br>N=<span class="hljs-number">1000</span>，T=<span class="hljs-number">1000000</span>，平均值:<span class="hljs-number">0.010973</span><br>N=<span class="hljs-number">10000</span>，T=<span class="hljs-number">1000000</span>，平均值:<span class="hljs-number">0.148369</span><br>N=<span class="hljs-number">100000</span>，T=<span class="hljs-number">1000000</span>，平均值:<span class="hljs-number">1.838557</span><br>N=<span class="hljs-number">1000000</span>，T=<span class="hljs-number">1000000</span>，平均值:<span class="hljs-number">21.962084</span><br></code></pre></td></tr></table></figure>
+<p>1.1习题完。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/">算法第四版</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E7%AE%97%E6%B3%95-%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AD%94%E6%A1%88%E7%B3%BB%E5%88%97-1-2%E7%BB%83%E4%B9%A0%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《算法-第四版》答案系列-1.2 练习篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E7%AE%97%E6%B3%95-%E7%AC%AC%E5%9B%9B%E7%89%88%E7%AD%94%E6%A1%88%E7%B3%BB%E5%88%97-1-1%E6%8F%90%E9%AB%98%E9%A2%98%E7%AF%87/">
+                        <span class="hidden-mobile">《算法-第四版》答案系列-1.1 提高题篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

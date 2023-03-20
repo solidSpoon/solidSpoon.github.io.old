@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>如何用正则表达式匹配 3 的倍数 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="如何用正则表达式匹配 3 的倍数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 21:23" pubdate>
+        2021年2月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何用正则表达式匹配 3 的倍数</h1>
+            
+            <div class="markdown-body">
+              <h1 id="如何用正则表达式匹配-3-的倍数"><a href="#如何用正则表达式匹配-3-的倍数" class="headerlink" title="如何用正则表达式匹配 3 的倍数"></a>如何用正则表达式匹配 3 的倍数</h1><p>如何用正则表达式匹配3的倍数</p>
+<p>最近在知乎上看到这样一个问题『如何用正则表达式匹配 3 的倍数』，原帖给出的答案非常有意思，遂研究了一番</p>
+<p>看一个数能否被 3 整除，最直接的办法就是将这个数用 3 除一下，如果余数是 0，那么这个数就可以被3 整除。然而正则并不具有计算的功能，正则算法的实现基于<strong>有穷状态自动机</strong>（finite automaton）</p>
+<p>以下是一个简单的示例</p>
+<p>这正则表达式 <code>哈+嗝</code> 的自动机，该正则表达式可以匹配一连串的『哈』紧接着一个『嗝』</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140036.png" srcset="/img/loading.gif"></p>
+<p>该自动机从左到右遍历一个字符串。可以看到，自动机初始状态是 s0，当遇到一个『哈』时，其状态变为 s1。此时，如果后面的字符还是『哈』，那么该自动机的状态会不断地在 s0 和 s1 之间转换，直到遇到一个不是『哈』的字符，状态稳定在 s1。此时如果下一个字符是『嗝』，则自动机变为状态 s2，也就是说该自动机匹配到了一个指定的文本；如果是其他字符，则匹配失败，回到 s0。</p>
+<p>我们常说一个正则表达式匹配到了文本，就是在文本中寻找一个字符串，可以让该正则表达式的自动机从起始状态转移到结束状态。如果我们要解决文章开头提出的问题，就要设计出合适的自动机。</p>
+<h1 id="设计自动机"><a href="#设计自动机" class="headerlink" title="设计自动机"></a>设计自动机</h1><p>我们来分析一下手动计算除法的过程</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140046.png" srcset="/img/loading.gif"></p>
+<p>仔细观察上图，可以发现一个数被 3 除，余数只有 0，1，2 三种情况，此时被除数的下一位可以是 0 ~ 9 的任意一值，也即我们需要处理的范围只有 00 ~ 09，1029。</p>
+<p>此时，我们已经有了一个自动机的雏形，它包括 A，B，C 三个状态</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140053.png" srcset="/img/loading.gif"></p>
+<p>由于我们的规则只有 00 ~ 09，1029，共 30 种，所以可以直接将这些规则添加到自动机中。这个自动机开始状态和结束状态都是 A</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140100.png" srcset="/img/loading.gif"></p>
+<p>对于前面的示例 522/3 ,在状态机中经过的路径如下，可以看到最终返回到了状态 A，表示 522 可以被 3 整除。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140106.png" srcset="/img/loading.gif"></p>
+<h1 id="状态机转正则表达式"><a href="#状态机转正则表达式" class="headerlink" title="状态机转正则表达式"></a>状态机转正则表达式</h1><p>下面来看看如何将我们设计出的这个状态机转换为正则表达式。有一点需要注意，由于我们的状态机起始状态和终止状态都为 A，如果在开始状态什么事都不做，实际已经处于终止状态，也就是说我们的状态机可以匹配到空字符串。在下面的推导中，我将用『Ø』表示空字符串。</p>
+<p>我们假定 A 是一个可以让状态机由终止状态转换到状态 A 的字符串，BC 类似。根据状态机可以列出如下三个方程</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">A</span> = A[<span class="hljs-number">0369</span>] | B[<span class="hljs-number">258</span>] | C[<span class="hljs-number">147</span>] | Ø<br><span class="hljs-attribute">B</span> = A[<span class="hljs-number">147</span>] | B[<span class="hljs-number">0369</span>] | C[<span class="hljs-number">258</span>]<br><span class="hljs-attribute">C</span> = A[<span class="hljs-number">258</span>] | B[<span class="hljs-number">147</span>] | C[<span class="hljs-number">0369</span>]<br></code></pre></td></tr></table></figure>
+
+<p>要从这三个方程推导出我们想要的正则表达式需要下面两个技巧</p>
+<p><strong>技巧1</strong>：根据正则语言的特性给定如下形式的方程，和它的解，以下每个字母均代表一个正则表达式</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">   <span class="hljs-attr">L</span> = LU | V<br>解：<span class="hljs-attr">L</span> = VU*<br></code></pre></td></tr></table></figure>
+
+<p>我们将解带入原方程可验证它的正确性</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">VU* = VU*U <span class="hljs-string">| V</span><br>VU* = VU+ <span class="hljs-string">| V</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧2</strong>：分配律</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">(U | <span class="hljs-type">V</span>) A = UA | <span class="hljs-type">VA</span><br></code></pre></td></tr></table></figure>
+
+<p>根据这两个技巧，推导过程如下，你可以暂时跳过这个推导过程</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs inform7">上述方程可以修改为：<br>  A = (Ø | B<span class="hljs-comment">[258]</span> | C<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*  (1)<br>  B = (A<span class="hljs-comment">[147]</span> | C<span class="hljs-comment">[258]</span>)<span class="hljs-comment">[0369]</span>*      (2)<br>  C = (A<span class="hljs-comment">[258]</span> | B<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*      (3)<br><br>将 (3) 代入 (1)(2) 得<br>  A = (Ø | B<span class="hljs-comment">[258]</span> | (A<span class="hljs-comment">[258]</span> | B<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*  (4)<br>  B = (A<span class="hljs-comment">[147]</span> | (A<span class="hljs-comment">[258]</span> | B<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span>)<span class="hljs-comment">[0369]</span>*      (5)<br><br>用分配律展开 (5) 中的竖线得到<br>  B = A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>* | B<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>    = B<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>* | A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>    = (A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<br>    = A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)* | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<br><br>把它代入 (4) 得<br>  A = (Ø | B<span class="hljs-comment">[258]</span> | (A<span class="hljs-comment">[258]</span> | B<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*<br>    = <span class="hljs-comment">[0369]</span>* | B<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>* | (A<span class="hljs-comment">[258]</span> | B<span class="hljs-comment">[147]</span>)<span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<br>    = <span class="hljs-comment">[0369]</span> | B<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>* | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* | B<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*  <br>    = <span class="hljs-comment">[0369]</span>* <br>      | B<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>      | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<br>      | B<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* <br>    = <span class="hljs-comment">[0369]</span>* <br>      | A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>      | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>      | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<br>      | A<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* <br>      | A<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* <br>    = A<span class="hljs-comment">[...]</span> | <span class="hljs-comment">[0369]</span>*<br>    = <span class="hljs-comment">[0369]</span>* <span class="hljs-comment">[...]</span>*<br>    = <span class="hljs-comment">[0369]</span>* (<br>                    <span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>      | <span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<br>      |             <span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* <br>      | <span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*(<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<br>      | <span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* )*<br>    = <span class="hljs-comment">[0369]</span>* (<br>        (<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>* | <span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)<br>        (<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*<br>        (<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>* | <span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*)<br>      | <span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<br>      )*<br></code></pre></td></tr></table></figure>
+
+<p>以上就是我们得到的正则表达式，我们去掉结果中的换行与空格，用 <code>(?:)</code> 消去不必要的子组，再加上断言 <code>(?&lt;!\d)</code> 与 <code>(?!\d)</code> 确保匹配整个数字，得到最终的正则表达式如下：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">(?&lt;!\d)<span class="hljs-comment">[0369]</span>*(?:(?:<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*|<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)(?:<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*)*(?:<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*|<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*)|<span class="hljs-comment">[258]</span><span class="hljs-comment">[0369]</span>*<span class="hljs-comment">[147]</span><span class="hljs-comment">[0369]</span>*)*(?!\d)<br></code></pre></td></tr></table></figure>
+
+<p>这是该正则表达式真正的自动机，该自动机将开始状态与结束状态区分开了</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140824.jpeg" srcset="/img/loading.gif"></p>
+<p>有点儿复杂，但是我们知道 3 的倍数有一个特性：如果一个数可以被 3 整除，那么这个数各位之和也能被 3 整除，反之也成立。我们在各位数中剔除『0，3，6，9』这些本身就是 3 的倍数的元素，将剩下元素的加和并不会影响我们的判断。就是说正则中的 <code>[0369]*</code> 实际上对理清该正则表达式没有帮助，我们暂时忽略正则中所有的 <code>[0369]*</code> ，得到如下状态机</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140122.png" srcset="/img/loading.gif"></p>
+<p>我将该状态机与我们开头所设计的状态机对应的状态标记在了图像上，以便于你理解我们推导的正则表达式。</p>
+<h1 id="更一般的情况"><a href="#更一般的情况" class="headerlink" title="更一般的情况"></a>更一般的情况</h1><p>如和用正则表达式匹配十进制下任意一个整数的倍数呢？</p>
+<p>实际上前面讲述的思路可以用于匹配任一个整数 n 的倍数，我们就需要构造一个有 n 个状态的自动机</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140128.png" srcset="/img/loading.gif"></p>
+<p>在这个状态机中，起始状态和结束状态都是『q0』，第 k 个状态『qk』代表当前读入的数可以被 n 除余 k。我们将手算除法扩展到一般形式：</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140132.png" srcset="/img/loading.gif"></p>
+<p>前面讨论过 m 的范围是 [ 0 - 9 ]，易得通过如下的公式即可构造一条从『qk』到『qr』的转移边</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140137.png" srcset="/img/loading.gif"></p>
+<p>我们需要对每个状态『qk』和 m 的组合都用这个公式计算一遍，这样才可以求得所有的转移边，工作量等于</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20201208140141.png" srcset="/img/loading.gif"></p>
+<p>当然实际编程中我们并不会用这个方法来匹配某一个数的倍数，这里探讨这一问题仅用于拓展思路。</p>
+<blockquote>
+<p>正则表达式如何匹配 3 的倍数？ - Belleve的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24824487/answer/29109747">https://www.zhihu.com/question/24824487/answer/29109747</a></p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99/">正则</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E5%88%A0%E9%99%A4%E6%88%96%E4%BF%AE%E6%94%B9Windows%E4%B8%AD%E8%A2%AB%E5%8D%A0%E7%94%A8%E7%9A%84%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">删除或修改 Windows 中被占用的文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">搭建简单好用的笔记系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

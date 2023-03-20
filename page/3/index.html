@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="方向是比速度更重要的追求">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/17/%E9%85%8D%E7%BD%AEWSL2%E4%BD%BF%E7%94%A8Windows%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91/">配置 WSL2 使用 Windows 代理上网</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/17/%E9%85%8D%E7%BD%AEWSL2%E4%BD%BF%E7%94%A8Windows%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91/">
+          
+          
+            
+          
+          WSL 2 配置代理在 Windows 上设置好代理，连上了谷歌开开心心，但是 WSL 2 不能共享 Windows 的代理策略，如果在 WSL 上再装一个代理软件那可太麻烦了，所以得想想办法。
+其实办法还挺简单的，可能有的同学不知道，在一个局域网下如果有一台机器配置好了代理，那么这个代理是可以共享给这个局域网下的其他设备的，比较类似软路由哈！
+具体方法如下：
+Windows 端这里以 Clash
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-17 01:41" pubdate>
+              2021-02-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/%E6%9F%A5%E7%9C%8BDockerIP%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">查看 Docker IP 的几种方法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/%E6%9F%A5%E7%9C%8BDockerIP%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+          
+          
+            
+          
+          使用 Docker 时常常需要知道某一容器的 IP，这是个挺烦人的事儿，本文介绍几种查看 Docker IP 的方法
+在容器内部查看1cat /etc/hosts
+会显示自己以及 –link 软连接的容器 IP
+使用 docker inspect 命令inspect 会列出容器详细信息
+下面的命令任选其一
+1docker inspect --format &#x27;&#123;&#123; .N
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 23:57" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Windows10KafkaDocker%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">教你在 Windows 10 Docker 上搭建 Kafka  集群</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Windows10KafkaDocker%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">
+          
+          
+            
+          
+          前言Kafka 是一款比较优秀的消息队列，简单介绍如下：
+
+Kafka 是一种分布式的，基于发布 / 订阅的消息系统。该消息系统是由 LinkedIn 于 2011 年设计开发，用作 LinkedIn 的活动流（Activity Stream）和运营数据处理管道（Pipeline）的基础。
+
+本文介绍如何在 Windows 10 Docker 上搭建 Kafka 集群
+运行 ZooKeeperKa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 23:43" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+              <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Docker%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/">Docker 网络设置</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Docker%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/">
+          
+          
+            
+          
+          这里列出 Docker 配置网络的常用命令
+
+
+docker network create
+docker network connect
+docker network ls
+docker network rm
+docker network disconnect
+docker network inspect
+
+
+列出所有网络
+1docker network ls
+创建网络
+1docker netwo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 23:03" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Docker%E8%AF%8A%E6%96%AD%E7%A5%9E%E5%99%A8BusyBox/">Docker 诊断神器 BusyBox</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Docker%E8%AF%8A%E6%96%AD%E7%A5%9E%E5%99%A8BusyBox/">
+          
+          
+            
+          
+          
+BusyBox 是一个集成了一百多个最常用 Linux 命令和工具（如 cat、echo、grep、mount、telnet 、ping、ifconfig 等）的精简工具箱，它只需要几 MB 的大小，很方便进行各种快速验证，被誉为“Linux 系统的瑞士军刀”。
+
+BusyBox 容器镜像可以帮助我们快速测试容器网络
+直接运行并进入命令行：
+1docker run --name &lt;my-d
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 23:00" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/MySQL%E6%89%8B%E5%8A%A8%E5%B0%86%E4%B8%BB%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%BB%8E%E5%BA%93/">MySQL 手动将主库的数据导入从库</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/MySQL%E6%89%8B%E5%8A%A8%E5%B0%86%E4%B8%BB%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%BB%8E%E5%BA%93/">
+          
+          
+            
+          
+          
+运行环境：Windows 10 Docker Desktop WSL 2 based engine
+
+搭建演示环境主库拉取 MySQL 8.0 版本镜像并启动，监听在 3306 端口，设置 root 用户密码为 root
+1docker run --name mysql -p 3316:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_ROOT_HOST=% -
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:42" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">Win10 - MySQL 8 Zip 版 - 搭建主从复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          Win10 - MySQL 8 压缩版 - 主从复制
+配置环境：Windows 10 - MySQL 压缩版 
+
+准备两个 MySQL 服务实例8.0 压缩版下载地址：
+
+https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.16-winx64.zip
+
+解压后再复制一份，假设命名为 mysql-8.0.16-winx64 和 mysql-
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:40" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGTID%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">Win10 - MySQL 8 Zip 版 - 搭建基于 GTID 的主从复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGTID%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          
+配置环境：Windows 10 - MySQL 压缩版 
+
+前言GTID 是干嘛的？
+
+GTID (Global Transaction IDentifier) 是全局事务标识。它具有全局唯一性，一个事务对应一个GTID。唯一性不仅限于主服务器，GTID在所有的从服务器上也是唯一的。一个GTID在一个服务器上只执行一次，从而避免重复执行导致数据混乱或主从不一致。
+在传统的复制里面，当发生故障需要
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:38" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/MySQL8-0%E6%90%AD%E5%BB%BA%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%A4%8D%E5%88%B6/">MySQL 8.0 搭建半同步复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/MySQL8-0%E6%90%AD%E5%BB%BA%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          说明：搭建半同步复制需要预先有基本的主从复制环境，具体可以看我之前的文章：
+
+https://github.com/solidSpoon/solidSpoon.github.io/wiki
+
+半同步超时的时候，会自动降为异步工作。当Slave开启半同步后，或者当主从之间网络延迟恢复正常的时候，半同步复制会自动从异步复制又转为半同步复制，还是相当智能的。
+Master 配置安装半同步模块并启动
+这里
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:35" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/16/Win10-MySQL8-0-Docker%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">Win10 - MySQL 8.0 - Docker 搭建主从复制</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/16/Win10-MySQL8-0-Docker%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+          
+          
+            
+          
+          
+搭建环境：Windows 10 Docker Desktop WSL 2 based engine
+
+创建首先创建两个数据库，一个作为主库，另一个作为从库
+编写 docker-conpose 文件一般安装了 docker 都会安装 docker-compose，可以使用 docker-compose -verison 查看是否安装
+12➜  ~ docker-compose -verisondo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-16 21:33" pubdate>
+              2021-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

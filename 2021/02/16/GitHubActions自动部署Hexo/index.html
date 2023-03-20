@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>GitHub Actions 自动部署 Hexo - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GitHub Actions 自动部署 Hexo">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 17:22" pubdate>
+        2021年2月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      610 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GitHub Actions 自动部署 Hexo</h1>
+            
+            <div class="markdown-body">
+              <p>简单介绍下 GitHub Actions 中的术语：</p>
+<ul>
+<li><p>workflow：表示一次持续集成的过程</p>
+</li>
+<li><p>job：构建任务，一个 workflow 可以由一个或者多个 job 组成，可支持并发执行 job</p>
+</li>
+<li><p>step：一个 job 由一个或多个 step 组成，按顺序依次执行</p>
+</li>
+<li><p>action：每个 step 由一个或多个 action 组成，按顺序依次执行</p>
+<h2 id="博客工程"><a href="#博客工程" class="headerlink" title="博客工程"></a>博客工程</h2><p>采用源码与部署放置在不同分支的方式，在本教程中</p>
+</li>
+<li><p>部署分支为：<code>master</code></p>
+</li>
+<li><p>源码分支为：<code>MyBlog2021</code></p>
+<h2 id="生成公私钥"><a href="#生成公私钥" class="headerlink" title="生成公私钥"></a>生成公私钥</h2><p>在源码分支通过下面命令生成公钥私钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout MyBlog2021<br>ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">&quot;<span class="hljs-subst">$(git config user.email)</span>&quot;</span> -f github-deploy-key -N <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>目录中生成两个文件：</p>
+</li>
+<li><p><code>github-deploy-key.pub</code> — 公钥文件</p>
+</li>
+<li><p><code>github-deploy-key</code> — 私钥文件</p>
+</li>
+</ul>
+<blockquote>
+<p>公钥和私钥切记要添加到 <code>.gitignore</code> 中！！！</p>
+</blockquote>
+<h2 id="GitHub-添加公钥"><a href="#GitHub-添加公钥" class="headerlink" title="GitHub 添加公钥"></a>GitHub 添加公钥</h2><p>在 GitHub 中博客工程中按照 <code>Settings-&gt;Deploye keys-&gt;Add deploy key</code> 找到对应的页面，然后进行公钥添加。该页面中 <code>Title</code> 自定义即可，<code>Key</code> 中添加 <code>github-deploy-key.pub</code> 文件中的内容。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164046.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>注意：切记不要多复制空格!!!<br>切记要勾选 Allow write access，否则会出现无法部署的情况。</p>
+</blockquote>
+<h2 id="GitHub-添加私钥"><a href="#GitHub-添加私钥" class="headerlink" title="GitHub 添加私钥"></a>GitHub 添加私钥</h2><p>在 GitHub 中博客工程中按照 <code>Settings-&gt;Secrets-&gt;Add a new secrets</code> 找到对应的页面，然后进行私钥添加。该页面中 <code>Name</code> 自定义即可，<code>Value</code> 中添加 <code>github-deploy-key</code> 文件中的内容。</p>
+<p>我的名字叫做 <code>HEXO_DEPLOY_PRI</code>，这个跟下文的配置文件保持一致就行<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164102.png" srcset="/img/loading.gif"></p>
+<h2 id="创建编译脚本"><a href="#创建编译脚本" class="headerlink" title="创建编译脚本"></a>创建编译脚本</h2><p>在博客源码分支（我这里是 <code>MyBlog2021</code> 分支）中创建 <code>.github/workflows/deployblog.yml</code> 文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">Blog</span><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">MyBlog2021</span><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">build:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br>    <span class="hljs-attr">strategy:</span><br>      <span class="hljs-attr">matrix:</span><br>        <span class="hljs-attr">node-version:</span> <br>          <span class="hljs-bullet">-</span> <span class="hljs-number">14.</span><span class="hljs-string">x</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">source</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v1</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">ref:</span> <span class="hljs-string">MyBlog2021</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node_version</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v2</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node_version</span> <span class="hljs-string">&#125;&#125;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Configuration</span> <span class="hljs-string">environment</span><br>        <span class="hljs-attr">env:</span><br>          <span class="hljs-attr">ACTION_DEPLOY_KEY:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.HEXO_DEPLOY_PRI</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br>          <span class="hljs-string">mkdir</span> <span class="hljs-string">-p</span> <span class="hljs-string">~/.ssh/</span><br>          <span class="hljs-string">echo</span> <span class="hljs-string">&quot;$ACTION_DEPLOY_KEY&quot;</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>          <span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>          <span class="hljs-string">ssh-keyscan</span> <span class="hljs-string">github.com</span> <span class="hljs-string">&gt;&gt;</span> <span class="hljs-string">~/.ssh/known_hosts</span><br>          <span class="hljs-string">git</span> <span class="hljs-string">config</span> <span class="hljs-string">--global</span> <span class="hljs-string">user.email</span> <span class="hljs-string">&quot;lujiahao0708@gmail.com&quot;</span><br>          <span class="hljs-string">git</span> <span class="hljs-string">config</span> <span class="hljs-string">--global</span> <span class="hljs-string">user.name</span> <span class="hljs-string">&quot;lujiahao0708&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Config</span> <span class="hljs-string">hexo</span> <br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span>  <br>          <span class="hljs-string">sudo</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-string">hexo-cli</span> <span class="hljs-string">-g</span><br>          <span class="hljs-string">sudo</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Hexo</span> <span class="hljs-string">deploy</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br>          <span class="hljs-string">hexo</span> <span class="hljs-string">clean</span><br>          <span class="hljs-string">hexo</span> <span class="hljs-string">d</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="Hexo-配置"><a href="#Hexo-配置" class="headerlink" title="Hexo 配置"></a>Hexo 配置</h2><p>在项目根目录中修改 <code>_config.yml</code> ，增加部署相关内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">博客项目的资源地址.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span><br></code></pre></td></tr></table></figure>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>push 好我们的分支之后，在项目 Action 目录即可看到<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210328164128.png" srcset="/img/loading.gif"></p>
+<hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/133764310">https://zhuanlan.zhihu.com/p/133764310</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/%7F%E4%B8%80%E7%AF%87%E6%95%A3%E6%96%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一篇散文</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/article-typesetting-guide/">
+                        <span class="hidden-mobile">文章排版指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

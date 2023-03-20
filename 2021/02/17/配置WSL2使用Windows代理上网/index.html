@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>配置 WSL2 使用 Windows 代理上网 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="配置 WSL2 使用 Windows 代理上网">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-17 01:41" pubdate>
+        2021年2月17日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      974 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">配置 WSL2 使用 Windows 代理上网</h1>
+            
+            <div class="markdown-body">
+              <h2 id="WSL-2-配置代理"><a href="#WSL-2-配置代理" class="headerlink" title="WSL 2 配置代理"></a>WSL 2 配置代理</h2><p>在 Windows 上设置好代理，连上了谷歌开开心心，但是 WSL 2 不能共享 Windows 的代理策略，如果在 WSL 上再装一个代理软件那可太麻烦了，所以得想想办法。</p>
+<p>其实办法还挺简单的，可能有的同学不知道，在一个局域网下如果有一台机器配置好了代理，那么这个代理是可以共享给这个局域网下的其他设备的，比较类似软路由哈！</p>
+<p>具体方法如下：</p>
+<h2 id="Windows-端"><a href="#Windows-端" class="headerlink" title="Windows 端"></a>Windows 端</h2><p>这里以 Clash 为例，打开 Allow LAN 选项，如下图所示。如果你使用其他软件，那可能是叫「网关模式」、「允许来自局域网的链接」或者其它的什么，都是一个东西，打开就好了，注意打开这个选项后你的电脑就可以代理整个局域网内的机器了，虽然其他的机器还需要额外的配置，但也还是注意安全。</p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210217014320.png" srcset="/img/loading.gif" alt="image.png"><br>对于 Clash 来说，这个选项是一次性的，下次开机它就关了，不过可以在配置文件里改，通常文件的开头就是。如下图，改成 true 就行。<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210217014312.png" srcset="/img/loading.gif" alt="image.png"><br>开启这个选项后，仔细找找，你会找到一个 IP 地址和一个端口号，IP 其实就是本机 IP 啦，这两个数一会有用。 </p>
+<p><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210217014306.png" srcset="/img/loading.gif" alt="image.png"><br>Clash 这个端口 http 和 socks 通用 </p>
+<p>注意如果后文配置后没有效果，那可能是 Windows  防火墙的锅，快去配置防火墙放行 Clash</p>
+<h2 id="WSL-2-端"><a href="#WSL-2-端" class="headerlink" title="WSL 2 端"></a>WSL 2 端</h2><p>说是 WSL 2，其实其他的手机电脑都能连上，就在网络设置或者 WiFi 设置那有个配置代理，把上面得到的 IP 和端口填上就行。</p>
+<p>下面就说说在 WSL 2 下怎么操作吧！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## 获取主机 IP</span><br><span class="hljs-comment">## 主机 IP 保存在 /etc/resolv.conf 中</span><br><span class="hljs-built_in">export</span> hostip=$(cat /etc/resolv.conf |grep -oP <span class="hljs-string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>Q: 以上似乎会定位到默认网关 <code>192.168.3.1</code><br>A: 切换到 WSL2 </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://<span class="hljs-variable">$&#123;hostip&#125;</span>:7890&quot;</span>;<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://<span class="hljs-variable">$&#123;hostip&#125;</span>:7890&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>注意修改成你的端口</p>
+<p>如果是 socket5 协议的话</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;socks5://<span class="hljs-variable">$&#123;hostip&#125;</span>:7890&quot;</span><br><span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;socks5://<span class="hljs-variable">$&#123;hostip&#125;</span>:7890&quot;</span><br></code></pre></td></tr></table></figure>
+<p>如果端口一样就可以合并成一句话，http 的同理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> all_proxy=<span class="hljs-string">&quot;socks5://<span class="hljs-variable">$&#123;hostip&#125;</span>:7890&quot;</span><br></code></pre></td></tr></table></figure>
+<p>使用 <code>curl</code> 即可验证是否代理成功，如下有返回值说明成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  ~cedar curl google.com<br>&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=<span class="hljs-string">&quot;content-type&quot;</span> content=<span class="hljs-string">&quot;text/html;charset=utf-8&quot;</span>&gt;<br>&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;<br>&lt;H1&gt;301 Moved&lt;/H1&gt;<br>The document has moved<br>&lt;A HREF=<span class="hljs-string">&quot;http://www.google.com/&quot;</span>&gt;here&lt;/A&gt;.<br>&lt;/BODY&gt;&lt;/HTML&gt;<br></code></pre></td></tr></table></figure>
+<p>可以将上面命令选择你需要的添加到 <code>.bashrc</code> ，这样会让代理一直开启。<br>使用 zsh 应该保存到  <code>~/.zshrc</code></p>
+<p>更新配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.zshrc<br></code></pre></td></tr></table></figure>
+
+<p>或者添加如下，需要代理的时候输入 <code>setss</code> 即可设置代理，取消代理就 <code>unsetss</code> ，或者新开一个窗口。<br>下面第二条的长命令你好像得根据情况删掉一部分。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> hostip=$(cat /etc/resolv.conf |grep -oP <span class="hljs-string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)<br><span class="hljs-built_in">alias</span> setss=<span class="hljs-string">&#x27;export https_proxy=&quot;http://$&#123;hostip&#125;:7890&quot;;export http_proxy=&quot;http://$&#123;hostip&#125;:7890&quot;;export all_proxy=&quot;socks5://$&#123;hostip&#125;:7890&quot;;&#x27;</span><br><span class="hljs-built_in">alias</span> unsetss=<span class="hljs-string">&#x27;unset all_proxy&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>如下是我在 <code>~/.zshrc</code> 中添加的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> hostip=$(cat /etc/resolv.conf |grep -oP <span class="hljs-string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)<br><span class="hljs-built_in">alias</span> setss=<span class="hljs-string">&#x27;export all_proxy=&quot;socks5://$&#123;hostip&#125;:7890&quot;;&#x27;</span><br><span class="hljs-built_in">alias</span> unsetss=<span class="hljs-string">&#x27;unset all_proxy&#x27;</span><br></code></pre></td></tr></table></figure>
+<h2 id="验证："><a href="#验证：" class="headerlink" title="验证："></a>验证：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  ~cedar setss<br>➜  ~cedar curl google.com<br>&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=<span class="hljs-string">&quot;content-type&quot;</span> content=<span class="hljs-string">&quot;text/html;charset=utf-8&quot;</span>&gt;<br>&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;<br>&lt;H1&gt;301 Moved&lt;/H1&gt;<br>The document has moved<br>&lt;A HREF=<span class="hljs-string">&quot;http://www.google.com/&quot;</span>&gt;here&lt;/A&gt;.<br>&lt;/BODY&gt;&lt;/HTML&gt;<br>➜  ~cedar unsetss<br>➜  ~cedar curl google.com<br>curl: (28) Failed to connect to google.com port 80: Connection timed out<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/17/Windows%E4%B8%8B%E4%B8%BAGit%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Windows 下为 Git 设置代理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E6%9F%A5%E7%9C%8BDockerIP%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">查看 Docker IP 的几种方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

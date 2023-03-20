@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>Win10 - MySQL 8 Zip 版 - 搭建主从复制 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Win10 - MySQL 8 Zip 版 - 搭建主从复制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-16 21:40" pubdate>
+        2021年2月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      867 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Win10 - MySQL 8 Zip 版 - 搭建主从复制</h1>
+            
+            <div class="markdown-body">
+              <h2 id="Win10-MySQL-8-压缩版-主从复制"><a href="#Win10-MySQL-8-压缩版-主从复制" class="headerlink" title="Win10 - MySQL 8 压缩版 - 主从复制"></a>Win10 - MySQL 8 压缩版 - 主从复制</h2><blockquote>
+<p>配置环境：Windows 10 - MySQL 压缩版 </p>
+</blockquote>
+<h2 id="准备两个-MySQL-服务实例"><a href="#准备两个-MySQL-服务实例" class="headerlink" title="准备两个 MySQL 服务实例"></a>准备两个 MySQL 服务实例</h2><p>8.0 压缩版下载地址：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.16-winx64.zip">https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.16-winx64.zip</a></p>
+</blockquote>
+<p>解压后再复制一份，假设命名为 <code>mysql-8.0.16-winx64</code> 和 <code>mysql-8.0.16-winx64-2</code></p>
+<h2 id="修改主-MySQL-8的-my-ini"><a href="#修改主-MySQL-8的-my-ini" class="headerlink" title="修改主 MySQL-8的 my.ini"></a>修改主 MySQL-8的 <code>my.ini</code></h2><p>在 <code>mysql-8.0.16-winx64</code> 目录下添加 my.ini 文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">mysqld</span>]<br><span class="hljs-string">basedir</span> <span class="hljs-string">=</span> <span class="hljs-string">./</span><br><span class="hljs-string">datadir</span> <span class="hljs-string">=</span> <span class="hljs-string">./data</span><br><span class="hljs-string">port</span> <span class="hljs-string">=</span> <span class="hljs-number">3306</span><br><span class="hljs-string">server_id</span> <span class="hljs-string">=</span> <span class="hljs-number">1</span><br><br><span class="hljs-string">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span> <br><span class="hljs-string">log_bin=mysql-bin</span><br><span class="hljs-string">binlog-format=Row</span><br></code></pre></td></tr></table></figure>
+<h2 id="修改从-MySQL-8的-my-ini"><a href="#修改从-MySQL-8的-my-ini" class="headerlink" title="修改从 MySQL-8的 my.ini"></a>修改从 MySQL-8的 <code>my.ini</code></h2><p>在从 <code>mysql-8.0.16-winx64-2</code> 目录下添加 my.ini 文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">mysqld</span>]<br><span class="hljs-string">basedir</span> <span class="hljs-string">=</span> <span class="hljs-string">./</span><br><span class="hljs-string">datadir</span> <span class="hljs-string">=</span> <span class="hljs-string">./data</span><br><span class="hljs-string">port</span> <span class="hljs-string">=</span> <span class="hljs-number">3316</span><br><span class="hljs-string">server_id</span> <span class="hljs-string">=</span> <span class="hljs-number">2</span><br><br><span class="hljs-string">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span> <br><span class="hljs-string">log_bin=mysql-bin</span><br><span class="hljs-string">binlog-format=Row</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="初始化和启动数据库"><a href="#初始化和启动数据库" class="headerlink" title="初始化和启动数据库"></a>初始化和启动数据库</h2><p>空数据库需要初始化，分别在两个数据库的 <code>\bin</code> 目录下执行 <code>mysqld --initialize-insecure</code> 进行初始化。</p>
+<p>分别启动主和从，在两个数据库的 <code>\bin</code> 目录下直接执行 <code>mysqld</code> 或 <code>start mysqld</code> 命令即可。</p>
+<h2 id="配置主节点"><a href="#配置主节点" class="headerlink" title="配置主节点"></a>配置主节点</h2><p>用 <code>mysql</code> 命令登录到主节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql -uroot -P3306<br></code></pre></td></tr></table></figure>
+<p>进入后执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; CREATE USER <span class="hljs-string">&#x27;repl&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="hljs-string">&#x27;123456&#x27;</span>;<br>Query OK, 0 rows affected (0.11 sec)<br><br>mysql&gt; GRANT REPLICATION SLAVE ON *.* TO <span class="hljs-string">&#x27;repl&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br>Query OK, 0 rows affected (0.12 sec)<br><br>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.10 sec)<br><br>mysql&gt; show master status;<br>+------------------+----------+--------------+------------------+-------------------+<br>| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |<br>+------------------+----------+--------------+------------------+-------------------+<br>| mysql-bin.000003 |      305 |              |                  |                   |<br>+------------------+----------+--------------+------------------+-------------------+<br>1 row <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)<br></code></pre></td></tr></table></figure>
+
+<p>创建数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">create schema db;<br></code></pre></td></tr></table></figure>
+<h3 id="主节点证书文件"><a href="#主节点证书文件" class="headerlink" title="主节点证书文件"></a>主节点证书文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; SHOW GLOBAL VARIABLES LIKE <span class="hljs-string">&#x27;caching_sha2_password_public_key_path&#x27;</span>;<br>+---------------------------------------+----------------+<br>| Variable_name                         | Value          |<br>+---------------------------------------+----------------+<br>| caching_sha2_password_public_key_path | public_key.pem |<br>+---------------------------------------+----------------+<br>1 row <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)<br></code></pre></td></tr></table></figure>
+<p>这个文件在初始化之后位于 <code>\bin\data</code> 下</p>
+<p>因为 MySQL 8 默认是用 <code>caching_sha2_password</code> 做认证插件，这点与 MySQL 5 不同：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">error connecting to master <span class="hljs-string">&#x27;repl@localhost:3306&#x27;</span> - retry-time: 60 retries: 18 message: Authentication plugin <span class="hljs-string">&#x27;caching_sha2_password&#x27;</span> reported error: Authentication requires secure connection.<br></code></pre></td></tr></table></figure>
+
+<p>这个文件就是基于默认设置 <code>caching_sha2_password</code> 下的通讯公钥文件。默认情况服务器不会给客户端发送，所以需要拷贝到从节点的目录下。</p>
+<p>如果不想拷贝的话 ：<br>MySQL 8.0 的版本要在<strong>从数据库</strong>初始设置（CHANGE MASTER TO）加：<br><code>MASTER_PUBLIC_KEY_PATH = &#39;key_file_name&#39;</code><br>或者<br><code>GET_MASTER_PUBLIC_KEY = &#123;0|1&#125;</code></p>
+<h2 id="配置从节点"><a href="#配置从节点" class="headerlink" title="配置从节点"></a>配置从节点</h2><p>把刚才的 <code>public_key.pem</code> 文件改名为 <code>master_public_key.pem</code> 然后拷贝到从服务器的 <code>\bin\data</code> 文件夹中，注意这个文件夹用上面的那个命令初始化之后才有。</p>
+<p><code>mysql</code> 命令登录到从节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql -uroot -P3316<br></code></pre></td></tr></table></figure>
+<p>还记得刚刚在主库查看的表格吗？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; show master status;<br>+------------------+----------+--------------+------------------+-------------------+<br>| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |<br>+------------------+----------+--------------+------------------+-------------------+<br>| mysql-bin.000003 |      305 |              |                  |                   |<br>+------------------+----------+--------------+------------------+-------------------+<br>1 row <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)<br></code></pre></td></tr></table></figure>
+<p>注意以下的 MASTER_LOG_POS 需要改成这个表格上 Position 的数值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">CHANGE MASTER TO<br>    MASTER_HOST=<span class="hljs-string">&#x27;localhost&#x27;</span>,  <br>    MASTER_PORT = 3306,<br>    MASTER_USER=<span class="hljs-string">&#x27;repl&#x27;</span>,      <br>    MASTER_PASSWORD=<span class="hljs-string">&#x27;123456&#x27;</span>,   <br>    MASTER_LOG_FILE=<span class="hljs-string">&#x27;mysql-bin.000002&#x27;</span>,<br>    MASTER_LOG_POS=855,<br>    MASTER_PUBLIC_KEY_PATH=<span class="hljs-string">&#x27;master_public_key.pem&#x27;</span>;<br>    <br>    //MASTER_AUTO_POSITION = 1;<br></code></pre></td></tr></table></figure>
+
+<p>这里有个问题，MySQL 8 下面不需要创建 db 。否则会报错说已经存在 db 。<br>–创建数据库：create schema db;–</p>
+<p>直接开始执行同步<br><code>start/stop slave;</code></p>
+<h2 id="验证操作"><a href="#验证操作" class="headerlink" title="验证操作"></a>验证操作</h2><h3 id="主库"><a href="#主库" class="headerlink" title="主库"></a>主库</h3><p>在主库执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; use db<br>Database changed<br>mysql&gt; create table t1(id int);<br>Query OK, 0 rows affected (0.17 sec)<br><br>mysql&gt;<br>mysql&gt;<br>mysql&gt; insert into t1(id) values(1),(2);<br>Query OK, 2 rows affected (0.04 sec)<br></code></pre></td></tr></table></figure>
+
+<h3 id="从库"><a href="#从库" class="headerlink" title="从库"></a>从库</h3><p>在从库查看数据同步情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; use db<br>Database changed<br>mysql&gt;<br>mysql&gt;<br>mysql&gt; show tables;<br>+--------------+<br>| Tables_in_db |<br>+--------------+<br>| t1           |<br>+--------------+<br>1 row <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)<br><br>mysql&gt;<br>mysql&gt;<br>mysql&gt; select * from t1;<br>+------+<br>| id   |<br>+------+<br>|    1 |<br>|    2 |<br>+------+<br>2 rows <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)<br></code></pre></td></tr></table></figure>
+
+<h2 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h2><p>可以通过 <code>show master status\G</code>，<code>show slave status\G</code> 查看状态，或定位一些问题</p>
+<p>可以能改过 <code>stop slave;</code>  <code>start slave;</code> 来停止复制。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL 主从复制</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/MySQL%E6%89%8B%E5%8A%A8%E5%B0%86%E4%B8%BB%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E4%BB%8E%E5%BA%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL 手动将主库的数据导入从库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/Win10-MySQL8Zip%E7%89%88-%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGTID%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                        <span class="hidden-mobile">Win10 - MySQL 8 Zip 版 - 搭建基于 GTID 的主从复制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

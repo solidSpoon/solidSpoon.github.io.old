@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pic/favicon.png">
+  <link rel="icon" type="image/png" href="/pic/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="solidSpoon 的博客">
+  <meta name="author" content="solidSpoon">
+  <meta name="keywords" content="">
+  <title>手把手教你读一个 Java 文件的字节码 - Hide</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"solidspoon.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":"G-J4C7KRTEV4","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"KJSrgHRNC5Peof00Y87aRjPf-gzGzoHsz","app_key":"GL6okGAEH7Al5AdYM4vMPeIi","server_url":"https://kjsrghrn.lc-cn-n1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Hide</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.yuque.com/solidspoon/leetcode">
+                <i class="iconfont icofont-code"></i>
+                LeetCode
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/obsNote/">
+                <i class="iconfont icofont-ui-note"></i>
+                Note
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210715112937.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="手把手教你读一个 Java 文件的字节码">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-04 01:37" pubdate>
+        2021年3月4日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">手把手教你读一个 Java 文件的字节码</h1>
+            
+            <div class="markdown-body">
+              <p>想要读懂 Java 的字节码其实没那么难。当然，如果你有汇编语言的经验就会更好上手。本文手把手教你阅读一个简单 Java 文件的字节码。</p>
+<h2 id="如何得到字节码？"><a href="#如何得到字节码？" class="headerlink" title="如何得到字节码？"></a>如何得到字节码？</h2><p>以下面这段示例代码为例，他存放在一个包中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> demo.a<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span></span>&#123;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>通过下面这几个方法就可以查看代码的字节码：</p>
+<h3 id="方法-1-、命令行"><a href="#方法-1-、命令行" class="headerlink" title="方法 1 、命令行"></a>方法 1 、命令行</h3><p>相关命令如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">javac demo/a/B.java <span class="hljs-comment">// 编译</span><br>jvavp -c demo.a.B   <span class="hljs-comment">// 输出字节码</span><br>javap -c -verbose demo.a.B <span class="hljs-comment">// 详细输出</span><br></code></pre></td></tr></table></figure>
+<h3 id="方法-2-、idea-插件"><a href="#方法-2-、idea-插件" class="headerlink" title="方法 2 、idea 插件"></a>方法 2 、idea 插件</h3><p>下载个插件：「jclasslib Bytecode Viewer」，网址如下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/9248-jclasslib-bytecode-viewer">https://plugins.jetbrains.com/plugin/9248-jclasslib-bytecode-viewer</a></p>
+</blockquote>
+<p>安装该插件后，首先编译代码，然后<br>菜单 👉 「view」 👉 「Show Bytecode With jclasslib」<br>结果如下：<br><img src="https://ced-md-picture.oss-cn-beijing.aliyuncs.com/img/20210402103711.png" srcset="/img/loading.gif"></p>
+<h2 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h2><p>我们使用下面这段代码，你可以将其输入 IDE 中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> num1 = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> num2 = <span class="hljs-number">130</span>;<br>        <span class="hljs-keyword">int</span> num3 = num1 + num2;<br>        <span class="hljs-keyword">int</span> num4 = num2 - num1;<br>        <span class="hljs-keyword">int</span> num5 = num1 * num2;<br>        <span class="hljs-keyword">int</span> num6 = num2 / num1;<br><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> num7 = <span class="hljs-number">5</span>;<br>        Integer num88 = <span class="hljs-number">6</span>;<br><br>        <span class="hljs-comment">//看装箱指令</span><br>        <span class="hljs-keyword">if</span>(num88 == <span class="hljs-number">0</span>)&#123;<br>            System.out.println(num1);<br>        &#125;<br><br>        List&lt;Integer&gt; nums = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        nums.add(<span class="hljs-number">1</span>);<br>        nums.add(<span class="hljs-number">2</span>);<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums)&#123;<br>            System.out.println(num);<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (nums.size() == num2) &#123;<br>            System.out.println(num2);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>下面是由 idea 反编译得到的代码，可以观察到 <code>for</code> 循环被改成了 <code>while</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//</span><br><span class="hljs-comment">// Source code recreated from a .class file by IntelliJ IDEA</span><br><span class="hljs-comment">// (powered by FernFlower decompiler)</span><br><span class="hljs-comment">//</span><br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.Iterator;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hello</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> num1 = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> num2 = <span class="hljs-number">130</span>;<br>        <span class="hljs-keyword">int</span> var10000 = num1 + num2;<br>        var10000 = num2 - num1;<br>        var10000 = num1 * num2;<br>        var10000 = num2 / num1;<br>        <span class="hljs-keyword">int</span> num7 = <span class="hljs-keyword">true</span>;<br>        Integer num88 = <span class="hljs-number">6</span>;<br>        <span class="hljs-keyword">if</span> (num88 == <span class="hljs-number">0</span>) &#123;<br>            System.out.println(num1);<br>        &#125;<br><br>        List&lt;Integer&gt; nums = <span class="hljs-keyword">new</span> ArrayList();<br>        nums.add(<span class="hljs-number">1</span>);<br>        nums.add(<span class="hljs-number">2</span>);<br>        Iterator var10 = nums.iterator();<br><br>        <span class="hljs-keyword">while</span>(var10.hasNext()) &#123;<br>            <span class="hljs-keyword">int</span> num = (Integer)var10.next();<br>            System.out.println(num);<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (nums.size() == num2) &#123;<br>            System.out.println(num2);<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="阅读字节码"><a href="#阅读字节码" class="headerlink" title="阅读字节码"></a>阅读字节码</h2><p>为了方便解释，我将字节码文件拆成小段，首先使用下面这个命令输出字节码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">PS C:\Users\cedar\Desktop\ReadBytecode\code\target\classes&gt; javap -c .\Hello.class<br></code></pre></td></tr></table></figure>
+<p>一开始就说明了这是「Hello.java」的字节码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Compiled from <span class="hljs-string">&quot;Hello.java&quot;</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> </span>&#123;<br></code></pre></td></tr></table></figure>
+<p>紧接着自动创建了无参构造方法，调用了父类 <code>Object</code> 的初始化函数。 <code>aload_0</code> 是说把本地变亮表位置 0 的对象加载出来，而这个位置保存的是对自身的引用。</p>
+<p>你会发现字节码每条命令前面也有一个数字，比如 <code>0: aload_0</code> 前面有一个 <code>0</code> ，它代表 <code>aload_0</code> 这条指令在第 0 个位置。接着观察 <code>4: return</code>，它的位置怎么突然变成 4 了？那是因为 <code>invokespecial</code> 这个指令还有两个输入参数，一共占用三个字节</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">-- 字节码<br> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hello</span><span class="hljs-params">()</span></span>;<br>    Code:<br>       <span class="hljs-number">0</span>: aload_0<br>       1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V<br>       <span class="hljs-number">4</span>: <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+<p> <code>1: invokespecial #1</code> 的 <code>#1</code>，代表常量池位置 1.常量池通过 <code>javap -c -verbose demo.a.B</code> 就可以显示出来，如下所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">Constant pool:<br>   <span class="hljs-comment">#1 = Methodref          #15.#48        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br>   <span class="hljs-comment">#2 = Methodref          #12.#49        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;</span><br>   <span class="hljs-comment">#3 = Methodref          #12.#50        // java/lang/Integer.intValue:()I</span><br>   ......<br></code></pre></td></tr></table></figure>
+<p>接下来就是 <code>main</code> 方法了，还记得我们在 <code>main</code> 方法中干了什么吗</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 源码</span><br>        <span class="hljs-keyword">int</span> num1 = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> num2 = <span class="hljs-number">130</span>;<br>        <span class="hljs-keyword">int</span> num3 = num1 + num2;<br>        <span class="hljs-keyword">int</span> num4 = num2 - num1;<br>        <span class="hljs-keyword">int</span> num5 = num1 * num2;<br>        <span class="hljs-keyword">int</span> num6 = num2 / num1;<br><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> num7 = <span class="hljs-number">5</span>;<br>        Integer num88 = <span class="hljs-number">6</span>;<br></code></pre></td></tr></table></figure>
+<p>它对应的字节码是下面这样的，具体内容我已经标注出来了，稍微解释一下 <code>iconst_1</code> ，代表常量 <code>int 1</code> ，也就是代码中有个常量 「1」加载到栈顶</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(java.lang.String[])</span></span>;<br>  Code:<br><br>  -- 初始化 num1 = <span class="hljs-number">1</span>;保存到变量表 <span class="hljs-number">1</span><br>     <span class="hljs-number">0</span>: iconst_1<br>     <span class="hljs-number">1</span>: istore_1<br><br>  -- 初始化 num2 = <span class="hljs-number">130</span>; 保存到 变量表<span class="hljs-number">2</span>，以下同理<br>     <span class="hljs-number">2</span>: sipush        <span class="hljs-number">130</span><br>     <span class="hljs-number">5</span>: istore_2<br><br>  -- 计算 num3(匿名了) = num1 + num2;<br>     <span class="hljs-number">6</span>: iload_1<br>     <span class="hljs-number">7</span>: iload_2<br>     <span class="hljs-number">8</span>: iadd<br>     <span class="hljs-number">9</span>: istore_3<br><br>  -- 计算 num4(匿名了) = num2 - num1;  <br>    <span class="hljs-number">10</span>: iload_2<br>    <span class="hljs-number">11</span>: iload_1<br>    <span class="hljs-number">12</span>: isub<br>    <span class="hljs-number">13</span>: istore        <span class="hljs-number">4</span><br><br>  -- 计算 num5(匿名了) = num1 * num2; <br>    <span class="hljs-number">15</span>: iload_1<br>    <span class="hljs-number">16</span>: iload_2<br>    <span class="hljs-number">17</span>: imul<br>    <span class="hljs-number">18</span>: istore        <span class="hljs-number">5</span><br><br>  -- 计算 num6(匿名了) = num2 / num1;<br>    <span class="hljs-number">20</span>: iload_2<br>    <span class="hljs-number">21</span>: iload_1<br>    <span class="hljs-number">22</span>: idiv<br>    <span class="hljs-number">23</span>: istore        <span class="hljs-number">6</span><br><br>  -- <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> num7 = <span class="hljs-number">5</span>;<br>    <span class="hljs-number">25</span>: iconst_5<br>    <span class="hljs-number">26</span>: istore        <span class="hljs-number">7</span><br><br>  -- Integer num88 = <span class="hljs-number">6</span>;<br>    <span class="hljs-number">28</span>: bipush        <span class="hljs-number">6</span><br>    30: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;<br>    <span class="hljs-number">33</span>: astore        <span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+<p>然后是这个 <code>if</code> 语句 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (num88 == <span class="hljs-number">0</span>) &#123;<br>    System.out.println(num1);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>注意上文 <code>num88</code> 被保存到变量表位置 8，所以此处把位置 8 加载出来</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">-- 字节码<br>      <span class="hljs-number">35</span>: aload         <span class="hljs-number">8</span><br>      37: invokevirtual #3                  // Method java/lang/Integer.intValue:()I<br>      <span class="hljs-number">40</span>: ifne          <span class="hljs-number">50</span> -- 如果不等于 <span class="hljs-number">0</span> 就跳转到 <span class="hljs-number">50</span><br>      43: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;<br>      <span class="hljs-number">46</span>: iload_1          -- 存储 num1 的地方<br>      47: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V<br></code></pre></td></tr></table></figure>
+<p>然后我们操作了一个 <code>List</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 源码</span><br>        List&lt;Integer&gt; nums = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        nums.add(<span class="hljs-number">1</span>);<br>        nums.add(<span class="hljs-number">2</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java">-- 初始化 List 对象<br>  50: new           #6                  // class java/util/ArrayList<br>  <span class="hljs-number">53</span>: dup              -- 把栈顶的值复制一份再压回去，此时栈顶有两份一样的值，分别被 <span class="hljs-number">54</span> 和 <span class="hljs-number">57</span> 指令消耗了<br>  54: invokespecial #7                  // Method java/util/ArrayList.&quot;&lt;init&gt;&quot;:()V<br>  <span class="hljs-number">57</span>: astore        <span class="hljs-number">9</span> -- 将初始化的对象存到寄存器 <span class="hljs-number">9</span><br><br>-- list -&gt; add(<span class="hljs-number">1</span>);<br>  <span class="hljs-number">59</span>: aload         <span class="hljs-number">9</span><br>  <span class="hljs-number">61</span>: iconst_1<br>  62: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;<br>  65: invokeinterface #8,  2            // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z<br>  <span class="hljs-number">70</span>: pop           -- 丢弃了 add 返回值<br><br>-- list -&gt; add(<span class="hljs-number">2</span>)<br>  <span class="hljs-number">71</span>: aload         <span class="hljs-number">9</span><br>  <span class="hljs-number">73</span>: iconst_2<br>  74: invokestatic  #2                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;<br>  77: invokeinterface #8,  2            // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z<br>  <span class="hljs-number">82</span>: pop           -- 丢弃了 add 返回值<br></code></pre></td></tr></table></figure>
+<p>遍历 <code>List</code> ，这里 JVM 把 <code>for</code> 改成了 <code>while</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 源代码</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums)&#123;<br>        System.out.println(num);<br>    &#125;<br><br><span class="hljs-comment">//被 JVM 该成如下代码</span><br>    Iterator var10 = nums.iterator();<br>    <span class="hljs-keyword">while</span>(var11.hasNext()) &#123;<br>        <span class="hljs-keyword">int</span> num = (Integer)var11.next();<br>        System.out.println(num);<br>    &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java">-- 获取迭代器<br>  <span class="hljs-number">83</span>: aload         <span class="hljs-number">9</span><br>  85: invokeinterface #9,  1            // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;<br>  <span class="hljs-number">90</span>: astore        <span class="hljs-number">10</span><br><br>-- <br>  <span class="hljs-number">92</span>: aload         <span class="hljs-number">10</span><br>  94: invokeinterface #10,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z<br>  <span class="hljs-number">99</span>: ifeq          <span class="hljs-number">128</span> -- 如果等于 <span class="hljs-number">0</span>，跳转到 <span class="hljs-number">128</span><br><br>-- 获取 next() 并打印<br> <span class="hljs-number">102</span>: aload         <span class="hljs-number">10</span><br> 104: invokeinterface #11,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;<br> 109: checkcast     #12                 // class java/lang/Integer  -- 检查对象是否为给定类型<br> 112: invokevirtual #3                  // Method java/lang/Integer.intValue:()I<br> <span class="hljs-number">115</span>: istore        <span class="hljs-number">11</span><br> 117: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;<br> <span class="hljs-number">120</span>: iload         <span class="hljs-number">11</span><br> 122: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V<br> <span class="hljs-number">125</span>: goto          <span class="hljs-number">92</span><br></code></pre></td></tr></table></figure>
+<p>最后我们写了个 if</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 源码</span><br>        <span class="hljs-keyword">if</span> (nums.size() == num2) &#123;<br>            System.out.println(num2);<br>        &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">    -- 如果 list.size() == num2; 打印 num2<br>     <span class="hljs-number">128</span>: aload         <span class="hljs-number">9</span><br>     130: invokeinterface #13,  1           // InterfaceMethod java/util/List.size:()I<br>     <span class="hljs-number">135</span>: iload_2<br>     <span class="hljs-number">136</span>: if_icmpne     <span class="hljs-number">146</span><br>     139: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;<br>     <span class="hljs-number">142</span>: iload_2<br>     143: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V<br>     <span class="hljs-number">146</span>: <span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Java 的字节码还是要比汇编简单一些。</p>
+<p>这里再提一点，当要初始化一个 int 时（在 JVM 中：bool，byte，char，short 都是 int），根据不同的数字所占的位数不同，分别需要如下几个命令，方括号中给出了命令适用的范围</p>
+<ul>
+<li>iconst: [-1, 5]</li>
+<li>bipush: [-128, 127]</li>
+<li>sipush: [-32768, 32767]</li>
+<li>idc: any int value</li>
+</ul>
+<hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html">https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E8%8A%82%E7%A0%81/">字节码</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/05/%E8%87%AA%E5%AE%9A%E4%B9%89-ClassLoader-%E5%8A%A0%E8%BD%BD%E4%B8%80%E4%B8%AA%E5%8A%A0%E5%AF%86-class-%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">自定义 ClassLoader 加载一个加密 class 文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/PhotoShop%E5%9B%BE%E5%B1%82%E7%9A%84%E6%B7%B7%E5%90%88%E6%A8%A1%E5%BC%8F%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/">
+                        <span class="hidden-mobile">PhotoShop 图层的混合模式是怎么回事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'solidSpoon/solidSpoon.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C7KRTEV4"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J4C7KRTEV4');
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
